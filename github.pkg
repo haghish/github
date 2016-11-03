@@ -1,0 +1,20 @@
+d 'GITHUB': module to install Stata packages and their dependencies from GitHub
+d
+d  github is a module for installing Stata packages with a particular
+d  version as well as their dependencies from GitHub.
+d
+d KW: Version control
+d KW: GitHub
+d KW: Git
+d KW: net
+d
+d Requires: Stata version 11 
+d
+d Distribution-Date: 20161103
+d
+d Author: E.F. Haghish, University of Southern Denmark
+d Support: email haghish@imada.sdu.dk
+d
+F github.ado
+F github.sthlp
+F githubQuery.ado
