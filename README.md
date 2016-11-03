@@ -22,13 +22,13 @@ version of MarkDoc package, say `3.8.0`. you can type:
 Some package rely on other packages. The `github` command allows you to install the package 
 dependencies with the specified version. To do so:
 
-1- create a file named `dependency.do` and include it in the repository
-2- this file is not meant to be installed in the PLUS directory therefore it should not be mentioned in the 
+1. create a file named `dependency.do` and include it in the repository
+2. this file is not meant to be installed in the PLUS directory therefore it should not be mentioned in the 
 pkg file (see below)
-3- include the code for installing the package dependencies in this do file. If the packages 
+3. include the code for installing the package dependencies in this do file. If the packages 
 are hosted on GitHub, use the `github` command for installing the package dependencies and 
 specify the requiered version. 
-4- `github` command looks for `dependency.do` after installing the package and if it finds it 
+4. `github` command looks for `dependency.do` after installing the package and if it finds it 
 in the repository, it executes it. 
  
 
