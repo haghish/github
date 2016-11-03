@@ -36,7 +36,7 @@ in the repository, it executes it.
 The repository should include a file __with `.pkg` suffix and an identical name as the package name__. 
 The name of the file doesn't have to be identical to the repository name, but it is strongly adviced 
 to name the repository identical to the package name. Below is an example file 
-of the `github.pkg` that is used for installing the package on your system.
+of the [`github.pkg`](https://raw.githubusercontent.com/haghish/github/master/github.pkg) that is used for installing the package on your system.
 Note that the files that are meant to be copied on your system begin with `F` (bottom of the file)
 
 ~~~
