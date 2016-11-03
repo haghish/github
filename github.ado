@@ -1,7 +1,8 @@
 /*** DO NOT EDIT THIS LINE -----------------------------------------------------
 Version: 1.0.0
 Title: github
-Description: installs Stata packages with a particular version (release) from 
+Description: installs Stata packages with a particular version (release) as 
+well as their dependencies from 
 [GitHub](http://www.github.com/haghish/githubinstall) 
 ----------------------------------------------------- DO NOT EDIT THIS LINE ***/
 
@@ -19,14 +20,18 @@ Syntax
 {synopthdr}
 {synoptline}
 {syntab:Main}
-{synopt:{opt v:ersion}}specifies a particular version{p_end}
+{synopt:{opt v:ersion}}specifies a particular version (release tags){p_end}
 {synopt:{opt replace}}specifies that the downloaded files replace existing files 
 if any of the files already exists{p_end}
-{synopt:{opt replace}}specifies that the downloaded files replace existing files 
+{synopt:{opt force}}specifies that the downloaded files replace existing files 
 if any of the files already exists, even if Stata thinks all the files are the same.
-force implies replace{p_end}
+force implies {bf:replace}.{p_end}
 {synoptline}
 {p2colreset}{...}
+
+The __install__ subcommand installs the package and its dependencies (if specified) 
+and the __query__ subcommand lists the previous versions (releases) of the 
+package. 
 
 Description
 ===========
@@ -35,20 +40,30 @@ __github__ simplifies installing Stata packages from
 [GitHub](http://www.github.com/) website. The package also allows installing 
 older releaes of the package using the __version()__ option, a feature that 
 improves reproducibility of analyses carried out by user-written packages. 
+Packages installed by __github__ command can also automatically install the 
+package dependencies. 
+
+For example, the {browse "https://github.com/haghish/MarkDoc":MarkDoc} package 
+requires two other Stata packages which are 
+{browse "https://github.com/haghish/weaver":Weaver} and
+{browse "https://github.com/haghish/MarkDoc":Statax}. 
+Usually, users have to install these packages manually after installing 
+MarkDoc from GitHub or SSC. However, the __github install__ command will look 
+for a file named __dependency.do__ and executes this file if its exists. 
+Package developers can simply __write the code required for installing the__ 
+__dependencies in this file__ to take care of the dependencies automatically. 
 
 Example(s)
 =================
 
     install the latest version of MarkDoc package from GitHub
-        . github haghish/markdoc, replace
+        . github install haghish/markdoc, replace
 
-    install MarkDoc version 3.8.1 from GitHub
+    install MarkDoc version 3.8.1 from GitHub (older version)
         . github haghish/markdoc, replace version("3.8.1")
 
-Acknowledgements
-================
-
-If you have thanks specific to this command, put them here.
+    list all of the available versions of the MarkDoc package
+        . github query haghish/markdoc
 
 Author
 ======
@@ -65,7 +80,7 @@ This help file was dynamically produced by
 
 
 
-cap prog drop github
+*cap prog drop github
 prog define github
 	
 	*installgithub username/path/to/repo , version() 
@@ -192,5 +207,5 @@ prog define github
 	
 end
 
-markdoc github.ado, export(sthlp) replace
+*markdoc github.ado, export(sthlp) replace
 

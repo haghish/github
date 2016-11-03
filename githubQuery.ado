@@ -1,8 +1,5 @@
 
-*https://api.github.com/repos/haghish/rcall/releases
-
-
-cap program drop githubQuery
+*cap program drop githubQuery
 program githubQuery
 	
 	syntax anything
