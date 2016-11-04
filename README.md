@@ -9,6 +9,12 @@ a package. You can install the latest version of the `github` command by executi
 net install github, replace from("https://raw.githubusercontent.com/haghish/github/master/")
 ```
 
+### Syntax
+
+The general syntax of the package can be summarized as follows:
+
+    github [ install | query ] github-username/repository [, options]
+
 ### Installing a package
 To install a package, all you need is the GitHub username and the name of the repository. For example, 
 to install [MarkDoc](https://github.com/haghish/MarkDoc) package, it is enough to type:
