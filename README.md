@@ -22,6 +22,38 @@ version of MarkDoc package, say `3.8.0`. you can type:
 
     github install haghish/MarkDoc , version("3.8.0")
 
+But were can you see the package versions? GitHub has a ___release___ tab that lists all of the previous releases of the software ([__See for example the previous releases of MarkDoc__](https://github.com/haghish/MarkDoc/releases)). But the good news is that `github` has a subcommand for listing all of the previous releases in Stata results windows and allows you to install any of them (_as well as their package dependencies for that particular version, if specified_) with a single mouse click or programmatically. To do so, type:
+
+    github query username/repository
+
+For example, to list [__MarkDoc__](https://github.com/haghish/MarkDoc/releases)'s previous releases, type:
+
+```
+. github query haghish/markdoc
+
+ ----------------------------------------
+  Version      Release Date      Install 
+ ----------------------------------------
+  3.8.5        2016-10-16        Install
+  3.8.4        2016-10-13        Install
+  3.8.3        2016-10-03        Install
+  3.8.2        2016-10-01        Install
+  3.8.1        2016-09-29        Install
+  3.8.0        2016-09-24        Install
+  3.7.9        2016-09-20        Install
+  3.7.8        2016-09-19        Install
+  3.7.7        2016-09-18        Install
+  3.7.6        2016-09-13        Install
+  3.7.5        2016-09-08        Install
+  3.7.4        2016-09-07        Install
+  3.7.3        2016-09-06        Install
+  3.7.2        2016-09-05        Install
+  3.7.0        2016-08-23        Install
+  3.6.9        2016-08-16        Install
+  3.6.7        2016-02-27        Install
+ ----------------------------------------
+```
+
 ### Package Dependencies
 Some package rely on other packages. The `github` command allows you to install the package 
 dependencies with the specified version. To do so:
