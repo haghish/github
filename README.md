@@ -34,6 +34,8 @@ are hosted on GitHub, use the `github` command for installing the package depend
 specify the requiered version. 
 4. `github` command looks for `dependency.do` after installing the package and if it finds it 
 in the repository, it executes it. 
+
+For example, [__MarkDoc package has a `dependency.do` file__](https://raw.githubusercontent.com/haghish/MarkDoc/master/dependency.do) that can serve as an example how the dependency file should be created. Naturally, the `dependenc.do` file is only executable by __`github install`__ command.
  
 
 ### Example of pkg file
