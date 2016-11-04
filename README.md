@@ -5,7 +5,9 @@
 `github` is a Stata module for installing Stata packages from GitHub, including previous releases of 
 a package. You can install the latest version of the `github` command by executing the following code:
 
-    net install github, replace from("https://raw.githubusercontent.com/haghish/github/master/")
+```{js}
+net install github, replace from("https://raw.githubusercontent.com/haghish/github/master/")
+```
 
 ### Installing a package
 To install a package, all you need is the GitHub username and the name of the repository. For example, 
