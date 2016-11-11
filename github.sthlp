@@ -1,5 +1,5 @@
 {smcl}
-{right:version 1.0.0}
+{right:version 1.0.1}
 {title:Title}
 
 {phang}
@@ -40,19 +40,33 @@ package.
 {browse "http://www.github.com/":GitHub} website. The package also allows installing 
 older releaes of the package using the {bf:version()} option, a feature that 
 improves reproducibility of analyses carried out by user-written packages. 
-Packages installed by {bf:github} command can also automatically install the 
-package dependencies. 
+
+
+{title:Installing package dependencies}
 
 {p 4 4 2}
+Packages installed by {bf:github} command can also automatically install the 
+package dependencies. 
 For example, the {browse "https://github.com/haghish/MarkDoc":MarkDoc} package 
 requires two other Stata packages which are 
 {browse "https://github.com/haghish/weaver":Weaver} and
 {browse "https://github.com/haghish/MarkDoc":Statax}. 
 Usually, users have to install these packages manually after installing 
 MarkDoc from GitHub or SSC. However, the {bf:github install} command will look 
-for a file named {bf:dependency.do} and executes this file if its exists. 
-Package developers can simply {bf:write the code required for installing the} 
-{bf:dependencies in this file} to take care of the dependencies automatically. 
+for a file named {bf:dependency.do} in the repository and executes this file 
+if it exists. 
+
+{p 4 4 2}
+The {bf:dependency.do} file will not be copied to the PLUS 
+directory and is simply executed by Stata after installing the package. It can 
+include a command for installing dependency packages using {bf:ssc}, 
+{bf:net install}, or {bf:github install} commands. The latter is preferable because 
+it also allows you to specify a particular version for the dependency packages. 
+
+{p 4 4 2}
+Note that the {bf:dependency.do} file will only be executed by {bf:github install} 
+command and other installation commands such as {bf:net install} will not 
+install the dependencies. 
 
 
 {title:Example(s)}
@@ -65,12 +79,6 @@ Package developers can simply {bf:write the code required for installing the}
 
     list all of the available versions of the MarkDoc package
         . github query haghish/markdoc
-
-
-{title:Acknowledgements}
-
-{p 4 4 2}
-If you have thanks specific to this command, put them here.
 
 
 {title:Author}

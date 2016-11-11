@@ -1,5 +1,5 @@
 /*** DO NOT EDIT THIS LINE -----------------------------------------------------
-Version: 1.0.0
+Version: 1.0.1
 Title: github
 Description: installs Stata packages with a particular version (release) as 
 well as their dependencies from 
@@ -40,18 +40,30 @@ __github__ simplifies installing Stata packages from
 [GitHub](http://www.github.com/) website. The package also allows installing 
 older releaes of the package using the __version()__ option, a feature that 
 improves reproducibility of analyses carried out by user-written packages. 
+
+Installing package dependencies
+===============================
+
 Packages installed by __github__ command can also automatically install the 
 package dependencies. 
-
 For example, the {browse "https://github.com/haghish/MarkDoc":MarkDoc} package 
 requires two other Stata packages which are 
 {browse "https://github.com/haghish/weaver":Weaver} and
 {browse "https://github.com/haghish/MarkDoc":Statax}. 
 Usually, users have to install these packages manually after installing 
 MarkDoc from GitHub or SSC. However, the __github install__ command will look 
-for a file named __dependency.do__ and executes this file if its exists. 
-Package developers can simply __write the code required for installing the__ 
-__dependencies in this file__ to take care of the dependencies automatically. 
+for a file named __dependency.do__ in the repository and executes this file 
+if it exists. 
+
+The __dependency.do__ file will not be copied to the PLUS 
+directory and is simply executed by Stata after installing the package. It can 
+include a command for installing dependency packages using __ssc__, 
+__net install__, or __github install__ commands. The latter is preferable because 
+it also allows you to specify a particular version for the dependency packages. 
+
+Note that the __dependency.do__ file will only be executed by __github install__ 
+command and other installation commands such as __net install__ will not 
+install the dependencies. 
 
 Example(s)
 =================
@@ -77,7 +89,6 @@ University of Southern Denmark
 This help file was dynamically produced by 
 [MarkDoc Literate Programming package](http://www.haghish.com/markdoc/) 
 ***/
-
 
 
 *cap prog drop github
@@ -156,6 +167,8 @@ prog define github
 		macro shift
 	}
 	
+	// Installing an archived version
+	// -----------------------------------------------------------------------
 	if !missing("`version'") {
 		local path "https://github.com/`anything'/archive/`version'.zip"
 		
@@ -181,12 +194,11 @@ prog define github
 		else {
 			di as txt "`package' package has no dependency"
 		}
-		
 	}
-	else {
-		//goes to the current directory path
-		//local path "https://github.com/`anything'/archive/`version'.zip" 
-		
+	
+	// Installing from the master
+	// -----------------------------------------------------------------------
+	else {		
 		net install `package', from("https://raw.githubusercontent.com/`anything'/master/") `replace' `force' 
 		
 		di _n "{title:Checking package dipendencies}" 
@@ -199,11 +211,7 @@ prog define github
 		else {
 			di as txt "`package' package has no dependency"
 		}
-		
 	}
-	
-	
-	*di as err "`anything'"
 	
 end
 
