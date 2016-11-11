@@ -1,5 +1,5 @@
 /*** DO NOT EDIT THIS LINE -----------------------------------------------------
-Version: 1.0.1
+Version: 1.0.2
 Title: github
 Description: installs Stata packages with a particular version (release) as 
 well as their dependencies from 
@@ -12,8 +12,35 @@ Syntax
 ======
 
 {p 8 16 2}
-{cmd: github} [ {bf:install} | {bf:query} ] {it:username}{bf:/}{it:repository} [{cmd:,} version(str) {it:replace force}]
+{cmd: github} [ {it:subcommand} ] {it:username}{bf:/}{it:repository} [{cmd:,} version(str) {it:replace force}]
 {p_end}
+
+The __github__ command takes several subcommands, which are:
+
+{synoptset 20 tabbed}{...}
+{synopthdr:subcommand}
+{synoptline}
+{synopt:{opt install}}installs the specified repository. The command should be 
+followed by the {bf:username/repository}{p_end}
+{synopt:{opt uninstall}}uninstalls a package{p_end}
+{synopt:{opt query}}followed by {bf:username/repository}, it makes a table of 
+all of the released versions of that package and allows you to install any version 
+with a single click.{p_end}
+{synoptline}
+{p2colreset}{...}
+
+Description
+===========
+
+__github__ simplifies installing Stata packages from 
+[GitHub](http://www.github.com/) website. The package also allows installing 
+older releaes of the package using the __version()__ option, a feature that 
+improves reproducibility of analyses carried out by user-written packages. 
+
+Options
+=======
+
+The __github__ command also takes several options which are discussed below:
 
 {* the new Stata help format of putting detail before generality}{...}
 {synoptset 20 tabbed}{...}
@@ -29,17 +56,6 @@ force implies {bf:replace}.{p_end}
 {synoptline}
 {p2colreset}{...}
 
-The __install__ subcommand installs the package and its dependencies (if specified) 
-and the __query__ subcommand lists the previous versions (releases) of the 
-package. 
-
-Description
-===========
-
-__github__ simplifies installing Stata packages from 
-[GitHub](http://www.github.com/) website. The package also allows installing 
-older releaes of the package using the __version()__ option, a feature that 
-improves reproducibility of analyses carried out by user-written packages. 
 
 Installing package dependencies
 ===============================
@@ -91,7 +107,7 @@ This help file was dynamically produced by
 ***/
 
 
-*cap prog drop github
+cap prog drop github
 prog define github
 	
 	*installgithub username/path/to/repo , version() 
@@ -101,10 +117,22 @@ prog define github
 	tokenize `anything'
 	local anything "`2'"
 	
+	// Query
+	// ---------
 	if "`1'" == "query" {
 		githubQuery `anything'
 		exit
 	}
+	
+	// Uninstall
+	// ---------
+	else if "`1'" == "uninstall" {
+		ado uninstall `2'
+		exit
+	}
+	
+	// Install
+	// ---------
 	else if "`1'" != "install" {
 		err 198
 	}
@@ -182,7 +210,10 @@ prog define github
 		qui cd "`dir'" 
 		local pkg : pwd
 		qui cd "`wd'"
-
+		
+		// make sure it is first uninstalled 
+		capture quietly ado uninstall "`package'"
+		
 		net install "`package'", from("`pkg'") `replace' `force' 
 		
 		di _n "{title:Checking package dipendencies}" 
@@ -215,5 +246,5 @@ prog define github
 	
 end
 
-*markdoc github.ado, export(sthlp) replace
+markdoc github.ado, export(sthlp) replace
 

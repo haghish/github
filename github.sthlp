@@ -1,5 +1,5 @@
 {smcl}
-{right:version 1.0.1}
+{right:version 1.0.2}
 {title:Title}
 
 {phang}
@@ -10,8 +10,38 @@
 {title:Syntax}
 
 {p 8 16 2}
-{cmd: github} [ {bf:install} | {bf:query} ] {it:username}{bf:/}{it:repository} [{cmd:,} version(str) {it:replace force}]
+{cmd: github} [ {it:subcommand} ] {it:username}{bf:/}{it:repository} [{cmd:,} version(str) {it:replace force}]
 {p_end}
+
+{p 4 4 2}
+The {bf:github} command takes several subcommands, which are:
+
+{synoptset 20 tabbed}{...}
+{synopthdr:subcommand}
+{synoptline}
+{synopt:{opt install}}installs the specified repository. The command should be 
+followed by the {bf:username/repository}{p_end}
+{synopt:{opt uninstall}}uninstalls a package{p_end}
+{synopt:{opt query}}followed by {bf:username/repository}, it makes a table of 
+all of the released versions of that package and allows you to install any version 
+with a single click.{p_end}
+{synoptline}
+{p2colreset}{...}
+
+
+{title:Description}
+
+{p 4 4 2}
+{bf:github} simplifies installing Stata packages from 
+{browse "http://www.github.com/":GitHub} website. The package also allows installing 
+older releaes of the package using the {bf:version()} option, a feature that 
+improves reproducibility of analyses carried out by user-written packages. 
+
+
+{title:Options}
+
+{p 4 4 2}
+The {bf:github} command also takes several options which are discussed below:
 
 {* the new Stata help format of putting detail before generality}{...}
 {synoptset 20 tabbed}{...}
@@ -27,19 +57,6 @@ force implies {bf:replace}.{p_end}
 {synoptline}
 {p2colreset}{...}
 
-{p 4 4 2}
-The {bf:install} subcommand installs the package and its dependencies (if specified) 
-and the {bf:query} subcommand lists the previous versions (releases) of the 
-package. 
-
-
-{title:Description}
-
-{p 4 4 2}
-{bf:github} simplifies installing Stata packages from 
-{browse "http://www.github.com/":GitHub} website. The package also allows installing 
-older releaes of the package using the {bf:version()} option, a feature that 
-improves reproducibility of analyses carried out by user-written packages. 
 
 
 {title:Installing package dependencies}
