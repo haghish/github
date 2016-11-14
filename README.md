@@ -15,6 +15,20 @@ to install [MarkDoc](https://github.com/haghish/MarkDoc) package, it is enough t
 
     github install haghish/markdoc
 
+Not all packages are installable. Stata repositories must have __toc__ and __pkg__ files in order to be installable. You can check whether a package is installable or not using the `check` subcommand. The `search` subcommand automatically checks for this.
+
+    github check haghish/markdoc
+
+### Uninstalling a package
+To install a package, use the `uninstall` subcommand, followed by the package name. For example:
+
+    github uninstall markdoc
+
+### Searching for a Stata package
+You can search GitHub for Stata package using a keyword. Read the help file for more information
+
+    github search weaver, in(all)
+
 ### Package Versions
 GitHub allows archiving unlimited number of package versions. The `github` command has an option for specifying 
 the package version, allowing installing previous package versions. For example, for installing an older 
