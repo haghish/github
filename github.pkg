@@ -10,11 +10,16 @@ d KW: net
 d
 d Requires: Stata version 11 
 d
-d Distribution-Date: 20161103
+d Distribution-Date: 20161114
 d
 d Author: E.F. Haghish, University of Southern Denmark
 d Support: email haghish@imada.sdu.dk
 d
 F github.ado
 F github.sthlp
+F githubdependency.ado
+F githubcheck.ado
+F githubconfirm.ado
+F githuboutput.ado
+F githubsearch.ado
 F githubQuery.ado

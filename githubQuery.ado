@@ -1,5 +1,4 @@
 
-*cap program drop githubQuery
 program githubQuery
 	
 	syntax anything

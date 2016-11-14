@@ -1,5 +1,5 @@
 {smcl}
-{right:version 1.0.2}
+{right:version 1.1.0}
 {title:Title}
 
 {phang}
@@ -10,12 +10,13 @@
 {title:Syntax}
 
 {p 8 16 2}
-{cmd: github} [ {it:subcommand} ] {it:username}{bf:/}{it:repository} [{cmd:,} version(str) {it:replace force}]
+{cmd: github} [ {help github##subcommand:{it:subcommand}} ] [ {it:keyword} | {it:username/repository} ] [{cmd:,} options]
 {p_end}
 
 {p 4 4 2}
-The {bf:github} command takes several subcommands, which are:
+The {bf:github} command takes several subcommands:
 
+{marker subcommand}{...}
 {synoptset 20 tabbed}{...}
 {synopthdr:subcommand}
 {synoptline}
@@ -25,6 +26,12 @@ followed by the {bf:username/repository}{p_end}
 {synopt:{opt query}}followed by {bf:username/repository}, it makes a table of 
 all of the released versions of that package and allows you to install any version 
 with a single click.{p_end}
+{synopt:{opt check}}followed by a {bf:username/repository} evaluates whether the 
+repository is installable (i.e. includes {bf:toc} and {bf:pkg} files{p_end}
+{synopt:{opt search}}followed by a {bf:keyword}, it searches the GitHub API in
+repository name (default), repository description, {bf:README.md} file in 
+the repository, or all of the above. the {bf:in(str)} option specifies the 
+field of the API search.{p_end}
 {synoptline}
 {p2colreset}{...}
 
@@ -32,28 +39,61 @@ with a single click.{p_end}
 {title:Description}
 
 {p 4 4 2}
-{bf:github} simplifies installing Stata packages from 
+{bf:github} simplifies searching and installing Stata packages from 
 {browse "http://www.github.com/":GitHub} website. The package also allows installing 
-older releaes of the package using the {bf:version()} option, a feature that 
-improves reproducibility of analyses carried out by user-written packages. 
+older releaes of the package using the {bf:version()} option, if the author 
+has made different release versions on GitHub. In addition, the command allows 
+the authors to specify package dependencies - that must be installed prior to 
+using the package - to be installed automatically. 
+
+{p 4 4 2}
+If the dependencies are also hosted on GitHub, the author can specify a 
+particular version of the dependencies to ensure the software works with the 
+tested version of the dependencies. The information about the 
+package dependencies also appear in the {bf:github search} command, allowing 
+the user to view the dependencies and their particular version that will be 
+installed automatically. 
 
 
 {title:Options}
 
 {p 4 4 2}
-The {bf:github} command also takes several options which are discussed below:
+The {bf:github} command also takes several options for installing a package or 
+searching for a keyword. The table shows the options accordingly:
 
 {* the new Stata help format of putting detail before generality}{...}
 {synoptset 20 tabbed}{...}
 {synopthdr}
 {synoptline}
-{syntab:Main}
-{synopt:{opt v:ersion}}specifies a particular version (release tags){p_end}
+{syntab:Installation Options}
+{synopt:{opt v:ersion(str)}}specifies a particular version (release tags) for 
+installing a new repository{p_end}
 {synopt:{opt replace}}specifies that the downloaded files replace existing files 
 if any of the files already exists{p_end}
 {synopt:{opt force}}specifies that the downloaded files replace existing files 
 if any of the files already exists, even if Stata thinks all the files are the same.
-force implies {bf:replace}.{p_end}
+force implies {bf:replace}. {p_end}
+
+{syntab:Search Options}
+{synopt:{opt language(str)}}specifies the programming language of the repository. 
+the default is {bf:stata}. To search for all programming languages related 
+to the {it:keyword}, specify {bf:language(all)}. {p_end}
+{synopt:{opt in(str)}}specifies the domain of the search which can be {bf:name} (default) 
+{bf:description}, {bf:readme}, or {bf:all}. To search for the {it:keyword} in 
+repository name, repository description, and the readme.md file, 
+specify {bf:in(all)}. {p_end}
+{synopt:{opt save(str)}}saves the results in a data set with the given name. {p_end}
+{synopt:{opt all}}shows repositories that lack the {bf:pkg} and {bf:stata.toc} 
+files. by default these repositories are not shown in the output because they 
+are not installable packages {p_end}
+{synopt:{opt created(str)}}filters the search results based on the date that the 
+repository was created on github. The date must be written with the format of 
+"{bf:yyyy-mm-dd}" which is required by GitHub. This option can also specify 
+a range of time between two dates. 
+{browse "https://help.github.com/articles/searching-repositories/#search-based-on-when-a-repository-was-created-or-last-updated":See the documentations on GitHub}.{p_end}
+{synopt:{opt pushed(str)}}filters the search results based on the date that the 
+repository was last updated on github. The format for entering the date 
+is identical to the {bf:created} option.{p_end}
 {synoptline}
 {p2colreset}{...}
 
@@ -88,15 +128,42 @@ install the dependencies.
 
 {title:Example(s)}
 
+{p 4 4 2}
+{bf:Installation examples:__
+
     install the latest version of MarkDoc package from GitHub
         . github install haghish/markdoc, replace
 
     install MarkDoc version 3.8.1 from GitHub (older version)
         . github haghish/markdoc, replace version("3.8.1")
+		
+    Uninstall MarkDoc repository
+        . github uninstall markdoc
+		
+{p 4 4 2}
+{bf:Search examples:__		
 
     list all of the available versions of the MarkDoc package
         . github query haghish/markdoc
+		
+    search for MarkDoc package on GitHub
+        . github search markdoc
+		
+    search for a Stata package named "weaver"
+        . github search weaver, language(stata)
+	
+    search for Stata packages that mention the keyword "likelihood" 
+        . github search likelihood, language(stata) in(all)
+		
+    search for a repository named "github" and published in November 2016 
+        . github search github, created("2016-11-01..2016-11-30") 
 
+{p 4 4 2}
+{bf:List examples:__
+
+    list all Stata packages that were created since Jan 2016 
+        . github list, reference("2016-01-01") language(stata)
+		
 
 {title:Author}
 
