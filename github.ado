@@ -317,6 +317,10 @@ prog define github
 	// Installing from the master
 	// -----------------------------------------------------------------------
 	else {		
+		
+		// make sure it is first uninstalled 
+		capture quietly ado uninstall "`package'"
+		
 		net install `package', from("https://raw.githubusercontent.com/`anything'/master/") `replace' `force' 
 		
 		di _n "{title:Checking package dipendencies}" 
