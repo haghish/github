@@ -123,7 +123,6 @@ install the dependencies.
 Example(s)
 =================
 
-__Installation examples:__
 
     install the latest version of MarkDoc package from GitHub
         . github install haghish/markdoc, replace
@@ -134,10 +133,9 @@ __Installation examples:__
     Uninstall MarkDoc repository
         . github uninstall markdoc
 		
-__Search examples:__		
-
     list all of the available versions of the MarkDoc package
         . github query haghish/markdoc
+		
 		
     search for MarkDoc package on GitHub
         . github search markdoc
@@ -151,10 +149,6 @@ __Search examples:__
     search for a repository named "github" and published in November 2016 
         . github search github, created("2016-11-01..2016-11-30") 
 
-__List examples:__
-
-    list all Stata packages that were created since Jan 2016 
-        . github list, reference("2016-01-01") language(stata)
 		
 Author
 ======

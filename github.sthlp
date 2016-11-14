@@ -128,8 +128,6 @@ install the dependencies.
 
 {title:Example(s)}
 
-{p 4 4 2}
-{bf:Installation examples:__
 
     install the latest version of MarkDoc package from GitHub
         . github install haghish/markdoc, replace
@@ -140,11 +138,9 @@ install the dependencies.
     Uninstall MarkDoc repository
         . github uninstall markdoc
 		
-{p 4 4 2}
-{bf:Search examples:__		
-
     list all of the available versions of the MarkDoc package
         . github query haghish/markdoc
+		
 		
     search for MarkDoc package on GitHub
         . github search markdoc
@@ -158,11 +154,6 @@ install the dependencies.
     search for a repository named "github" and published in November 2016 
         . github search github, created("2016-11-01..2016-11-30") 
 
-{p 4 4 2}
-{bf:List examples:__
-
-    list all Stata packages that were created since Jan 2016 
-        . github list, reference("2016-01-01") language(stata)
 		
 
 {title:Author}
