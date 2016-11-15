@@ -1,5 +1,5 @@
 /*** DO NOT EDIT THIS LINE -----------------------------------------------------
-Version: 1.1.0
+Version: 1.1.1
 Title: github
 Description: installs Stata packages with a particular version (release) as 
 well as their dependencies from 
@@ -84,6 +84,10 @@ specify {bf:in(all)}. {p_end}
 {synopt:{opt all}}shows repositories that lack the {bf:pkg} and {bf:stata.toc} 
 files. by default these repositories are not shown in the output because they 
 are not installable packages {p_end}
+{synopt:{opt append}}when the {bf:save} option is specified, the {bf:append} 
+option will add the new results to the saved dataset{p_end}
+{synopt:{opt replace}}when the {bf:save} option is specified, the {bf:replace} 
+option will replaces the dataset, if it exists{p_end}
 {synopt:{opt created(str)}}filters the search results based on the date that the 
 repository was created on github. The date must be written with the format of 
 "{bf:yyyy-mm-dd}" which is required by GitHub. This option can also specify 
@@ -164,13 +168,14 @@ This help file was dynamically produced by
 ***/
 
 
-*cap prog drop github
+cap prog drop github
 prog define github
 	
 	*installgithub username/path/to/repo , version() 
 	
-	syntax anything, [Version(str) replace force save(str) in(str) 			///
-	language(str) all created(str) pushed(str) reference(str) debug ] 
+	syntax anything, [Version(str) replace force save(str) in(str) 				///
+	language(str) all created(str) pushed(str) debug reference(str)			///
+	append replace ] 
 	
 	tokenize `anything'
 	local anything "`2'"
@@ -193,7 +198,7 @@ prog define github
 	// ---------
 	else if "`1'" == "search" {
 		githubsearch `2', language(`language') in(`in') save(`save') `all' 		///
-		created(`created') pushed(`pushed') `debug'
+		created(`created') pushed(`pushed') `debug' `append' `replace'
 		exit
 	}
 	
@@ -214,7 +219,9 @@ prog define github
 	// List
 	// ---------
 	else if "`1'" == "list" {
-		githublist `2' , reference(`reference') language(`language') save(`save')
+		githublist `2' ,  language(`language') reference(`reference')			///
+		save(`save') created(`created') pushed(`pushed') `debug' `append' 		///
+		`replace'
 		exit
 	}
 	
@@ -337,5 +344,6 @@ prog define github
 	
 end
 
-*markdoc github.ado, export(sthlp) replace
+markdoc github.ado, export(sthlp) replace
+
 
