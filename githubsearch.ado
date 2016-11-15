@@ -3,7 +3,7 @@
 program githubsearch
 
 	syntax anything , [language(str) save(str) in(str) all created(str) 		///
-	pushed(str) debug append replace quiet ] 
+	pushed(str) debug append replace quiet number(`number')] 
 	
 	// defaults language is Stata
 	// --------------------------
@@ -309,7 +309,7 @@ program githubsearch
 	// Drawing the output table
 	// =======================================================================
 	if missing("`quiet'") {
-		githuboutput `anything', in("`in'") `all'
+		githuboutput `anything', in("`in'") `all' number(`number')
 	}	
 
 	restore

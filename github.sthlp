@@ -1,5 +1,5 @@
 {smcl}
-{right:version 1.1.0}
+{right:version 1.2.0}
 {title:Title}
 
 {phang}
@@ -32,6 +32,14 @@ repository is installable (i.e. includes {bf:toc} and {bf:pkg} files{p_end}
 repository name (default), repository description, {bf:README.md} file in 
 the repository, or all of the above. the {bf:in(str)} option specifies the 
 field of the API search.{p_end}
+{synopt:{opt list}}GitHub API returns maximum of 100 research results. therefore, 
+a recursive search is needed to build the complete list of Stata packages on 
+GitHub. followed by a keyword (e.g. stata) the {bf:list} command searches the 
+API within a specific time periods and aggregate the results to build the complete 
+list of Stata packages. {p_end}
+{synopt:{opt hot}}ranks the popular repositories on GitHub.    {break}
+the {bf:language}, {bf:all}, and {bf:number} options can be used to narrow 
+or expand the results. {p_end}
 {synoptline}
 {p2colreset}{...}
 
@@ -86,6 +94,11 @@ specify {bf:in(all)}. {p_end}
 {synopt:{opt all}}shows repositories that lack the {bf:pkg} and {bf:stata.toc} 
 files. by default these repositories are not shown in the output because they 
 are not installable packages {p_end}
+{synopt:{opt append}}when the {bf:save} option is specified, the {bf:append} 
+option will add the new results to the saved dataset{p_end}
+{synopt:{opt replace}}when the {bf:save} option is specified, the {bf:replace} 
+option will replaces the dataset, if it exists{p_end}
+{synopt:{opt number(int)}}limits the number of displayed repositories.{p_end}
 {synopt:{opt created(str)}}filters the search results based on the date that the 
 repository was created on github. The date must be written with the format of 
 "{bf:yyyy-mm-dd}" which is required by GitHub. This option can also specify 
@@ -128,6 +141,8 @@ install the dependencies.
 
 {title:Example(s)}
 
+{p 4 4 2}
+{bf:examples of installing and uninstalling packages} 
 
     install the latest version of MarkDoc package from GitHub
         . github install haghish/markdoc, replace
@@ -142,6 +157,9 @@ install the dependencies.
         . github query haghish/markdoc
 		
 		
+{p 4 4 2}
+{bf:examples of searching for a package} 
+		
     search for MarkDoc package on GitHub
         . github search markdoc
 		
@@ -154,6 +172,21 @@ install the dependencies.
     search for a repository named "github" and published in November 2016 
         . github search github, created("2016-11-01..2016-11-30") 
 
+
+{p 4 4 2}
+{bf:examples of searching the popular packages} 
+	
+    view the top 10 packages (Stata installable) on GitHub  
+        . github hot 
+
+    view the top 50 packages (Stata installable) on GitHub  
+        . github hot , number(50)
+		
+    view the top 100 Stata repositories (including non-installable repos)
+        . github hot , number(100) all language(Stata) 
+		
+    build the complete list of Stata packages on GiutHub
+        . github list stata, language(all) in(all) all save(archive) append
 		
 
 {title:Author}

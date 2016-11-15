@@ -17,9 +17,13 @@ d Support: email haghish@imada.sdu.dk
 d
 F github.ado
 F github.sthlp
-F githubdependency.ado
 F githubcheck.ado
 F githubconfirm.ado
+F githubdependency.ado
+F githubhot.ado
+F githublist.ado
 F githuboutput.ado
-F githubsearch.ado
 F githubQuery.ado
+F githubsearch.ado
+F githubsearchsteps.ado
+

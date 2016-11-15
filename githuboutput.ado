@@ -1,9 +1,7 @@
-// works withe the data in the memory
 
-*cap prog drop githuboutput
 prog githuboutput
 	
-	syntax [anything] [, all in(str)]
+	syntax [anything]  [, language(str) all in(str) quiet Number(numlist max=1)] 
 	
 	cap qui summarize installable
 	local N 1
@@ -24,16 +22,23 @@ prog githuboutput
 		_col(38) "{bf:Description} "  _n 	///
 		" {hline 80}"
 		
-		while `N' <= `c(N)' {
+		// limit the output
+		if missing("`number'") local number `c(N)'
+		
+		while `N' <= `c(N)' & `N' <= `number' {
 			
 			if installable[`N'] == 1 | !missing("`all'") {
 				local address : di address[`N']
+				capture githubdependency `address'
+			
 				local short : di abbrev(name[`N'], 13) 
 				
 				tokenize `address', parse("/")
-				local user : di abbrev("`1'", 11) 
+				local user : di abbrev(`"`1'"', 11) 
 				
-				capture githubdependency `address'
+				local homepage : di homepage[`N']
+				local homeabbrev : di abbrev(`"`homepage'"', 30)
+			
 				
 				*local user : di address[`N']
 				*local short : di abbrev(name[`N'], 15) 
@@ -62,8 +67,8 @@ prog githuboutput
 				local lang : di language[`N']
 				
 				// get label
-				local valuelabel :label (language) `lang'
-				if "`valuelabel'" != "" local nme `valuelabel'
+*				local valuelabel :label (language) `lang'
+*				if "`valuelabel'" != "" local lang `valuelabel'
 		
 				local description : di description[`N']
 				local l : di length(`"`description'"')
@@ -99,7 +104,7 @@ prog githuboutput
 				if "`install'" == "1" & trim(`"`l1'"') != "" {
 					di _col(29) "{it:`size'k}" _c
 				}
-				else {
+				else if "`install'" == "1" {
 					local alternative 1
 				}
 				local l1 //RESET
@@ -111,39 +116,56 @@ prog githuboutput
 					local l`m' //RESET
 					local m `++m'
 				}
-				di _col(38) "{bf:Hits:}" trim("`score'") _col(49) "{bf:Stars:}" 		///
+				
+				// Add the Homepage
+				// -----------------------------------------------------------
+				if `"`homepage'"' != "" {
+					di _col(38) `"homepage: {browse "`homepage'":`homeabbrev'}"'
+					local homepage //RESET
+				}
+				
+				// Add the additional description
+				// -----------------------------------------------------------
+				di _col(38) "{bf:Hits:}" trim("`score'") _col(48) "{bf:Stars:}" 		///
 				trim("`star'") _c 
 				
-				if !missing("`nme'") {
-					di _col(58) "{bf:Lang:}" trim("`nme'") _c
+				if !missing("`lang'") {
+					di _col(58) "{bf:Lang:}" trim("`lang'") _c
 				}	
 				
 				if `r(dependency)' == 1 {
-					di _col(74) /*"{bf:Dep:}"*/ `"({browse "http://github.com/`address'/blob/master/dependency.do":Depend})"' _n
+					if "`alternative'" == "1" {
+						di _col(74) `"({browse "http://github.com/`address'/blob/master/dependency.do":Depend})"' 
+					}
+					else {
+						di _col(74) `"({browse "http://github.com/`address'/blob/master/dependency.do":Depend})"' _n
+					}
 				}	
 				else {
-					di _col(75)  //"{bf:Dep:}" "No" _n
+					if "`alternative'" == "1" {
+						di _col(75)  
+					}
+					else {
+						di _col(75) _n 
+					}
 				}	
 				
 				//Add the package size if the description was empty
 				if "`alternative'" == "1"  {
-					di _col(29) "{it:`size'k}" _c
+					di _col(29) "{it:`size'k}" _n
 					local alternative //RESET
 				}
-				
-				di _n
-				
 			}
 			local N `++N'
 		}
 		
 		di " {hline 80}"
 	}
-	else if "`savelang'" != "all" & "`in'" != "name,description,readme" {
+	else if missing("`quiet'") & "`savelang'" != "all" & "`in'" != "name,description,readme" {
 		di as txt "repository {bf:`anything'} was not found for {bf:in(`in')} and {bf:language(`savelang')}" 
 		di "try: {stata github search `anything', in(all) language(all) all}" 
 	}
-	else {
+	else if missing("`quiet'") {
 		di as txt "repository {bf:`anything'} was not found for {bf:in(`savein')} and {bf:language(`savelang')}" 
 		if missing("`all'") {
 			di "try: {stata github search `anything', in(all) language(all) all}" 
@@ -151,4 +173,3 @@ prog githuboutput
 	}
 	
 end
-
