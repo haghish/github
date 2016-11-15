@@ -254,7 +254,7 @@ prog define github
 	// Hits
 	// ---------
 	else if "`1'" == "hot" {
-		githubhit , number(`number') language(`language') `all' 
+		githubhot , number(`number') language(`language') `all' 
 		exit
 	}
 	
