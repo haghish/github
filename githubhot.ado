@@ -1,4 +1,3 @@
-
 prog githubhot
 	syntax [anything] [, language(str) save(str) in(str) all Number(numlist max=1)] 
 	preserve
