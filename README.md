@@ -2,7 +2,7 @@
 
 
 ---
-__NOTE__: to make your repository installable, you need __packagename.pkg__ and __stata.toc__ files. The [__MarkDoc Package__](https://github.com/haghish/MarkDoc) can __automatically__ build these files for you, making your package ready to be installable from any platform. I strongly recommend you to use __MarkDoc__ for writing your package documentation (sthlp) files and creating the __pkg__ and __toc__ files, because the package updates all of these files automatically.
+__NOTE__: to make your repository installable, you need __packagename.pkg__ and __stata.toc__ files. The [__MarkDoc Package__](https://github.com/haghish/MarkDoc) can __automatically__ build these files for you, making your package ready to be installable from any platform. I strongly recommend you to use __MarkDoc__ for writing your package documentation (sthlp) files and creating the __pkg__ and __toc__ files, because the package updates all of these files automatically. It is noteworthy that there are many Stata modules on GitHub which are not installable. Make sure your repository won't be one of them! It is noteworthy that the __`github`__ package favores repositories that are installable. Therefore, by making your package installable, you will receive much more attention from Stata users on GitHub. 
 
 ---
 
