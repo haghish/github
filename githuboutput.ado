@@ -1,8 +1,6 @@
 
 prog githuboutput
-	
 	syntax [anything]  [, language(str) all in(str) quiet Number(numlist max=1)] 
-	
 	cap qui summarize installable
 	local N 1
 	local max `r(max)'
@@ -27,133 +25,137 @@ prog githuboutput
 		
 		while `N' <= `c(N)' & `N' <= `number' {
 			
-			if installable[`N'] == 1 | !missing("`all'") {
-				local address : di address[`N']
-				capture githubdependency `address'
-			
-				local short : di abbrev(name[`N'], 13) 
+			// check the language
+			if !missing("`language'") & "`language'" == language[`N'] |			///
+			missing("`language'") {		
+				if installable[`N'] == 1 | !missing("`all'") {
+					local address : di address[`N']
+					capture githubdependency `address'
 				
-				tokenize `address', parse("/")
-				local user : di abbrev(`"`1'"', 11) 
+					local short : di abbrev(name[`N'], 13) 
+					
+					tokenize `address', parse("/")
+					local user : di abbrev(`"`1'"', 11) 
+					
+					local homepage : di homepage[`N']
+					local homeabbrev : di abbrev(`"`homepage'"', 30)
 				
-				local homepage : di homepage[`N']
-				local homeabbrev : di abbrev(`"`homepage'"', 30)
-			
-				
-				*local user : di address[`N']
-				*local short : di abbrev(name[`N'], 15) 
-				
-				
-				
-				di `"  {bf:{browse "http://github.com/`address'":`short'}}"' ///
-				_col(17) `"{browse "http://github.com/`1'":`user'}"' _c
-				
-				local install : di installable[`N']
-				if "`install'" == "1" {
-					di _col(29) "{stata github install `address', replace:Install}" _c
-				}
-				else {
-					di _col(29) "" _c
-				}
-				
-				// Description
-				// ------------------------------------
-				local score: di %5.0f score[`N']
-				*if `score' > 100 {
-				*	local score: di %5.0f score[`N']
-				*}
-				local star : di star[`N']
-				local size : di kb[`N']
-				local lang : di language[`N']
-				
-				// get label
-*				local valuelabel :label (language) `lang'
-*				if "`valuelabel'" != "" local lang `valuelabel'
-		
-				local description : di description[`N']
-				local l : di length(`"`description'"')
-				local n 1
-				local end 1
-				
-				tokenize `"`macval(description)'"'
-				local sentence "`1'"
-				local c 2
-				
-				local len 0
-				local len2 0
-
-				while `l' > 0 & `"``c''"' != "" {
-					while `len2' <= 44 & `"``c''"' != "" {
-						local sentence : di `"`sentence' ``c''"'
-						local len : di strlen(`"`sentence'"') 
-						local c `++c'
-						local sentence2 : di `"`sentence' "' `"``c''"'
-						local len2 : di strlen(`"`sentence2'"') 
-					}
-					local l`n' : di `"`sentence'"'
-					local sentence  //RESET
-					local sentence2 //RESET
-					local len2    0 //RESET
-					local l = `l'-`len'
-					local n `++n'
-				}
-
-				if `"`l1'"' != "" di _col(38) `"`l1'"'
-				
-				//Add the package size
-				if "`install'" == "1" & trim(`"`l1'"') != "" {
-					di _col(29) "{it:`size'k}" _c
-				}
-				else if "`install'" == "1" {
-					local alternative 1
-				}
-				local l1 //RESET
-				local m 2
-				
-				// continue with the description
-				while `m' <= `n' {
-					if `"`l`m''"' != "" di _col(37) `"`l`m''"' 
-					local l`m' //RESET
-					local m `++m'
-				}
-				
-				// Add the Homepage
-				// -----------------------------------------------------------
-				if `"`homepage'"' != "" {
-					di _col(38) `"homepage: {browse "`homepage'":`homeabbrev'}"'
-					local homepage //RESET
-				}
-				
-				// Add the additional description
-				// -----------------------------------------------------------
-				di _col(38) "{bf:Hits:}" trim("`score'") _col(48) "{bf:Stars:}" 		///
-				trim("`star'") _c 
-				
-				if !missing("`lang'") {
-					di _col(58) "{bf:Lang:}" trim("`lang'") _c
-				}	
-				
-				if `r(dependency)' == 1 {
-					if "`alternative'" == "1" {
-						di _col(74) `"({browse "http://github.com/`address'/blob/master/dependency.do":Depend})"' 
+					
+					*local user : di address[`N']
+					*local short : di abbrev(name[`N'], 15) 
+					
+					
+					
+					di `"  {bf:{browse "http://github.com/`address'":`short'}}"' ///
+					_col(17) `"{browse "http://github.com/`1'":`user'}"' _c
+					
+					local install : di installable[`N']
+					if "`install'" == "1" {
+						di _col(29) "{stata github install `address', replace:Install}" _c
 					}
 					else {
-						di _col(74) `"({browse "http://github.com/`address'/blob/master/dependency.do":Depend})"' _n
+						di _col(29) "" _c
 					}
-				}	
-				else {
-					if "`alternative'" == "1" {
-						di _col(75)  
+					
+					// Description
+					// ------------------------------------
+					local score: di %5.0f score[`N']
+					*if `score' > 100 {
+					*	local score: di %5.0f score[`N']
+					*}
+					local star : di star[`N']
+					local size : di kb[`N']
+					local lang : di language[`N']
+					
+					// get label
+	*				local valuelabel :label (language) `lang'
+	*				if "`valuelabel'" != "" local lang `valuelabel'
+			
+					local description : di description[`N']
+					local l : di length(`"`description'"')
+					local n 1
+					local end 1
+					
+					tokenize `"`macval(description)'"'
+					local sentence "`1'"
+					local c 2
+					
+					local len 0
+					local len2 0
+
+					while `l' > 0 & `"``c''"' != "" {
+						while `len2' <= 44 & `"``c''"' != "" {
+							local sentence : di `"`sentence' ``c''"'
+							local len : di strlen(`"`sentence'"') 
+							local c `++c'
+							local sentence2 : di `"`sentence' "' `"``c''"'
+							local len2 : di strlen(`"`sentence2'"') 
+						}
+						local l`n' : di `"`sentence'"'
+						local sentence  //RESET
+						local sentence2 //RESET
+						local len2    0 //RESET
+						local l = `l'-`len'
+						local n `++n'
 					}
+
+					if `"`l1'"' != "" di _col(38) `"`l1'"'
+					
+					//Add the package size
+					if "`install'" == "1" & trim(`"`l1'"') != "" {
+						di _col(29) "{it:`size'k}" _c
+					}
+					else if "`install'" == "1" {
+						local alternative 1
+					}
+					local l1 //RESET
+					local m 2
+					
+					// continue with the description
+					while `m' <= `n' {
+						if `"`l`m''"' != "" di _col(37) `"`l`m''"' 
+						local l`m' //RESET
+						local m `++m'
+					}
+					
+					// Add the Homepage
+					// -----------------------------------------------------------
+					if `"`homepage'"' != "" {
+						di _col(38) `"homepage: {browse "`homepage'":`homeabbrev'}"'
+						local homepage //RESET
+					}
+					
+					// Add the additional description
+					// -----------------------------------------------------------
+					di _col(38) "{bf:Hits:}" trim("`score'") _col(48) "{bf:Stars:}" 		///
+					trim("`star'") _c 
+					
+					if !missing("`lang'") {
+						di _col(58) "{bf:Lang:}" trim("`lang'") _c
+					}	
+					
+					if `r(dependency)' == 1 {
+						if "`alternative'" == "1" {
+							di _col(74) `"({browse "http://github.com/`address'/blob/master/dependency.do":Depend})"' 
+						}
+						else {
+							di _col(74) `"({browse "http://github.com/`address'/blob/master/dependency.do":Depend})"' _n
+						}
+					}	
 					else {
-						di _col(75) _n 
+						if "`alternative'" == "1" {
+							di _col(75)  
+						}
+						else {
+							di _col(75) _n 
+						}
+					}	
+					
+					//Add the package size if the description was empty
+					if "`alternative'" == "1"  {
+						di _col(29) "{it:`size'k}" _n
+						local alternative //RESET
 					}
-				}	
-				
-				//Add the package size if the description was empty
-				if "`alternative'" == "1"  {
-					di _col(29) "{it:`size'k}" _n
-					local alternative //RESET
 				}
 			}
 			local N `++N'

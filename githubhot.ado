@@ -2,7 +2,7 @@
 prog githubhot
 	syntax [anything] [, language(str) save(str) in(str) all Number(numlist max=1)] 
 	preserve
-	qui use "https://raw.githubusercontent.com/haghish/github/master/archive.dta", clear
+	qui use "https://raw.githubusercontent.com/haghish/github/master/data/archive.dta", clear
 	if missing("`all'") {
 		qui keep if installable
 	}	
@@ -17,7 +17,6 @@ prog githubhot
 	
 	capture keep in 1/`number'
 	
-	githuboutput `anything', in("`in'") `all' quiet 
+	githuboutput `anything', in("`in'") `all' quiet language(`language') number(`number')
 	restore
 end 
-

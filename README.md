@@ -6,7 +6,7 @@
 a package. You can install the latest version of the `github` command by executing the following code:
 
 ```{js}
-net install github, replace from("https://raw.githubusercontent.com/haghish/github/master/")
+net install github, from("https://raw.githubusercontent.com/haghish/github/master/")
 ```
 
 ### Installing a package
@@ -23,6 +23,10 @@ Not all packages are installable. Stata repositories must have __toc__ and __pkg
 To install a package, use the `uninstall` subcommand, followed by the package name. For example:
 
     github uninstall markdoc
+
+to uninstall __`github`__ package itself, type:
+
+    ado uninstall github
 
 ### Searching for a Stata package
 You can search GitHub for Stata package using a keyword. Read the help file for more information
