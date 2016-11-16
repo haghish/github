@@ -1,6 +1,11 @@
 # Installing Stata packages from GitHub
 
 
+---
+__NOTE__: to make your repository installable, you need _packagename___.pkg__ and __stata.toc__ files. The [__MarkDoc Package__](https://github.com/haghish/MarkDoc) can __automatically__ build these files for you, making your package ready to be installable from any platform. I strongly recommend you to use __MarkDoc__ for writing your package documentation (sthlp) files and creating the __pkg__ and __toc__ files, because the package updates all of these files automatically.
+
+---
+
 
 `github` is a Stata module for installing Stata packages from GitHub, including previous releases of 
 a package. You can install the latest version of the `github` command by executing the following code:
