@@ -1,9 +1,7 @@
-
-
 program githubsearch
 
 	syntax anything , [language(str) save(str) in(str) all created(str) 		///
-	pushed(str) debug append replace quiet number(`number')] 
+	pushed(str) debug append replace quiet Number(numlist max=1)] 
 	
 	// defaults language is Stata
 	// --------------------------
