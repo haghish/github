@@ -1,4 +1,4 @@
-
+cap prog drop githuboutput
 prog githuboutput
 	syntax [anything]  [, language(str) all in(str) quiet Number(numlist max=1)] 
 	cap qui summarize installable
@@ -16,7 +16,7 @@ prog githuboutput
 	// make sure one of the observations is installable 
 	if `c(N)' > 0 & `max' != 0 | `c(N)' > 0 & !missing("`all'") {
 		di in text _n " {hline 80}" _n												///
-		"  {bf:repository}" _col(17) "{bf:Author}" _col(29) "{bf:Install}" 	///
+		"  {bf:Repository}" _col(17) "{bf:Username}" _col(29) "{bf:Install}" 	///
 		_col(38) "{bf:Description} "  _n 	///
 		" {hline 80}"
 		
@@ -31,7 +31,9 @@ prog githuboutput
 				if installable[`N'] == 1 | !missing("`all'") {
 					local address : di address[`N']
 					capture githubdependency `address'
-				
+					
+					local pushed : di %tcCCYY-NN-DD pushed[`N']
+					
 					local short : di abbrev(name[`N'], 13) 
 					
 					tokenize `address', parse("/")
@@ -121,9 +123,13 @@ prog githuboutput
 					// Add the Homepage
 					// -----------------------------------------------------------
 					if `"`homepage'"' != "" {
-						di _col(38) `"homepage: {browse "`homepage'":`homeabbrev'}"'
+						di _col(38) `"homepage {browse "`homepage'":`homeabbrev'}"'
 						local homepage //RESET
 					}
+					
+					// Add the last update
+					// -----------------------------------------------------------
+					di _col(38) `"updated on `pushed'"'
 					
 					// Add the additional description
 					// -----------------------------------------------------------

@@ -1,5 +1,5 @@
 /*** DO NOT EDIT THIS LINE -----------------------------------------------------
-Version: 1.2.2
+Version: 1.2.3
 Title: github
 Description: installs Stata packages with a particular version (release) as 
 well as their dependencies from 
