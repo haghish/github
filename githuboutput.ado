@@ -1,4 +1,4 @@
-cap prog drop githuboutput
+*cap prog drop githuboutput
 prog githuboutput
 	syntax [anything]  [, language(str) all in(str) quiet Number(numlist max=1)] 
 	cap qui summarize installable
