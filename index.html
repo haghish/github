@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>GitHub by haghish</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">GitHub</h1>
+      <h2 class="project-tagline">a module for installing Stata packages from GitHub</h2>
+      <a href="https://github.com/haghish/github" class="btn">View on GitHub</a>
+      <a href="https://github.com/haghish/github/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/haghish/github/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="installing-stata-packages-from-github" class="anchor" href="#installing-stata-packages-from-github" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installing Stata packages from GitHub</h1>
+
+<hr>
+
+<p><strong>NOTE</strong>: to make your repository installable, you need <strong>packagename.pkg</strong> and <strong>stata.toc</strong> files. The <a href="https://github.com/haghish/MarkDoc"><strong>MarkDoc Package</strong></a> can <strong>automatically</strong> build these files for you, making your package ready to be installable from any platform. I strongly recommend you to use <strong>MarkDoc</strong> for writing your package documentation (sthlp) files and creating the <strong>pkg</strong> and <strong>toc</strong> files, because the package updates all of these files automatically. It is noteworthy that there are many Stata modules on GitHub which are not installable. Make sure your repository won't be one of them! It is noteworthy that the <strong><code>github</code></strong> package favores repositories that are installable. Therefore, by making your package installable, you will receive much more attention from Stata users on GitHub. </p>
+
+<hr>
+
+<p><code>github</code> is a Stata module for installing Stata packages from GitHub, including previous releases of 
+a package. You can install the latest version of the <code>github</code> command by executing the following code:</p>
+
+<div class="highlight highlight-source-js"><pre>net install github, <span class="pl-en">from</span>(<span class="pl-s"><span class="pl-pds">"</span>https://raw.githubusercontent.com/haghish/github/master/<span class="pl-pds">"</span></span>)</pre></div>
+
+<h3>
+<a id="installing-a-package" class="anchor" href="#installing-a-package" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installing a package</h3>
+
+<p>To install a package, all you need is the GitHub username and the name of the repository. For example, 
+to install <a href="https://github.com/haghish/MarkDoc">MarkDoc</a> package, it is enough to type:</p>
+
+<pre><code>github install haghish/markdoc
+</code></pre>
+
+<p>Not all packages are installable. Stata repositories must have <strong>toc</strong> and <strong>pkg</strong> files in order to be installable. You can check whether a package is installable or not using the <code>check</code> subcommand. The <code>search</code> subcommand automatically checks for this.</p>
+
+<pre><code>github check haghish/markdoc
+</code></pre>
+
+<h3>
+<a id="uninstalling-a-package" class="anchor" href="#uninstalling-a-package" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Uninstalling a package</h3>
+
+<p>To install a package, use the <code>uninstall</code> subcommand, followed by the package name. For example:</p>
+
+<pre><code>github uninstall markdoc
+</code></pre>
+
+<p>to uninstall <strong><code>github</code></strong> package itself, type:</p>
+
+<pre><code>ado uninstall github
+</code></pre>
+
+<h3>
+<a id="searching-for-a-stata-package" class="anchor" href="#searching-for-a-stata-package" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Searching for a Stata package</h3>
+
+<p>You can search GitHub for Stata package using a keyword. Read the help file for more information</p>
+
+<pre><code>github search weaver, in(all)
+</code></pre>
+
+<h3>
+<a id="package-versions" class="anchor" href="#package-versions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Package Versions</h3>
+
+<p>GitHub allows archiving unlimited number of package versions. The <code>github</code> command has an option for specifying 
+the package version, allowing installing previous package versions. For example, for installing an older 
+version of MarkDoc package, say <code>3.8.0</code>. you can type:</p>
+
+<pre><code>github install haghish/MarkDoc , version("3.8.0")
+</code></pre>
+
+<p>But were can you see the package versions? GitHub has a <strong><em>release</em></strong> tab that lists all of the previous releases of the software (<a href="https://github.com/haghish/MarkDoc/releases"><strong>See for example the previous releases of MarkDoc</strong></a>). But the good news is that <code>github</code> has a subcommand for listing all of the previous releases in Stata results windows and allows you to install any of them (<em>as well as their package dependencies for that particular version, if specified</em>) with a single mouse click or programmatically. To do so, type:</p>
+
+<pre><code>github query username/repository
+</code></pre>
+
+<p>For example, to list <a href="https://github.com/haghish/MarkDoc/releases"><strong>MarkDoc</strong></a>'s previous releases, type:</p>
+
+<pre><code>. github query haghish/markdoc
+
+ ----------------------------------------
+  Version      Release Date      Install 
+ ----------------------------------------
+  3.8.5        2016-10-16        Install
+  3.8.4        2016-10-13        Install
+  3.8.3        2016-10-03        Install
+  3.8.2        2016-10-01        Install
+  3.8.1        2016-09-29        Install
+  3.8.0        2016-09-24        Install
+  3.7.9        2016-09-20        Install
+  3.7.8        2016-09-19        Install
+  3.7.7        2016-09-18        Install
+  3.7.6        2016-09-13        Install
+  3.7.5        2016-09-08        Install
+  3.7.4        2016-09-07        Install
+  3.7.3        2016-09-06        Install
+  3.7.2        2016-09-05        Install
+  3.7.0        2016-08-23        Install
+  3.6.9        2016-08-16        Install
+  3.6.7        2016-02-27        Install
+ ----------------------------------------
+</code></pre>
+
+<h3>
+<a id="package-dependencies" class="anchor" href="#package-dependencies" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Package Dependencies</h3>
+
+<p>Some package rely on other packages. The <code>github</code> command allows you to install the package 
+dependencies with the specified version. To do so:</p>
+
+<ol>
+<li>create a file named <code>dependency.do</code> and include it in the repository</li>
+<li>this file is not meant to be installed in the PLUS directory therefore it should not be mentioned in the 
+pkg file (see below)</li>
+<li>include the code for installing the package dependencies in this do file. If the packages 
+are hosted on GitHub, use the <code>github</code> command for installing the package dependencies and 
+specify the requiered version. </li>
+<li>
+<code>github</code> command looks for <code>dependency.do</code> after installing the package and if it finds it 
+in the repository, it executes it. </li>
+</ol>
+
+<p>For example, <a href="https://raw.githubusercontent.com/haghish/MarkDoc/master/dependency.do"><strong>MarkDoc package has a <code>dependency.do</code> file</strong></a> that can serve as an example how the dependency file should be created. Naturally, the <code>dependenc.do</code> file is only executable by <strong><code>github install</code></strong> command.</p>
+
+<h3>
+<a id="example-of-pkg-file" class="anchor" href="#example-of-pkg-file" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example of pkg file</h3>
+
+<p>The repository should include a file <strong>with <code>.pkg</code> suffix and an identical name as the package name</strong>. 
+The name of the file doesn't have to be identical to the repository name, but it is strongly adviced 
+to name the repository identical to the package name. Below is an example file 
+of the <a href="https://raw.githubusercontent.com/haghish/github/master/github.pkg"><code>github.pkg</code></a> that is used for installing the package on your system.
+Note that the files that are meant to be copied on your system begin with <code>F</code> (bottom of the file)</p>
+
+<pre><code>d 'GITHUB': module to install Stata packages and their dependencies from GitHub
+d
+d  github is a module for installing Stata packages with a particular
+d  version as well as their dependencies from GitHub.
+d
+d KW: Version control
+d KW: GitHub
+d KW: Git
+d KW: net
+d
+d Requires: Stata version 11 
+d
+d Distribution-Date: 20161103
+d
+d Author: E.F. Haghish, University of Southern Denmark
+d Support: email haghish@imada.sdu.dk
+d
+F github.ado
+F github.sthlp
+F githubQuery.ado
+</code></pre>
+
+<h2>
+<a id="author" class="anchor" href="#author" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Author</h2>
+
+<p><strong>E. F. Haghish</strong><br>
+  Center for Medical Biometry and Medical Informatics
+  University of Freiburg, Germany<br>
+  <em><a href="mailto:haghish@imbi.uni-freiburg.de">haghish@imbi.uni-freiburg.de</a></em><br>
+  <em><a href="http://www.haghish.com/weaver">http://www.haghish.com/weaver</a></em><br>
+  <em><a href="https://twitter.com/Haghish">@Haghish</a></em>   </p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/haghish/github">GitHub</a> is maintained by <a href="https://github.com/haghish">haghish</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
