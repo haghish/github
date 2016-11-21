@@ -11,7 +11,7 @@ __NOTE__: to make your repository installable, you need __packagename.pkg__ and 
 a package. You can install the latest version of the `github` command by executing the following code:
 
 ```{js}
-net install github, from("https://raw.githubusercontent.com/haghish/github/master/")
+net install github, from("https://haghish.github.io/github/")
 ```
 
 ### Installing a package
