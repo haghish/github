@@ -202,6 +202,12 @@ prog define github
 	language(str) all created(str) pushed(str) debug reference(str)				///
 	append replace Number(numlist max=1) ] 
 	
+	
+	// correct the language
+	if "`language'" == "stata" local language Stata
+	if "`language'" == "r" local language R
+	if "`language'" == "python" local language Python
+	
 	tokenize `anything'
 	local anything "`2'"
 	

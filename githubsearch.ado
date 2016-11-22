@@ -1,4 +1,4 @@
-
+*cap prog drop githubsearch
 program githubsearch
 
 	syntax anything , [language(str) save(str) in(str) all created(str) 		///
@@ -11,7 +11,7 @@ program githubsearch
 		local language  //nothing!
 	}
 	else if missing("`language'") {
-		local savelang stata
+		local savelang Stata
 		local language "+language:stata"
 	}
 	else {
@@ -308,7 +308,7 @@ program githubsearch
 	// Drawing the output table
 	// =======================================================================
 	if missing("`quiet'") {
-		githuboutput `anything', in("`in'") `all' number(`number')
+		githuboutput `anything', in("`in'") `all' number(`number') language(`savelang')
 	}	
 
 	restore

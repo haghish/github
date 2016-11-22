@@ -57,7 +57,7 @@ prog githuboutput
 					}
 					else {
 						*di _col(29) "" _c
-						di _col(29) "({stata github install `address':{it:force}})" _c
+						di _col(29) "({stata github install `address', force:{it:force}})" _c
 					}
 					
 					// Description
@@ -172,12 +172,12 @@ prog githuboutput
 		
 		di " {hline 80}"
 	}
-	else if missing("`quiet'") & "`savelang'" != "all" & "`in'" != "name,description,readme" {
-		di as txt "repository {bf:`anything'} was not found for {bf:in(`in')} and {bf:language(`savelang')}" 
+	else if missing("`quiet'") & "`language'" != "all" & "`in'" != "name,description,readme" {
+		di as txt "repository {bf:`anything'} was not found for {bf:in(`in')} and {bf:language(`language')}" 
 		di "try: {stata github search `anything', in(all) language(all) all}" 
 	}
 	else if missing("`quiet'") {
-		di as txt "repository {bf:`anything'} was not found for {bf:in(`savein')} and {bf:language(`savelang')}" 
+		di as txt "repository {bf:`anything'} was not found for {bf:in(`savein')} and {bf:language(`language')}" 
 		if missing("`all'") {
 			di "try: {stata github search `anything', in(all) language(all) all}" 
 		}
