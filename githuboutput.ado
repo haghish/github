@@ -174,12 +174,12 @@ prog githuboutput
 	}
 	else if missing("`quiet'") & "`language'" != "all" & "`in'" != "name,description,readme" {
 		di as txt "repository {bf:`anything'} was not found for {bf:in(`in')} and {bf:language(`language')}" 
-		di "try: {stata github search `anything', in(all) language(all) all}" 
+		di "{p}try: {stata github search `anything', in(all) language(Stata) all}" 
 	}
 	else if missing("`quiet'") {
 		di as txt "repository {bf:`anything'} was not found for {bf:in(`savein')} and {bf:language(`language')}" 
 		if missing("`all'") {
-			di "try: {stata github search `anything', in(all) language(all) all}" 
+			di "{p}try: {stata github search `anything', in(all) language(Stata) all}"  
 		}
 	}
 	
