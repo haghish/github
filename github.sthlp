@@ -1,10 +1,10 @@
 {smcl}
-{right:version 1.2.4}
+{right:version 1.3.0}
 {title:Title}
 
 {phang}
-{cmd:github} {hline 2} installs Stata packages with a particular version (release) as well as their dependencies from 
- {browse "http://www.github.com/haghish/githubinstall":GitHub} 
+{cmd:github} {hline 2} search, install, and uninstall Stata packages with a particular    {break} version (release) as well as their dependencies from 
+ {browse "http://www.github.com/haghish/github":GitHub} website
  
 
 {title:Syntax}
@@ -76,11 +76,11 @@ searching for a keyword. The table shows the options accordingly:
 {syntab:Installation Options}
 {synopt:{opt v:ersion(str)}}specifies a particular version (release tags) for 
 installing a new repository{p_end}
-{synopt:{opt replace}}specifies that the downloaded files replace existing files 
-if any of the files already exists{p_end}
-{synopt:{opt force}}specifies that the downloaded files replace existing files 
-if any of the files already exists, even if Stata thinks all the files are the same.
-force implies {bf:replace}. {p_end}
+{synopt:{opt force}}specifies that the downloaded files be installed even if the 
+{bf:packagename.pkg} and {bf:Stata.toc} files are missing. when searching for 
+repositories on github, packages that lack the {bf:pkg} and {bf:toc} files appear 
+as "({bf:force})" in the result table, which indicates they are installed with 
+the {bf:force} option. {p_end}
 
 {syntab:Search Options}
 {synopt:{opt language(str)}}specifies the programming language of the repository. 
@@ -145,10 +145,10 @@ install the dependencies.
 {bf:examples of installing and uninstalling packages} 
 
     install the latest version of MarkDoc package from GitHub
-        . github install haghish/markdoc, replace
+        . github install haghish/markdoc
 
     install MarkDoc version 3.8.1 from GitHub (older version)
-        . github haghish/markdoc, replace version("3.8.1")
+        . github haghish/markdoc, version("3.8.1")
 		
     Uninstall MarkDoc repository
         . github uninstall markdoc

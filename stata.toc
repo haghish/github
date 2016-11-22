@@ -1,4 +1,4 @@
-v 1.2.2
+v 1.3.0
 d 'GITHUB': installs Stata packages with a particular version (release) as
 d well as their dependencies from 
 d {browse "http://www.github.com/haghish/githubinstall":GitHub} 

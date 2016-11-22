@@ -8,7 +8,7 @@ prog githubhot
 	if !missing("`language'") {
 		qui drop if language != "`language'"
 	}
-	gsort -score -star
+	gsort -installable -score -star
 	
 	if missing("`number'") {
 		local number 10

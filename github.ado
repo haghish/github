@@ -1,5 +1,5 @@
 /*** DO NOT EDIT THIS LINE -----------------------------------------------------
-Version: 1.2.4
+Version: 1.3.0
 Title: github
 Description: search, install, and uninstall Stata packages with a particular  
 version (release) as well as their dependencies from 
@@ -74,11 +74,11 @@ searching for a keyword. The table shows the options accordingly:
 {syntab:Installation Options}
 {synopt:{opt v:ersion(str)}}specifies a particular version (release tags) for 
 installing a new repository{p_end}
-{synopt:{opt replace}}specifies that the downloaded files replace existing files 
-if any of the files already exists{p_end}
-{synopt:{opt force}}specifies that the downloaded files replace existing files 
-if any of the files already exists, even if Stata thinks all the files are the same.
-force implies {bf:replace}. {p_end}
+{synopt:{opt force}}specifies that the downloaded files be installed even if the 
+__packagename.pkg__ and __Stata.toc__ files are missing. when searching for 
+repositories on github, packages that lack the __pkg__ and __toc__ files appear 
+as "(__force__)" in the result table, which indicates they are installed with 
+the __force__ option. {p_end}
 
 {syntab:Search Options}
 {synopt:{opt language(str)}}specifies the programming language of the repository. 
@@ -139,10 +139,10 @@ Example(s)
 __examples of installing and uninstalling packages__ 
 
     install the latest version of MarkDoc package from GitHub
-        . github install haghish/markdoc, replace
+        . github install haghish/markdoc
 
     install MarkDoc version 3.8.1 from GitHub (older version)
-        . github haghish/markdoc, replace version("3.8.1")
+        . github haghish/markdoc, version("3.8.1")
 		
     Uninstall MarkDoc repository
         . github uninstall markdoc
@@ -196,11 +196,10 @@ This help file was dynamically produced by
 *cap prog drop github
 
 prog define github
-	
-	*installgithub username/path/to/repo , version() 
+
 	
 	syntax anything, [Version(str) replace force save(str) in(str) 				///
-	language(str) all created(str) pushed(str) debug reference(str)			///
+	language(str) all created(str) pushed(str) debug reference(str)				///
 	append replace Number(numlist max=1) ] 
 	
 	tokenize `anything'
@@ -315,43 +314,63 @@ prog define github
 	tokenize `"`anything'"', parse("/")
 	local username `1'
     macro shift
-	while "`1'" != "" {
-		if missing("`package'") {
+	
+	if missing("`package'") {
+		while "`1'" != "" {
 			local package "`1'"
-		}	
-		macro shift
+			macro shift
+		}
 	}
 	
 	// Installing an archived version
 	// -----------------------------------------------------------------------
-	if !missing("`version'") {
-		local path "https://github.com/`anything'/archive/`version'.zip"
+	if !missing("`version'") | !missing("`force'") {
 		
-		quietly copy "`path'" "`version'.zip", replace
-	
+		if !missing("`version'") {
+			local path "https://github.com/`anything'/archive/`version'.zip"
+		}
+		else {
+			local path "https://github.com/`anything'/archive/master.zip" 
+			local version master
+		}
 		
-		quietly unzipfile "`version'.zip", replace
+		quietly copy "`path'" "`package'-`version'.zip", replace
+		quietly unzipfile "`package'-`version'.zip", replace
 		local dir "`package'-`version'"
-		
 		local wd : pwd
 		qui cd "`dir'" 
 		local pkg : pwd
+		
+		// check that the package does not include PKG and TOC before `force'
+		if !missing("`force'") {
+			capture findfile "`package'.pkg"
+			if _rc == 0 {
+				capture findfile "Stata.toc"
+				if _rc != 0 {
+					githubmake "`package'"
+				}
+			}
+			else githubmake "`package'"
+		}
+		
 		qui cd "`wd'"
+		
 		
 		// make sure it is first uninstalled 
 		capture quietly ado uninstall "`package'"
-		
 		net install "`package'", from("`pkg'") `replace' `force' 
 		
 		di _n "{title:Checking package dipendencies}" 
 		capture quietly findfile "dependency.do", path("`pkg'")
 		if _rc == 0 {
-			di as txt "installing package dependencies:" _n
+			di as txt "installing {bf:`package'} package dependencies:" _n
 			noisily do `r(fn)'
 		}
 		else {
-			di as txt "`package' package has no dependency"
+			di as txt "{bf:`package'} package has no dependency"
 		}
+		
+		cap qui erase "`package'-`version'.zip"
 	}
 	
 	// Installing from the master
@@ -361,22 +380,21 @@ prog define github
 		// make sure it is first uninstalled 
 		capture quietly ado uninstall "`package'"
 		
-		net install `package', from("https://raw.githubusercontent.com/`anything'/master/") `replace' `force' 
-		
+		net install `package', from("https://raw.githubusercontent.com/`anything'/master/") `replace' //`force' 
+
 		di _n "{title:Checking package dipendencies}" 
 		tempfile dep
 		capture quietly copy "https://raw.githubusercontent.com/`anything'/master/dependency.do" `dep'
 		if _rc == 0 {
-			di as txt "{bf:installing package dependencies:}" _n
+			di as txt "installing {bf:`package'} package dependencies:" _n
 			noisily do `dep'
 		}
 		else {
-			di as txt "`package' package has no dependency"
+			di as txt "{bf:`package'} package has no dependency"
 		}
 	}
 	
 end
 
-*markdoc github.ado, export(sthlp) replace
-
+*markdoc github.ado, export(sthlp) replace build
 

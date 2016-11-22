@@ -53,10 +53,11 @@ prog githuboutput
 					
 					local install : di installable[`N']
 					if "`install'" == "1" {
-						di _col(29) "{stata github install `address', replace:Install}" _c
+						di _col(29) "{stata github install `address':Install}" _c
 					}
 					else {
-						di _col(29) "" _c
+						*di _col(29) "" _c
+						di _col(29) "({stata github install `address':{it:force}})" _c
 					}
 					
 					// Description
@@ -104,10 +105,12 @@ prog githuboutput
 					if `"`l1'"' != "" di _col(38) `"`l1'"'
 					
 					//Add the package size
-					if "`install'" == "1" & trim(`"`l1'"') != "" {
+					*if "`install'" == "1" & trim(`"`l1'"') != "" {
+					if trim(`"`l1'"') != "" {
 						di _col(29) "{it:`size'k}" _c
 					}
-					else if "`install'" == "1" {
+					//else if "`install'" == "1" {
+					else {
 						local alternative 1
 					}
 					local l1 //RESET
@@ -181,3 +184,4 @@ prog githuboutput
 	}
 	
 end
+
