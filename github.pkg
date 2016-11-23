@@ -1,8 +1,8 @@
-d 'GITHUB': installs Stata packages with a particular version (release) as
-d well as their dependencies from 
-d {browse "http://www.github.com/haghish/githubinstall":GitHub} 
+d 'GITHUB': search, install, and uninstall Stata packages with a particular    {break}
+d version (release) as well as their dependencies from 
+d {browse "http://www.github.com/haghish/github":GitHub} website
 d
-d Distribution-Date: 20161116
+d Distribution-Date: 20161123
 d
 F github.ado
 F github.sthlp
