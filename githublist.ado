@@ -6,12 +6,12 @@ prog githublist
 	
 	// Packages before 2012
 	// ======================================================================
-	githubsearch `anything', created("<2012-01-01") language(`language') 			///
-	in(`in') `all' save("`save'") append quiet
+	githubsearch `anything', created("<2012-01-01") language(`language') 		///
+	in(`in') `all' save("`save'") append quiet noscore
 	
 	// Packages after 2012
 	// ======================================================================
-	githubsearchsteps stata, reference("2012-01-01") duration(`duration') 				///
+	githubsearchsteps stata, reference("2012-01-01") duration(`duration') 		///
 	language(`language') in(`in') `all'  save("`save'") append quiet
 	
 	// Generate the score
