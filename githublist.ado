@@ -21,8 +21,6 @@ prog githublist
 	if !missing(`"`save'"') {
 		use "`save'", clear 
 		qui label data "updated on `c(current_date)'"
-		quietly gen score = (watchers*5 + star*5 + fork) - 5
-		quietly replace score = 0 if score < 0
 		qui save `"`save'"', replace
 	}	
 		

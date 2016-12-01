@@ -8,6 +8,10 @@ prog githubhot
 	if !missing("`language'") {
 		qui drop if language != "`language'"
 	}
+	
+	quietly gen score = (watchers*5 + star*5 + fork) - 5
+	quietly replace score = 0 if score < 0
+		
 	gsort -installable -score -star
 	
 	if missing("`number'") {
