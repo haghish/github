@@ -2,7 +2,7 @@
 prog githublist
 	
 	syntax [anything] [, language(str) save(str) in(str) all created(str) 		///
-	pushed(str) duration(numlist max=1) replace append quiet] reference(str)
+	pushed(str) duration(numlist max=1) replace append quiet] 
 	
 	// Packages before 2012
 	// ======================================================================
