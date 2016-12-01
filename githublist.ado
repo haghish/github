@@ -20,6 +20,7 @@ prog githublist
 	if missing("`quiet'") {
 		preserve
 		if !missing(`"`save'"') {
+			qui label data "updated on `c(current_date)'"
 			use "`save'", clear 
 		}	
 		githuboutput `anything', in("`in'") `all' quiet
