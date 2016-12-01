@@ -14,6 +14,11 @@ prog githublist
 	githubsearchsteps stata, reference("2012-01-01") duration(`duration') 				///
 	language(`language') in(`in') `all'  save("`save'") append quiet
 	
+	// Generate the score
+	// =======================================================================
+	quietly gen score = (watchers*5 + star*5 + fork) - 5
+	quietly replace score = 0 if score < 0
+	
 	// -----------------------------------------------------------------------
 	// Drawing the output table
 	// =======================================================================
