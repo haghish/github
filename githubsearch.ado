@@ -2,7 +2,7 @@
 program githubsearch
 
 	syntax anything , [language(str) save(str) in(str) all created(str) 		///
-	pushed(str) debug append replace quiet Number(numlist max=1) noscore] 
+	pushed(str) debug append replace quiet Number(numlist max=1) scoreless] 
 	
 	// defaults language is Stata
 	// --------------------------
@@ -278,13 +278,15 @@ program githubsearch
 	*qui rename type language
 	
 	//generate score
-	if missing("`noscore'") {
+	if missing("`scoreless'") {
 		quietly gen score = (watchers*5 + star*5 + fork) - 5
 		quietly replace score = 0 if score < 0
 	}	
 	
 	// sort the data based on installable and score 
-	quietly gsort - installable - score
+	if missing("`scoreless'") {
+		quietly gsort - installable - score
+	}
 	
 	// -----------------------------------------------------------------------
 	// Save the results
