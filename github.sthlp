@@ -1,5 +1,5 @@
 {smcl}
-{right:version 1.3.1}
+{right:version 1.3.2}
 {title:Title}
 
 {phang}
@@ -77,10 +77,9 @@ searching for a keyword. The table shows the options accordingly:
 {synopt:{opt v:ersion(str)}}specifies a particular version (release tags) for 
 installing a new repository{p_end}
 {synopt:{opt force}}specifies that the downloaded files be installed even if the 
-{bf:packagename.pkg} and {bf:Stata.toc} files are missing. when searching for 
-repositories on github, packages that lack the {bf:pkg} and {bf:toc} files appear 
-as "({it:_force_})" in the result table, which indicates they are installed with 
-the {bf:force} option. {p_end}
+{bf:packagename.pkg} and {bf:Stata.toc} files are missing. Use this option 
+wisely because by forcing the installation, you are installing a software that 
+is not prepared for installation. {p_end}
 
 {syntab:Search Options}
 {synopt:{opt language(str)}}specifies the programming language of the repository. 

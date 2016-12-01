@@ -1,5 +1,5 @@
 /*** DO NOT EDIT THIS LINE -----------------------------------------------------
-Version: 1.3.1
+Version: 1.3.2
 Title: github
 Description: search, install, and uninstall Stata packages with a particular  
 version (release) as well as their dependencies from 
@@ -75,10 +75,9 @@ searching for a keyword. The table shows the options accordingly:
 {synopt:{opt v:ersion(str)}}specifies a particular version (release tags) for 
 installing a new repository{p_end}
 {synopt:{opt force}}specifies that the downloaded files be installed even if the 
-__packagename.pkg__ and __Stata.toc__ files are missing. when searching for 
-repositories on github, packages that lack the __pkg__ and __toc__ files appear 
-as "(__force__)" in the result table, which indicates they are installed with 
-the __force__ option. {p_end}
+__packagename.pkg__ and __Stata.toc__ files are missing. Use this option 
+wisely because by forcing the installation, you are installing a software that 
+is not prepared for installation. {p_end}
 
 {syntab:Search Options}
 {synopt:{opt language(str)}}specifies the programming language of the repository. 
@@ -250,7 +249,7 @@ prog define github
 	// List
 	// ---------
 	else if "`1'" == "list" {
-		githublist `2' ,  language(`language') reference(`reference')			///
+		githublist `2' ,  language(`language') 									///
 		save(`save') created(`created') pushed(`pushed') `debug' `append' 		///
 		`replace'
 		exit
