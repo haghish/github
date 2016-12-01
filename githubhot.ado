@@ -9,6 +9,7 @@ prog githubhot
 		qui drop if language != "`language'"
 	}
 	
+	cap drop score //WHAT IS GOING ON IN GITHUBLIST?
 	quietly gen score = (watchers*5 + star*5 + fork) - 5
 	quietly replace score = 0 if score < 0
 		
