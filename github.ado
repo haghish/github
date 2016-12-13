@@ -369,7 +369,7 @@ prog define github
 		capture quietly findfile "dependency.do", path("`pkg'")
 		if _rc == 0 {
 			di as txt "installing {bf:`package'} package dependencies:" _n
-			noisily do `r(fn)'
+			noisily do "`r(fn)'"
 		}
 		else {
 			di as txt "{bf:`package'} package has no dependency"
