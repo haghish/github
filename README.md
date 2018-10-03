@@ -1,15 +1,14 @@
-# Installing Stata packages from GitHub
+# `github` : a module for searching and installing Stata packages from GitHub
 
+<a href="http://github.com/haghish/github"><img src="https://github.com/haghish/markdoc/raw/master/Resources/images/github3.png" align="left" width="140" hspace="10" vspace="6"></a>
 
----
+`github` is a Stata module for searching and installing Stata packages from GitHub, including previous releases of 
+a package. It is a combination of several Stata commands such as `search`, `findit`, and `ssc`, but instead, made for managing Stata packages hosted on GitHub. In addition, the package provides new features for version control which are not available to Stata users elsewhere (for example, the package allows installing older releases of a Stata package to reproduce an analysis carried out with older software). 
 
-__NOTE__: to make your repository installable, you need __packagename.pkg__ and __stata.toc__ files. The [__MarkDoc Package__](https://github.com/haghish/MarkDoc) can __automatically__ build these files for you, making your package ready to be installable from any platform. __`github`__ package provide an option named `force` that allows you to force install repositories which are not installable. However, the package still gives more credit to installable packages when using the __`github search`__ command. Therefore, by making your package installable, you will receive much more attention from Stata users on GitHub. Using [__MarkDoc Package__](https://github.com/haghish/MarkDoc) you can write the Stata help files using Markdown and build the __toc__ and __pkg__ files effortlessly. 
+Instalation
+-----------
 
----
-
-
-`github` is a Stata module for installing Stata packages from GitHub, including previous releases of 
-a package. You can install the latest version of the `github` command by executing the following code:
+You can install the latest version of the `github` command by executing the following code:
 
 ```{js}
 net install github, from("https://haghish.github.io/github/")
@@ -25,17 +24,16 @@ Not all packages are installable. Stata repositories must have __toc__ and __pkg
 
     github check haghish/markdoc
 
+> <img src="https://github.com/haghish/markdoc/raw/master/Resources/images/attention.png" width="20px" height="20px"  align="left" hspace="0" vspace="0"> to make your repository installable, you need __packagename.pkg__ and __stata.toc__ files. The [__MarkDoc Package__](https://github.com/haghish/MarkDoc) can __automatically__ build these files for you, making your package ready to be installable from any platform. __`github`__ package provide an option named `force` that allows you to force install repositories which are not installable. However, the package still gives more credit to installable packages when using the __`github search`__ command. Therefore, by making your package installable, you will receive much more attention from Stata users on GitHub. Using [__MarkDoc Package__](https://github.com/haghish/MarkDoc) you can write the Stata help files using Markdown and build the __toc__ and __pkg__ files effortlessly. 
+
+
 ### Uninstalling a package
 To install a package, use the `uninstall` subcommand, followed by the package name. For example:
 
     github uninstall markdoc
 
-to uninstall __`github`__ package itself, type:
-
-    ado uninstall github
-
 ### Searching for a Stata package
-You can search GitHub for Stata package using a keyword. Read the help file for more information
+You can search GitHub for Stata package using a keyword. Read the help file for more information. This is similar to Stata's `search` or `findit` commands, but instead, only used for searching GitHub packages:
 
     github search weaver, in(all)
 
@@ -131,7 +129,6 @@ Author
   Center for Medical Biometry and Medical Informatics
   University of Freiburg, Germany      
   _haghish@imbi.uni-freiburg.de_     
-  _http://www.haghish.com/weaver_  
   _[@Haghish](https://twitter.com/Haghish)_   
   
 
