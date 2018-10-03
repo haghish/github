@@ -126,9 +126,8 @@ F githubQuery.ado
 Author
 ------
   **E. F. Haghish**  
-  Center for Medical Biometry and Medical Informatics
+  Center for Medical Biometry and Medical Informatics   
   University of Freiburg, Germany      
-  _haghish@imbi.uni-freiburg.de_     
   _[@Haghish](https://twitter.com/Haghish)_   
   
 
