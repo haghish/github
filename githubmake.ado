@@ -44,6 +44,7 @@ program githubmake
 		& `"`macval(1)'"' != "dependency.do"								///
 		& `"`macval(1)'"' != "params.json"  								///
 		& `"`macval(1)'"' != "index.html"  									///
+		& `"`macval(1)'"' != ".gitignore"									///
 		{
 			file write `pkg' `"F `1'"' _n
 		}
