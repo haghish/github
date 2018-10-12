@@ -68,19 +68,19 @@ program githubsearch
 	*di as err "{p}https://api.github.com/search/repositories?q=`anything'`language'+in:`in'&per_page=100"
 	
 	if !missing("`debug'") {
-		di as err "{p}https://api.github.com/search/repositories?q=`anything'`language'`created'`pushed'+in:`in'&sort=stars&order=desc&per_page=100" _n
-		copy "https://api.github.com/search/repositories?q=`anything'`language'`created'`pushed'+in:`in'&sort=stars&order=desc&per_page=100" "base.json", replace
+		di as err "{p}https://api.github.com/search/repositories?q=`anything'`language'`created'`pushed'+in:`in'&sort=stars&order=desc&per_page=50" _n
+		copy "https://api.github.com/search/repositories?q=`anything'`language'`created'`pushed'+in:`in'&sort=stars&order=desc&per_page=50" "base.json", replace
 	}
-	tempfile api tmp
+	tempfile apifile tmp
 	tempname hitch knot
-	capture qui copy "https://api.github.com/search/repositories?q=`anything'`language'`created'`pushed'+in:`in'&sort=stars&order=desc&per_page=100" `api', replace
+	capture qui copy "https://api.github.com/search/repositories?q=`anything'`language'`created'`pushed'+in:`in'&sort=stars&order=desc&per_page=50" `apifile', replace
 
 	if _rc != 0 {
 		di as err "{p}the GitHub API is not responsive right now. Try again in " ///
 		"10 or 20 seconds. this can happen if you search GitHub very frequent..."
 		exit
 	}
-	file open `hitch' using "`api'", read
+	file open `hitch' using "`apifile'", read
 	qui file open `knot' using "`tmp'", write replace
 	file read `hitch' line
 	
@@ -90,6 +90,7 @@ program githubsearch
 	
 	// check the number of results
 	// --------------------------------
+	//display `"`macval(line)'"'
 	tokenize `"`macval(line)'"' , parse(",")
 	local 1 : display substr(`"`macval(1)'"',16,.)
 	local found `1'
@@ -98,8 +99,7 @@ program githubsearch
 	// --------------------------------
 	if `1' > 100 {
 		local warning 1
-		di as txt "({p}your search has yeilded {bf:`1'} results, but "			///
-		"GitHub API can return maximum of 100 results. Narrow your search "		///
+		di as txt "{p}(your search has yeilded {bf:`1'} results. Narrow your search "		///
 		"using {bf:language}, {bf:in}, {bf:created}, and {bf:pushed} options...)" _n
 	}
 	
