@@ -2,7 +2,7 @@
 // TITLE PAGE TAB
 // =============================================================================
 VERSION 12
-POSITION . . 400 440
+POSITION . . 400 540
 
 // Specify package license
 //      https://help.github.com/articles/licensing-a-repository/
@@ -47,34 +47,49 @@ END
 
 DIALOG make, label("make") 
 BEGIN
+
+	// toc
+	CHECKBOX toc  10  10   @   .  , option(toc) default(1) ///
+	         label("create stata.toc") 
+	// pkg
+	CHECKBOX pkg  10    +20   @   .  , option(pkg) default(1) ///
+	         label("create packagename.pkg") 
+	// pkg
+	CHECKBOX readme  10    +20   @   .  , option(readme) default(1) ///
+	         label("create README.md (recommended)") 
+	
+	// replace
+	CHECKBOX replace  10    +20   @   .  , option(replace) default(0) ///
+	         label("replace files, if existing") 
+					 
 	
 	// select the path to the directory
-	/*
-	TEXT tx0 10 10 . ., label("Directory")
-	FILE sourceFile	 80 10  310  .  , error("Open file")  ///
+	TEXT tx_repoinfo  10   +40  . ., label("Specify the path to the package repository")
+	TEXT tx0 10 +20 . ., label("repository*")
+	FILE path	 80 @  310  .  , error("path should be specified")  ///
 	      label(Browse...) ///
-	      tooltip("select the path to the package directory") direct ///
+	      tooltip("select the path to the package directory. for example, this can be the GitHub repository you are intending to upload") direct ///
 	      onchange("script mainReset")
-	*/	  
+	 
 	
 	// select installable files
-	TEXT tx_pkginfo  10   10  . ., label("Package information")
+	TEXT tx_pkginfo  10   +40  . ., label("Package information")
 	
 	// title of the document
 	TEXT tx_name 10 +20 . ., label("pkg name*")
-	EDIT name    80 @ 310 19 , default("can ne a single word only")
+	EDIT name    80 @ 310 19 , default("commandname")
 	
 	// title of the document
 	TEXT tx_title 10 +20 . ., label("title*")
-	EDIT title    80 @ 310 19, default("a short title or a brief explanation of the package...")
+	EDIT title    80 @ 310 19, default("a short title or a brief explanation...")
 	
 	// verrsion
-	TEXT tx_version  10   +20  . 310, label("version*")
-	EDIT version     80   @    310  19  , default("specify the package version")
+	TEXT tx_version  10   +20  . 310, label("version")
+	EDIT version     80   @    310  19  , default("")
 	
 	// Description
 	TEXT tx_description  10   +20  . 310, label("description")
-	EDIT description     80   @    310  19  , default("extended description of the package")
+	EDIT description     80   @    310  19  , default("extended description of the package...")
 	
 	// License
 	TEXT tx_license  10   +20  . 310, label("license")
@@ -92,9 +107,9 @@ BEGIN
 	TEXT tx_affiliation 10 +20 . ., label("affiliation")
 	EDIT affiliation 80 @ 310 19   
 	 
-	// Address
-	TEXT tx_address 10 +20 . ., label("address")
-	EDIT address 80 @ 310 19  
+	// URL
+	TEXT tx_url 10 +20 . ., label("url link")
+	EDIT url 80 @ 310 19  
 	
 	// E-mail
 	TEXT tx_email 10 +20 . ., label("e-mail")
@@ -103,7 +118,7 @@ BEGIN
 	
 	
 	// select installable files
-	TEXT tx_summary3  10   +40  . 310, label("Select the package installation and/or ancillary files*  (hold CTRL)")
+	TEXT tx_summary3  10   +40  . 310, label("Select the package installation and/or ancillary files*  (hold CTRL key)")
 	
 	TEXT tx_summary4  10   +20  . 310, label("installation")
 	FILE ffile	 80 @  310  .  , error("Open file")  ///
@@ -117,13 +132,6 @@ BEGIN
 	      label("select") ///
 	      tooltip("select the path to the package directory") multiselect ///
 	      onchange("script mainReset") 
-		  
-	// replace
-	CHECKBOX replace  10    +40   @   .  , option(replace) default(1) ///
-	         label("replace .pkg and .toc files (if existing)") 
-	// markdown
-	CHECKBOX markdown  10    +20   @   .  , option(markdown) default(0) ///
-	         label("translate markdown notations to SMCL") 
 	
 	// required
 	TEXT tx_required  10   +40  . 310, label("* stared items are required")
@@ -147,10 +155,25 @@ COPY copy1
 PROGRAM command
 BEGIN
 	
-    
-	// one of the installing or ancillary files should be specified
+  // repository path should be specified
 	
-	if ((!make.ffile) |  (!make.axfile)) {
+	
+	// repository, name, title, version, author should be specified
+	if (!make.path) {
+		stopbox stop "repository path is required"
+	}
+	if (!make.name | make.name.iseq("commandname")) {
+		stopbox stop "repository name is required"
+	}
+	if (!make.title | make.title.iseq("a short title or a brief explanation...")) {
+		stopbox stop "repository title is required"
+	}
+	if (!make.author) {
+		stopbox stop "author name is required"
+	}
+	
+	// one of the installing or ancillary files should be specified
+	if (!make.ffile & !make.axfile) {
 		stopbox stop "select installation and/or ancillary files"
 	}
 	
