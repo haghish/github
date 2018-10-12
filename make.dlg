@@ -63,13 +63,7 @@ BEGIN
 	         label("replace files, if existing") 
 					 
 	
-	// select the path to the directory
-	TEXT tx_repoinfo  10   +40  . ., label("Specify the path to the package repository")
-	TEXT tx0 10 +20 . ., label("repository*")
-	FILE path	 80 @  310  .  , error("path should be specified")  ///
-	      label(Browse...) ///
-	      tooltip("select the path to the package directory. for example, this can be the GitHub repository you are intending to upload") direct ///
-	      onchange("script mainReset")
+	
 	 
 	
 	// select installable files
@@ -93,7 +87,7 @@ BEGIN
 	
 	// License
 	TEXT tx_license  10   +20  . 310, label("license")
-	COMBOBOX license  80    @  60  .  , dropdownlist contents(license_list)
+	COMBOBOX license  80    @  70  .  , dropdownlist contents(license_list)
 	
 	
 	// select installable files
@@ -116,7 +110,15 @@ BEGIN
 	EDIT email 80 @ 310 19  
 	 
 	
-	
+	// select the path to the directory
+	TEXT tx_repoinfo  10   +40  . ., label("Specify the path to the package repository")
+	TEXT tx0 10 +20 . ., label("repository*")
+	FILE path	 80 @  310  .  , error("path should be specified")  ///
+	      label(Browse...) ///
+	      tooltip("select the path to the package directory. for example, this can be the GitHub repository you are intending to upload") direct ///
+	      onchange("script mainReset")
+		  
+		  
 	// select installable files
 	TEXT tx_summary3  10   +40  . 310, label("Select the package installation and/or ancillary files*  (hold CTRL key)")
 	
@@ -159,9 +161,6 @@ BEGIN
 	
 	
 	// repository, name, title, version, author should be specified
-	if (!make.path) {
-		stopbox stop "repository path is required"
-	}
 	if (!make.name | make.name.iseq("commandname")) {
 		stopbox stop "repository name is required"
 	}
@@ -170,6 +169,10 @@ BEGIN
 	}
 	if (!make.author) {
 		stopbox stop "author name is required"
+	}
+	
+	if (!make.path) {
+		stopbox stop "repository path is required"
 	}
 	
 	// one of the installing or ancillary files should be specified
