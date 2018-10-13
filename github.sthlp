@@ -1,5 +1,5 @@
 {smcl}
-{right:version 1.3.3}
+{right:version 1.4.0}
 {title:Title}
 
 {phang}
@@ -37,9 +37,6 @@ a recursive search is needed to build the complete list of Stata packages on
 GitHub. followed by a keyword (e.g. stata) the {bf:list} command searches the 
 API within a specific time periods and aggregate the results to build the complete 
 list of Stata packages. {p_end}
-{synopt:{opt hot}}ranks the popular repositories on GitHub.    {break}
-the {bf:language}, {bf:all}, and {bf:number} options can be used to narrow 
-or expand the results. {p_end}
 {synoptline}
 {p2colreset}{...}
 
@@ -173,18 +170,8 @@ install the dependencies.
 
 
 {p 4 4 2}
-{bf:examples of searching the popular packages} 
-	
-    view the top 10 packages (Stata installable) on GitHub  
-        . github hot 
-
-    view the top 50 packages (Stata installable) on GitHub  
-        . github hot , number(50)
+{bf:build the complete list of Stata packages on GiutHub} 
 		
-    view the top 100 Stata repositories (including non-installable repos)
-        . github hot , number(100) all language(Stata) 
-		
-    build the complete list of Stata packages on GiutHub
         . github list stata, language(all) in(all) all save(archive) append
 		
 
