@@ -4,6 +4,8 @@ d {browse "http://www.github.com/haghish/github":GitHub} website
 d
 d Distribution-Date: 20161214
 d
+F findall.ado
+F findall.sthlp
 F github.ado
 F github.sthlp
 F githubcheck.ado
