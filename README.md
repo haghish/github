@@ -123,6 +123,20 @@ F githubQuery.ado
 ~~~
 
 
+Searching for a package in Stata
+--------------------------------
+
+As mentioned earlier, the `github search` command can search GitHub API for a particular repository or a keyword. However, often Stata users wish to search other software hosts as well, e.g. stata.com or SSC. The `findall` command is a general search tool for searching Stata modules on GitHub, Stata Journal, Web, SSC, etc
+
+`findall` not only provides more general results to the `search` command, but also, __it adds the date of the latest update of the module to the results obtained from SSC and GitHub__. 
+
+```js
+findall keyword
+```
+
+
+
+
 Author
 ------
   **E. F. Haghish**  
