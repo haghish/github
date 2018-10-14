@@ -1,5 +1,5 @@
 /*** DO NOT EDIT THIS LINE -----------------------------------------------------
-Version: 1.0.0
+Version: 1.1
 Title: findall
 Description: a Stata module to search for Stata packages on GitHub, Stata Journal, 
 SSC, and the web. The command also shows the last update of the module on each 
@@ -64,7 +64,7 @@ program findall
 	tempfile log 
 	qui log using "`log'", name(findallpkg)
 	search `anything', all
-	github search `anything'
+	github search `anything', in(all) language(Stata) all
 	qui log close findallpkg
 	
 	// Edit the log, add useful information

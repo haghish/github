@@ -145,10 +145,10 @@ prog githuboutput
 					
 					if `r(dependency)' == 1 {
 						if "`alternative'" == "1" {
-							di _col(74) `"({browse "http://github.com/`address'/blob/master/dependency.do":Depend})"' 
+							di _col(74) `"({browse "http://github.com/`address'/blob/master/dependency.do":dependency})"' 
 						}
 						else {
-							di _col(74) `"({browse "http://github.com/`address'/blob/master/dependency.do":Depend})"' _n
+							di _col(74) `"({browse "http://github.com/`address'/blob/master/dependency.do":dependency})"' _n
 						}
 					}	
 					else {
