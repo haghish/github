@@ -21,17 +21,17 @@ program githubmake
 	local capital : di ustrupper("`title'") 
 
 	
-	tempfile api toctmp pkgtmp 
+	tempfile toctmp pkgtmp 
 	tempname hitch knot toc pkg
 	
 	// Creating the TOC file
-	// -----------------------------------------------------------------------
+	// -------------------------------------------------------
 	qui file open `toc' using "`toctmp'", write replace
-	file write `toc' "d '`capital''" _n "p `title'" _n 
+	file write `toc' "d '`capital''" _n 
 	file write `toc' "p `title'" _n
 	
-	// make a list of installable files
-	// -----------------------------------------------------------------------
+	// Creating the PKG file
+	// -------------------------------------------------------
 	qui file open `pkg' using `"`pkgtmp'"', write replace
 	file write `pkg' "d '`capital''" _n "d " _n 
 	local list : dir . files "*" 
