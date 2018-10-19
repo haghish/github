@@ -111,12 +111,14 @@ BEGIN
 	 
 	
 	// select the path to the directory
+	/*
 	TEXT tx_repoinfo  10   +40  . ., label("Specify the path to the package repository")
 	TEXT tx0 10 +20 . ., label("repository*")
 	FILE path	 80 @  310  .  , error("path should be specified")  ///
 	      label(Browse...) ///
 	      tooltip("select the path to the package directory. for example, this can be the GitHub repository you are intending to upload") direct ///
 	      onchange("script mainReset")
+	*/
 		  
 		  
 	// select installable files
@@ -171,9 +173,11 @@ BEGIN
 		stopbox stop "author name is required"
 	}
 	
+	/*
 	if (!make.path) {
 		stopbox stop "repository path is required"
 	}
+	*/
 	
 	// one of the installing or ancillary files should be specified
 	if (!make.ffile & !make.axfile) {
