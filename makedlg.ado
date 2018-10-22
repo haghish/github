@@ -43,7 +43,7 @@ prog makedlg
 
 	
 	// call the make function 
-	make "`anything'",                  ///
+	make `anything',                    ///
 	     `toc'                          ///
 			 `pkg'                          ///
 			 `readme'                       ///
@@ -59,6 +59,6 @@ end
 
 
 
-makedlg "packagename", version("1.0.0") author("haghish") ///
+makedlg packagename, version("1.0.0") author("haghish") ///
 description("this is the package description") ancillary(`""C:\Users\haghish.fardzadeh\Documents\GitHub\github\githubdependency.ado" "C:\Users\haghish.fardzadeh\Documents\GitHub\github\githublist.ado" "C:\Users\haghish.fardzadeh\Documents\GitHub\github\githubmake.ado""') readme replace ///
 title("do something cool")
