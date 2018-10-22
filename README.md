@@ -1,4 +1,4 @@
-# `github` : a module for searching and installing Stata packages from GitHub
+# `github` : a module for building, searching, and installing Stata packages from GitHub
 
 <a href="http://github.com/haghish/github"><img src="https://github.com/haghish/markdoc/raw/master/Resources/images/github3.png" align="left" width="140" hspace="10" vspace="6"></a>
 
