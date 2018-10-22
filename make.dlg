@@ -1,8 +1,7 @@
-// -----------------------------------------------------------------------------
-// TITLE PAGE TAB
-// =============================================================================
+* developed by E. F. Haghish - 2018
+
 VERSION 12
-POSITION . . 400 540
+POSITION . . 400 475
 
 // Specify package license
 //      https://help.github.com/articles/licensing-a-repository/
@@ -62,9 +61,6 @@ BEGIN
 	CHECKBOX replace  10    +20   @   .  , option(replace) default(0) ///
 	         label("replace files, if existing") 
 					 
-	
-	
-	 
 	
 	// select installable files
 	TEXT tx_pkginfo  10   +40  . ., label("Package information")
@@ -153,14 +149,11 @@ COPY copy1
 
 
 
-// -----------------------------------------------------------------------------
-// FINAL MARKDOC COMMAND
-// =============================================================================	
+// ---------------------------------------------------------
+// MAKE COMMAND
+// =========================================================
 PROGRAM command
 BEGIN
-	
-  // repository path should be specified
-	
 	
 	// repository, name, title, version, author should be specified
 	if (!make.name | make.name.iseq("commandname")) {
@@ -184,87 +177,81 @@ BEGIN
 		stopbox stop "select installation and/or ancillary files"
 	}
 	
-	put "make2 "
+	put "makedlg "
+	put make.name 
+	put ", "
 	
-	// Main Tab
-	// -------------------------------------------------------------------------
-	if make.ffile {
-		
-		//call sub.sourceFile.setvalue ""
-		
-		put "`"`"""'
-		require make.ffile
-		put make.ffile
-		put make.axfile
-		put `"""'"'"
-		
 
+	option make.replace						// replace
+	option make.toc						    // create toc 
+	option make.pkg						    // create pkg
+	option make.readme						// create readme
+	
+	
+	if (make.title) {
+			put "title(`"`"""'
+			put make.title
+			put `"""'"') "
+	}
 		
-		/*
-		put `"" , "'
-		
-		
-		put "markup(" main.markup  ") "
-		
-		if main.r1 {
-			put "export(html) "
-		}
-		if main.r2 {
-			put "export(pdf) "
-		}
-		if main.r3 {
-			put "export(tex) "
-		}
-		if main.r4 {
-			put "export(docx) "
-		}
-		if main.r5 {
-			put "export(odt) "
-		}
-		if main.r6 {
-			put "export(md) "
-		}
-		
-		option main.replace						// replace
-		option main.install						// install 
-		option main.statax						// Statax syntax highlighter
-		option main.toc							// table of content
-		option main.date						// table of date
-		option main.numbered					// numbered 
-		option main.master					// master
-		option main.noisily						// noisily
-		
-		*put "export(" main.format ") "
-		
-		if main.style {
-			put "style(" `"""' main.style `"""' ") "
-		}
-		
-		if main.template {
-			put "template(" `"""' main.template `"""' ") "
-		}
-		
-		if main.title {
-			put "title(" `"""' main.title `"""' ") "
-		}	
-		if main.author {
-			put "author(" `"""' main.author `"""' ") "
-		}	
-		if main.affiliation {
-			put "affiliation(" `"""' main.affiliation  `"""' ") "
-		}	
-		if main.address {
-			put "address(" `"""' main.address `"""' ") "
-		}	
-		if main.summary {
-			put "summary(" `"""' main.summary  `"""' ") "
-		}
-		*/
-
+	if (make.version) {
+		put "version(" `"""'
+		put make.version
+		put `"""'") "
 	}
 	
-
-
-
+	if (make.description) {
+		put "description(`"`"""'
+		put make.description
+		put `"""'"') "
+	}
+	
+	if (make.license) {
+		put "license(" `"""'
+		put make.license
+		put `"""'") "
+	}
+	
+	if (make.author) {
+		put "author(" `"""'
+		put make.author
+		put `"""'") "
+	}
+	
+	if (make.affiliation) {
+		put "affiliation(" `"""'
+		put make.affiliation
+		put `"""'") "
+	}
+	
+	
+	if (make.url) {
+		put "url(" `"""'
+		put make.url
+		put `"""'") "
+	}
+	
+	if (make.email) {
+		put "email(" `"""'
+		put make.email
+		put `"""'") "
+	}
+	
+	
+	if (make.ffile) {
+		put "install(`"`"""'
+		require make.ffile
+		put make.ffile
+		put `"""'"') "
+	}
+	
+	if (make.axfile) {
+		put "ancillary(`"`"""'
+		require make.axfile
+		put make.axfile
+		put `"""'"') "
+	}
+		
+		
 END
 
