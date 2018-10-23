@@ -1,7 +1,7 @@
 * developed by E. F. Haghish - 2018
 
 VERSION 12
-POSITION . . 340 235
+POSITION . . 340 200
 
 // Specify package license
 //      https://help.github.com/articles/licensing-a-repository/
@@ -33,55 +33,44 @@ END
 
 DIALOG make, label("github search") 
 BEGIN
-
-	// toc
-	CHECKBOX findall  10  10   @   .  , option(toc) default(1) ///
-	         label("Search all (GitHub, net sources, documentations, FAQs)") 
-	// pkg
-	CHECKBOX all  10    +20   @   .  , option(pkg) default(0) ///
-	         label("Show repositories that are not intallable packages") 
-
 	
+	/*
+	// toc
+	CHECKBOX findall  10  10   @   .  , option(findall) default(1) ///
+	         label("Search all (GitHub, net sources, documentations, FAQs)") 
+	*/
+	
+	// pkg
+	CHECKBOX all  10    10   @   .  , option(all) default(0) ///
+	         label("Show repositories that are not intallable Stata packages") 
+
+	/*
 	// select installable files
 	TEXT tx_pkginfo  10   +40  . ., label("Package information")
+	*/
 	
 	// title of the document
-	TEXT tx_name 10 +20 . ., label("keyword")
-	EDIT name    80 @ 245 19 , default("")
-	
-
-	
-	
-	// language
-	TEXT tx_language  10   +20  . 310, label("language")
-	COMBOBOX language  80    @  70  .  , dropdownlist contents(language_list)
+	TEXT tx_keyword 10 +40 . ., label("keyword")
+	EDIT keyword    80 @ 245 19 , default("")
 	
 	// in
-	TEXT tx_in  10   +20  . 310, label("search in")
+	TEXT tx_in  10   +25  . 310, label("search in")
 	COMBOBOX in  80    @  70  .  , dropdownlist contents(in_list)
 	
+	// language
+	TEXT tx_language  10   +25  . 310, label("language")
+	COMBOBOX language  80    @  70  .  , dropdownlist contents(language_list)
+	
+	
+	
 	// date search
-	TEXT tx_date  10   +40  . 310, label("limit your search to a particular date range")
+	TEXT tx_date  10   +40  . 310, label("limit your search to a date range")
 	COMBOBOX date  10    +25  63  .  , dropdownlist contents(date_list)
 	TEXT tx_from  80   @  110 ., label("from")
 	EDIT from     115   @    90  19  , default("YYYY-MM-DD")
 	TEXT tx_to  215   @  300 ., label("to")
 	EDIT to     235   @    90  19  , default("YYYY-MM-DD")
 	
-	
-	 
-	
-	// select the path to the directory
-	/*
-	TEXT tx_repoinfo  10   +40  . ., label("Specify the path to the package repository")
-	TEXT tx0 10 +20 . ., label("repository*")
-	FILE path	 80 @  310  .  , error("path should be specified")  ///
-	      label(Browse...) ///
-	      tooltip("select the path to the package directory. for example, this can be the GitHub repository you are intending to upload") direct ///
-	      onchange("script mainReset")
-	*/
-		  
-		  
 
 	
 END
@@ -104,66 +93,39 @@ PROGRAM command
 BEGIN
 	
 	// repository, name, title, version, author should be specified
+	/*
 	if (!make.name | make.name.iseq("commandname")) {
 		stopbox stop "repository name is required"
 	}
 	if (!make.title | make.title.iseq("a short title or a brief explanation...")) {
 		stopbox stop "repository title is required"
 	}
-	if (!make.author) {
-		stopbox stop "author name is required"
-	}
-	
-	/*
-	if (!make.path) {
-		stopbox stop "repository path is required"
-	}
+
 	*/
 	
-	// one of the installing or ancillary files should be specified
-	if (!make.ffile & !make.axfile) {
-		stopbox stop "select installation and/or ancillary files"
-	}
-	
-	put "makedlg "
-	put make.name 
-	put ", "
 	
 
-	option make.findall						// search all
+	// search github
+	put "github search "
+
+	
+	
+	put make.keyword
+	put ", 
+	
 	option make.all						    // cshow repos that are not Stata packages
-
 	
-	
-	if (make.title) {
-			put "title(`"`"""'
-			put make.title
-			put `"""'"') "
+	if (make.language) {
+			put " language("
+			put make.language
+			put ") "
 	}
 		
-	if (make.version) {
-		put "version(" `"""'
-		put make.version
-		put `"""'") "
-	}
 	
-	if (make.description) {
-		put "description(`"`"""'
-		put make.description
-		put `"""'"') "
-	}
+	/*
 	
-	if (make.license) {
-		put "license(" `"""'
-		put make.license
-		put `"""'") "
-	}
-	
-	if (make.author) {
-		put "author(" `"""'
-		put make.author
-		put `"""'") "
-	}
+
+
 	
 	if (make.affiliation) {
 		put "affiliation(" `"""'
@@ -171,18 +133,6 @@ BEGIN
 		put `"""'") "
 	}
 	
-	
-	if (make.url) {
-		put "url(" `"""'
-		put make.url
-		put `"""'") "
-	}
-	
-	if (make.email) {
-		put "email(" `"""'
-		put make.email
-		put `"""'") "
-	}
 	
 	
 	if (make.ffile) {
@@ -198,6 +148,7 @@ BEGIN
 		put make.axfile
 		put `"""'"') "
 	}
+	*/
 		
 		
 END
