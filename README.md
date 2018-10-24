@@ -32,6 +32,10 @@ To install a package, use the `uninstall` subcommand, followed by the package na
 
     github uninstall markdoc
 
+### Installing package dependencies
+
+let's assume you have written a Stata package that requiers other packages to work properly. You can include a `dependency.do` file in your repository to tell `github install` command that these dependencies are necessary. the package will execute this file in Stata after installing your package. You will have plenty of options. For example, you can write the code for installing the package. Or, alternatively, you can simply notify the user... In either case, you should know that the `dependency.do` will be executed after the package installation. 
+
 ### Searching for a Stata package
 You can search GitHub for Stata package using a keyword. Read the help file for more information. This is similar to Stata's `search` or `findit` commands, but instead, only used for searching GitHub packages:
 
