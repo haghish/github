@@ -7,6 +7,7 @@ d
 F findall.ado
 F findall.sthlp
 F github.ado
+F github.dlg
 F github.sthlp
 F githubcheck.ado
 F githubconfirm.ado
@@ -17,4 +18,5 @@ F githuboutput.ado
 F githubQuery.ado
 F githubsearch.ado
 F githubsearchsteps.ado
+F make.ado
 F make.dlg
