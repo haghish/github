@@ -24,7 +24,7 @@ program githubsearch
 		local created "+created:`created'"
 	}
 	if !missing("`pushed'") {
-		local created "+pushed:`pushed'"
+		local pushed "+pushed:`pushed'"
 	}
 	
 	// search domain

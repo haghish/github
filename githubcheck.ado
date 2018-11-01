@@ -28,11 +28,11 @@ program githubcheck, rclass
 	
 	if `1' > 0 {
 		return local toc 1
-		di as txt "{bf:stata.toc} file was found"
+		di as txt "{bf:toc} file was found"
 	}
 	else {
 		return local toc 0
-		di as txt "{bf:stata.toc} file was NOT found"
+		di as error "{bf:toc} file was NOT found"
 	}
 	file close `hitch'
 	
@@ -61,18 +61,18 @@ program githubcheck, rclass
 	}
 	else {
 		return local pkg 0
-		di as txt "{bf:pkg} file was NOT found"
+		di as error "{bf:pkg} file was NOT found"
 	}
 	file close `hitch'
 	
 	
 	if `toc' > 0 & `pkg' > 0 {
 		return local installable 1
-		di as txt "{bf:`anything'} is installable"
+		di as txt "(:the repository is installable)"
 	}
 	else {
 		return local installable 0
-		di as err "{bf:`anything'} is NOT installable"
+		di as err "(the repository is NOT installable)"
 	}
 	
 	
