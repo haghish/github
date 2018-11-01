@@ -68,7 +68,7 @@ program githubcheck, rclass
 	
 	if `toc' > 0 & `pkg' > 0 {
 		return local installable 1
-		di as txt "(:the repository is installable)"
+		di as txt "(the repository is installable)"
 	}
 	else {
 		return local installable 0
