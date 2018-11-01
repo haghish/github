@@ -54,18 +54,35 @@ This help file was dynamically produced by
 
 *cap prog drop findall
 program findall
-	syntax [anything] [,  *]
+	*syntax [anything] [,  *]
+	syntax [anything] [, language(str) in(str) net local all]
 	
 	// the search function prints nothing in results window in version 14
 	version 8
 	
+	// avoid errors
+	capture log close findallpkg
+	
+	// SYNTAX PRICESSING
+	// -----------------
+	if missing("`language'") local language Stata
+	if missing("`in'") local in name
+	
 	// Create a log and save the search results
 	// -----------------------------------------------------------------------
+	
 	tempfile log 
 	qui log using "`log'", name(findallpkg)
-	search `anything', all
-	github search `anything', in(all) language(Stata) all
+	if missing("`local'") & !missing("`net'") search `anything', all
+	if !missing("`local'") & missing("`net'") search `anything', local
+	if !missing("`local'") & !missing("`net'") search `anything'
+	
+	*search `anything', local
+	
+	github search `anything', in("`in'") language("`language'") `all'
 	qui log close findallpkg
+	
+	//doedit "`log'"
 	
 	// Edit the log, add useful information
 	// -----------------------------------------------------------------------
@@ -78,6 +95,11 @@ program findall
 		
 		// Edit the log, add useful information
 		// -------------------------------------------------------------------
+		if missing("`local'") {
+		  if `"`macval(line)'"' == "{title:Search of official help files, FAQs, Examples, SJs, and STBs}" {
+		    file read `hitch' line
+		  }
+		}
 		
 		//get the versions from SSC
 		tokenize `"`macval(line)'"'
@@ -114,8 +136,8 @@ program findall
 		if `"`macval(line)'"' == "(end of search)" {
 			local line "Web resources from GitHub"
 			file write `knot' `"{smcl}"' _n
-			file write `knot' `"{title:`macval(line)'}"' _n(2)
-			file write `knot' "(contacting https://github.com)"
+			file write `knot' `"{title:`macval(line)'}"' _n
+			*file write `knot' "(contacting https://github.com)"
 			file read `hitch' line
 		}
 		else {
@@ -138,8 +160,8 @@ program findall
 	// View the results
 	// -----------------------------------------------------------------------
 	copy "`tmp'" `"`anything'"', replace
-	view "`anything'", smcl
-	capture erase "`anything'"
+	view "`anything'", smcl 
+	capture erase "`anything'" 
 	
 end
 
