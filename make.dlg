@@ -67,11 +67,11 @@ BEGIN
 	
 	// title of the document
 	TEXT tx_name 10 +20 . ., label("pkg name*")
-	EDIT name    80 @ 310 19 , default("commandname")
+	EDIT name    80 @ 310 19 , default("")
 	
 	// title of the document
-	TEXT tx_title 10 +20 . ., label("title*")
-	EDIT title    80 @ 310 19, default("a short title or a brief explanation...")
+	TEXT tx_title 10 +20 . ., label("short title*")
+	EDIT title    80 @ 310 19, default("")
 	
 	// verrsion
 	TEXT tx_version  10   +20  . 310, label("version")
@@ -79,7 +79,7 @@ BEGIN
 	
 	// Description
 	TEXT tx_description  10   +20  . 310, label("description")
-	EDIT description     80   @    310  19  , default("extended description of the package...")
+	EDIT description     80   @    310  19  , default("")
 	
 	// License
 	TEXT tx_license  10   +20  . 310, label("license")
@@ -123,14 +123,14 @@ BEGIN
 	TEXT tx_summary4  10   +20  . 310, label("installation")
 	FILE ffile	 80 @  310  .  , error("Open file")  ///
 	      label("select") ///
-	      tooltip("select the path to the package directory") multiselect ///
+	      tooltip("select the installation files. hold CTRL key for selecting multiple files") multiselect ///
 	      onchange("script mainReset") 
 		  
 	// select installable files
 	TEXT tx_summary5  10   +20  . 310, label("ancillary")
 	FILE axfile	 80 @  310  .  , error("Open file")  ///
 	      label("select") ///
-	      tooltip("select the path to the package directory") multiselect ///
+	      tooltip("select the ancillary files. hold CTRL key for selecting multiple files") multiselect ///
 	      onchange("script mainReset") 
 	
 	// required
@@ -156,10 +156,10 @@ PROGRAM command
 BEGIN
 	
 	// repository, name, title, version, author should be specified
-	if (!make.name | make.name.iseq("commandname")) {
+	if (!make.name | make.name.iseq("")) {
 		stopbox stop "repository name is required"
 	}
-	if (!make.title | make.title.iseq("a short title or a brief explanation...")) {
+	if (!make.title | make.title.iseq("")) {
 		stopbox stop "repository title is required"
 	}
 	if (!make.author) {
