@@ -27,7 +27,7 @@ prog githuboutput
 			
 			// check the language
 			if !missing("`language'") & "`language'" == language[`N'] |			///
-			missing("`language'") {		
+			missing("`language'") | "`language'" == "all" & address[`N'] != "" {		
 				if installable[`N'] == 1 | !missing("`all'") {
 					local address : di address[`N']
 					capture githubdependency `address'
@@ -184,4 +184,3 @@ prog githuboutput
 	}
 	
 end
-

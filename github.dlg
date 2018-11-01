@@ -64,9 +64,9 @@ BEGIN
 	
 	
 	// date search
-	TEXT tx_date  10   +40  . 310, label("limit your search to a date range")
-	COMBOBOX date  10    +25  63  .  , dropdownlist contents(date_list)
-	TEXT tx_from  80   @  110 ., label("from")
+	TEXT tx_date  10   +40  . 310, label("limit your search to a date range (optional)")
+	COMBOBOX date  10    +25  70  .  , dropdownlist contents(date_list)
+	TEXT tx_from  80   @  112 ., label("from")
 	EDIT from     115   @    90  19  , default("YYYY-MM-DD")
 	TEXT tx_to  215   @  300 ., label("to")
 	EDIT to     235   @    90  19  , default("YYYY-MM-DD")
