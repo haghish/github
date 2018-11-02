@@ -1,5 +1,5 @@
 /*** DO NOT EDIT THIS LINE -----------------------------------------------------
-Version: 1.4.1
+Version: 1.4.2
 Title: github
 Description: search, install, and uninstall Stata packages with a particular  
 version (release) as well as their dependencies from 
@@ -188,8 +188,9 @@ prog define github
 
 	
 	syntax anything, [Version(str) replace force save(str) in(str) 				///
-	language(str) all created(str) pushed(str) debug reference(str)				///
-	append replace Number(numlist max=1) ] 
+	language(str) all NET  ///
+	created(str) pushed(str) debug reference(str)			///
+	append replace Number(numlist max=1) local] 
 	
 	
 	// correct the language
@@ -200,6 +201,20 @@ prog define github
 	tokenize `anything'
 	local anything "`2'"
 	
+	
+	
+	
+	
+	// Setpath ??? WHY I HAD ADDED THIS CODE?
+	// =======
+	*else if substr(trim(`"`macval(0)'"'),1,7) == "setpath" {
+	if `"`macval(1)'"' == "setpath" | `"`macval(1)'"' == "setpath:" {
+		local 0 : subinstr local 0 "setpath" ""
+		confirm file `0'
+		
+		exit
+	}
+	
 	// Query
 	// ---------
 	if "`1'" == "query" {
@@ -207,9 +222,35 @@ prog define github
 		exit
 	}
 	
+	// List
+	// ---------
+	else if "`1'" == "list" {
+		if !missing("`anything'") {
+			err 198
+		}
+		githubdb list
+		exit
+	}
+	
+	// Update
+	// ---------
+	if "`1'" == "update" {
+		
+		// if a package name is specified, update it
+		if missing("`anything'") {
+		  di as err "package name is required"
+		  qui err 198
+		}
+		
+		githubdb check, name("`anything'")
+		github install `r(address)'
+		exit
+	}
+	
 	// Uninstall
 	// ---------
 	else if "`1'" == "uninstall" {
+		githubdb erase, name("`2'")
 		ado uninstall `2'
 		exit
 	}
@@ -217,9 +258,15 @@ prog define github
 	// Search
 	// ---------
 	else if "`1'" == "search" {
+	  if !missing("`local'") | !missing("`net'") {
+	    findall `2', language(`language') in(`in') `local'  `net' `all' 
+		exit
+	  }
+	  else {
 		githubsearch `2', language(`language') in(`in') save(`save') `all' 		///
 		created(`created') pushed(`pushed') `debug' `append' `replace' number(`number')
 		exit
+	  }
 	}
 	
 	// Make
@@ -236,9 +283,9 @@ prog define github
 		//exit
 	}
 	
-	// List
+	// Listpack (EXPERIMENTAL, UNDOCUMENTED)
 	// ---------
-	else if "`1'" == "list" {
+	else if "`1'" == "listpack" {
 		githublist `2' ,  language(`language') 									///
 		save(`save') created(`created') pushed(`pushed') `debug' `append' 		///
 		`replace'
@@ -250,6 +297,8 @@ prog define github
 	else if "`1'" != "install" {
 		err 198
 	}
+	
+	// PACKAGE INSTALLATION ----------------------------------------------------
 	
 	// Get the packagename
 	// -------------------
@@ -303,12 +352,16 @@ prog define github
 	local username `1'
     macro shift
 	
-	if missing("`package'") {
-		while "`1'" != "" {
-			local package "`1'"
-			macro shift
-		}
+	while "`1'" != "" {
+		local reponame "`1'"
+		macro shift
 	}
+	if missing("`package'") {
+		local package `reponame'
+	}
+	
+	//BY HERE we have the username, repositoryname, and packagename. what else?
+	//link address, and possibly downloaded date
 	
 	// Installing an archived version
 	// -----------------------------------------------------------------------
@@ -367,9 +420,13 @@ prog define github
 		
 		// make sure it is first uninstalled 
 		capture quietly ado uninstall "`package'"
+		githubdb erase, name("`package'")
 		
 		net install `package', from("https://raw.githubusercontent.com/`anything'/master/") `replace' //`force' 
-
+		
+		githubdb add, address("`anything'") username("`username'") 				///
+		              reponame("`reponame'") name("`package'")
+		
 		di _n "{title:Checking package dipendencies}" 
 		tempfile dep
 		capture quietly copy "https://raw.githubusercontent.com/`anything'/master/dependency.do" `dep'
