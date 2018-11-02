@@ -2,7 +2,7 @@ d 'GITHUB': search, install, and uninstall Stata packages with a particular    {
 d version (release) as well as their dependencies from 
 d {browse "http://www.github.com/haghish/github":GitHub} website
 d
-d Distribution-Date: 20161214
+d Distribution-Date: 20181102
 d
 F findall.ado
 F findall.sthlp
@@ -12,6 +12,7 @@ F github.sthlp
 F githubcheck.ado
 F githubconfirm.ado
 F githubdependency.ado
+F githubdb.ado
 F githublist.ado
 F githubmake.ado
 F githuboutput.ado
