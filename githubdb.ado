@@ -82,24 +82,26 @@ program githubdb, rclass
 		if "`anything'" == "list" {
 			preserve
 			use "`r(fn)'", clear
-			di in text " {hline 64}" _n											///
-	                   "  {bf:Date}" _col(16) 									///
-					   "{bf:Name}" _col(28) 									///
-					   "{bf:user/repository} " _col(48) 						///
-					   "{bf:Action}"    _n                                 		///
-	                   " {hline 64}"
-	
 			local N : di _N
-			forvalues i = 1/`N' {
-				local address : di username[`i'] "/" reponame[`i']
-				local short : di abbrev("`address'", 20) 
-				local name : di name[`i']
-				di " " downloaded[`i'] _col(16) name[`i'] _col(28)              ///
-				   `"{browse "http://github.com/`address'":`short'}"'           ///
-					   _col(48) "{stata github install `address' :update}"      ///
-					   " / {stata github uninstall `name' :uninstall}"
+			if `N' > 0 {
+				di in text " {hline 64}" _n										///
+						   "  {bf:Date}" _col(16) 								///
+						   "{bf:Name}" _col(28) 								///
+						   "{bf:user/repository} " _col(48) 					///
+						   "{bf:Action}"    _n                                 	///
+						   " {hline 64}"
+				forvalues i = 1/`N' {
+					local address : di username[`i'] "/" reponame[`i']
+					local short : di abbrev("`address'", 20) 
+					local name : di name[`i']
+					di " " downloaded[`i'] _col(16) name[`i'] _col(28)          ///
+					   `"{browse "http://github.com/`address'":`short'}"'       ///
+						   _col(48) "{stata github install `address' :update}"  ///
+						   " / {stata github uninstall `name' :uninstall}"
+				}
+				di in text " {hline 64}"
 			}
-			di in text " {hline 64}"
+			else di as txt "no github package was found!"
 			restore
 		}
 	}
