@@ -182,8 +182,16 @@ This help file was dynamically produced by
 [MarkDoc Literate Programming package](http://www.haghish.com/markdoc/) 
 ***/
 
-*cap prog drop github
 
+/*
+PLEASE NOTE
+--------------------------------------
+
+- some of the options of the program are not documented because they are 
+  intended to be used internally
+*/
+
+*cap prog drop github
 prog define github
 
 	

@@ -10,7 +10,7 @@
 {title:Syntax}
 
 {p 8 16 2}
-{cmd: github} [ {help github##subcommand:{it:subcommand}} ] [ {it:keyword} | {it:username/repository} ] [{cmd:,} options]
+{cmd: github} [ {help github##subcommand:{it:subcommand}} ] [ {it:keywords} | {it:username/repository} ] [{cmd:,} options]
 {p_end}
 
 {p 4 4 2}
@@ -20,23 +20,17 @@ The {bf:github} command takes several subcommands:
 {synoptset 20 tabbed}{...}
 {synopthdr:subcommand}
 {synoptline}
+{synopt:{opt search}}followed by {it:keywords}, it searches the GitHub API and Stata.com for Stata packages and repositories.{p_end}
 {synopt:{opt install}}installs the specified repository. The command should be 
 followed by the {bf:username/repository}{p_end}
-{synopt:{opt uninstall}}uninstalls a package{p_end}
 {synopt:{opt query}}followed by {bf:username/repository}, it makes a table of 
 all of the released versions of that package and allows you to install any version 
 with a single click.{p_end}
 {synopt:{opt check}}followed by a {bf:username/repository} evaluates whether the 
 repository is installable (i.e. includes {bf:toc} and {bf:pkg} files{p_end}
-{synopt:{opt search}}followed by a {bf:keyword}, it searches the GitHub API in
-repository name (default), repository description, {bf:README.md} file in 
-the repository, or all of the above. the {bf:in(str)} option specifies the 
-field of the API search.{p_end}
-{synopt:{opt list}}GitHub API returns maximum of 100 research results. therefore, 
-a recursive search is needed to build the complete list of Stata packages on 
-GitHub. followed by a keyword (e.g. stata) the {bf:list} command searches the 
-API within a specific time periods and aggregate the results to build the complete 
-list of Stata packages. {p_end}
+{synopt:{opt uninstall}}uninstalls a package. the command should be followed by a {it:package-name}.{p_end}
+{synopt:{opt update}}updates a package. the command should be followed by a {it:package-name}.{p_end}
+{synopt:{opt list}}lists the installed packages from GitHub and allows updating or uninstalling them. {p_end}
 {synoptline}
 {p2colreset}{...}
 
@@ -86,23 +80,13 @@ to the {it:keyword}, specify {bf:language(all)}. {p_end}
 {bf:description}, {bf:readme}, or {bf:all}. To search for the {it:keyword} in 
 repository name, repository description, and the readme.md file, 
 specify {bf:in(all)}. {p_end}
-{synopt:{opt save(str)}}saves the results in a data set with the given name. {p_end}
 {synopt:{opt all}}shows repositories that lack the {bf:pkg} and {bf:stata.toc} 
 files. by default these repositories are not shown in the output because they 
 are not installable packages {p_end}
-{synopt:{opt append}}when the {bf:save} option is specified, the {bf:append} 
-option will add the new results to the saved dataset{p_end}
-{synopt:{opt replace}}when the {bf:save} option is specified, the {bf:replace} 
-option will replaces the dataset, if it exists{p_end}
-{synopt:{opt number(int)}}limits the number of displayed repositories.{p_end}
-{synopt:{opt created(str)}}filters the search results based on the date that the 
-repository was created on github. The date must be written with the format of 
-"{bf:yyyy-mm-dd}" which is required by GitHub. This option can also specify 
-a range of time between two dates. 
-{browse "https://help.github.com/articles/searching-repositories/#search-based-on-when-a-repository-was-created-or-last-updated":See the documentations on GitHub}.{p_end}
-{synopt:{opt pushed(str)}}filters the search results based on the date that the 
-repository was last updated on github. The format for entering the date 
-is identical to the {bf:created} option.{p_end}
+{synopt:{opt net}}it includes results from Stata.com website, analyzes them, and shows the 
+publication date of the packages{p_end}
+{synopt:{opt local}}it includes results from Stata.com website that might include 
+documents other than packages, such as help files, FAQs, Stata Journal articles, etc.{p_end}
 {synoptline}
 {p2colreset}{...}
 
@@ -170,9 +154,9 @@ install the dependencies.
 
 
 {p 4 4 2}
-{bf:build the complete list of Stata packages on GiutHub} 
+{bf:list the installed packages from GiutHub} 
 		
-        . github list stata, language(all) in(all) all save(archive) append
+        . github list
 		
 
 {title:Author}
