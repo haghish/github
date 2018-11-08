@@ -195,9 +195,10 @@ PLEASE NOTE
 prog define github
 
 	
-	syntax anything, [Version(str) replace force save(str) in(str) 				///
-	language(str) all NET  ///
-	created(str) pushed(str) debug reference(str)			///
+	syntax anything, [Version(str) force save(str) in(str) 				        ///
+	language(str) all NET                                                       ///
+	/// some of the options of the program are not documented yet               ///
+	created(str) pushed(str) debug reference(str)			                    ///
 	append replace Number(numlist max=1) local] 
 	
 	
