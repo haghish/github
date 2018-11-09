@@ -11,8 +11,8 @@ F github.dlg
 F github.sthlp
 F githubcheck.ado
 F githubconfirm.ado
-F githubdependency.ado
 F githubdb.ado
+F githubdependency.ado
 F githublist.ado
 F githubmake.ado
 F githuboutput.ado
