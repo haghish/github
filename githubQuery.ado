@@ -90,7 +90,7 @@ program githubQuery
 			if !missing(`"`link'"') & !missing("`version'") & !missing("`date'") {
 				
 				di `"  {browse `link':`version'}"' _skip(8)  "`date'" _skip(7) 	///
-				"{stata github install `anything', version(`version') replace : Install}" 
+				"{stata github install `anything', version(`version') : Install}" 
 				
 				local link
 				local version
