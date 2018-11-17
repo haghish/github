@@ -410,7 +410,7 @@ prog define github
 		capture quietly ado uninstall "`package'"
 		net install "`package'", from("`pkg'") `replace' `force' 
 		
-		di _n "{title:Checking package dipendencies}" 
+		di _n "{title:Checking package dependencies}" 
 		capture quietly findfile "dependency.do", path("`pkg'")
 		if _rc == 0 {
 			di as txt "installing {bf:`package'} package dependencies:" _n
@@ -436,7 +436,7 @@ prog define github
 		githubdb add, address("`anything'") username("`username'") 				///
 		              reponame("`reponame'") name("`package'")
 		
-		di _n "{title:Checking package dipendencies}" 
+		di _n "{title:Checking package dependencies}" 
 		tempfile dep
 		capture quietly copy "https://raw.githubusercontent.com/`anything'/master/dependency.do" `dep'
 		if _rc == 0 {
