@@ -55,7 +55,7 @@ BEGIN
 	         label("create packagename.pkg") 
 	// pkg
 	CHECKBOX readme  10    +20   @   .  , option(readme) default(1) ///
-	         label("create README.md (recommended)") 
+	         label("create README.md") 
 	
 	// replace
 	CHECKBOX replace  10    +20   @   .  , option(replace) default(0) ///
@@ -74,7 +74,7 @@ BEGIN
 	EDIT title    80 @ 310 19, default("")
 	
 	// verrsion
-	TEXT tx_version  10   +20  . 310, label("version")
+	TEXT tx_version  10   +20  . 310, label("version*")
 	EDIT version     80   @    310  19  , default("")
 	
 	// Description
@@ -92,6 +92,10 @@ BEGIN
 	// Author of the document
 	TEXT tx_author 10 +20 . +59, label("author*")
 	EDIT author 80 @ 310 19  
+	
+	// E-mail
+	TEXT tx_email 10 +20 . ., label("e-mail*")
+	EDIT email 80 @ 310 19  
 	 
 	// Affiliation
 	TEXT tx_affiliation 10 +20 . ., label("affiliation")
@@ -101,9 +105,7 @@ BEGIN
 	TEXT tx_url 10 +20 . ., label("url link")
 	EDIT url 80 @ 310 19  
 	
-	// E-mail
-	TEXT tx_email 10 +20 . ., label("e-mail")
-	EDIT email 80 @ 310 19  
+	
 	 
 	
 	// select the path to the directory
@@ -162,15 +164,19 @@ BEGIN
 	if (!make.title | make.title.iseq("")) {
 		stopbox stop "repository title is required"
 	}
+	if (!make.version | make.version.iseq("")) {
+		stopbox stop "verion is required"
+	}
 	if (!make.author) {
 		stopbox stop "author name is required"
 	}
-	
-	/*
-	if (!make.path) {
-		stopbox stop "repository path is required"
+	if (!make.email | make.email.iseq("")) {
+		stopbox stop "email is required"
 	}
-	*/
+	
+
+	
+
 	
 	// one of the installing or ancillary files should be specified
 	if (!make.ffile & !make.axfile) {
