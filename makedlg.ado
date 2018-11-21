@@ -1,6 +1,6 @@
 
 
-cap prog drop makedlg
+*cap prog drop makedlg
 prog makedlg
 	
 	syntax [anything] [,      ///
@@ -22,9 +22,10 @@ prog makedlg
 
 	
 	// get the install file names of anything
+
 	tokenize `"`install'"', parse(" ")	
 	while !missing("`1'") {
-	  quietly abspath "`1'"
+		quietly abspath "`1'"
 		if missing("`inst'") local inst = "`r(fname)'"
 		else local inst = "`inst';`r(fname)'"	
 		macro shift
@@ -50,15 +51,19 @@ prog makedlg
 			 `replace'                      ///
 			 title(`title')                 ///
 	     version(`version')             ///
+			 license("`license'")           ///
 	     description(`description')     ///
 			 author(`author')               ///
+			 affiliation(`affiliation')     ///
+			 email(`email')                 ///
+			 url(`url')                     ///
 	     install("`inst'")              ///
 			 ancillary("`anc'")
 	
 end
 
 
-
+/*
 makedlg packagename, version("1.0.0") author("haghish") ///
 description("this is the package description") ancillary(`""C:\Users\haghish.fardzadeh\Documents\GitHub\github\githubdependency.ado" "C:\Users\haghish.fardzadeh\Documents\GitHub\github\githublist.ado" "C:\Users\haghish.fardzadeh\Documents\GitHub\github\githubmake.ado""') readme replace ///
 title("do something cool")

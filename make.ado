@@ -1,5 +1,5 @@
 	
-cap prog drop make
+*cap prog drop make
 prog make
 	
 	syntax [anything] [,      ///
@@ -34,12 +34,27 @@ prog make
 		file write `tocfile' "v `version'" _n 
 	}
 	if !missing("`author'") {
-		file write `tocfile' "d Materials by `author'" _n(2) 
+		file write `tocfile' "d Materials by `author'" _n 
 	}
-	file write `tocfile' "d '`capital''" _n(2) 
+	
+
+	if !missing("`affiliation'") {
+		file write `tocfile' "d `affiliation'" _n 
+	}
+	if !missing("`email'") {
+		file write `tocfile' "d `email'" _n 
+	}
+	if !missing("`url'") {
+		file write `tocfile' "d `url'" _n 
+	}
+
+	
+	file write `tocfile' _n
+	
+	*file write `tocfile' "d '`capital''" _n(2) 
 	
 	if !missing("`description'") {
-		file write `tocfile' "d '`capital'': `description'" _n(2) 
+		file write `tocfile' "d '`anything'': `description'" _n(2) 
 	}
 	file write `tocfile' "p `anything'" _n
 	
@@ -50,15 +65,23 @@ prog make
 	if !missing("`version'") {
 		file write `pkgfile' "v `version'" _n 
 	}
-	if !missing("`description'") {
-		file write `pkgfile' "d '`capital'': `description'" _n(2) 
+	if !missing("`title'") {
+		file write `pkgfile' "d '`capital'': `title'" _n
 	}
-	else file write `pkgfile' "d '`capital'': no description is available!" _n
+	else file write `pkgfile' "d '`capital''" _n
+	
+	if !missing("`description'") {
+		file write `pkgfile' "d " _n  "d `description'" _n
+	}
+	
 	
 	//date
 	local today : di %td_CYND  date("$S_DATE", "DMY")
 	file write `pkgfile' "d " _n 
 	file write `pkgfile' "d Distribution-Date: `today'" _n 
+	if !missing("`license'") {
+		file write `pkgfile' "d License:" " `license'" _n
+	}
 	file write `pkgfile' "d " _n
 	
 	//if install and ancillary are empty, list all files 
@@ -109,11 +132,17 @@ prog make
 	// Creating the README.md file
 	// -------------------------------------------------------
 	qui file open `readmefile' using "`readtmp'", write replace
+	
+	if !missing("`version'") {
+	  file write `readmefile' "_v. `version'_  " _n(2)
+	}
+	
 	file write `readmefile' "`" "`anything'" "` "
 	if !missing("`title'") {
 		file write `readmefile' ": `title'"
 	}
-	file write `readmefile' _n "==============================" _n(2)
+	local len = length(" `anything' : `title' ")
+	file write `readmefile' _n  _dup(`len') "=" _n(2)
 	
 	
 	if !missing("`description'") {
@@ -122,11 +151,18 @@ prog make
 		file write `readmefile' "`description'" _n
 	}
 	
+	if !missing("`license'") {
+	  file write `readmefile' _n "### License" _n
+		file write `readmefile' "`license'" _n(2)
+	}
 	
 	if !missing("`author'") {
 	  file write `readmefile' _n "Author" _n
 		file write `readmefile' "------" _n(2)
-		file write `readmefile' "`author'" _n
+		file write `readmefile' "**`author'**  " _n
+		if !missing("`affiliation'") file write `readmefile' "`affiliation'  " _n
+		if !missing("`email'") file write `readmefile' "`email'  " _n
+		if !missing("`url'") file write `readmefile' "<`url'>  " _n
 	}
 
 	
