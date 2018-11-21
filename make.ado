@@ -153,7 +153,7 @@ prog make
 	
 	if !missing("`license'") {
 	  file write `readmefile' _n "### License" _n
-		file write `readmefile' "`license'" _n(2)
+		file write `readmefile' "`license'" _n
 	}
 	
 	if !missing("`author'") {
