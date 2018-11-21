@@ -82,7 +82,7 @@ BEGIN
 	EDIT description     80   @    310  19  , default("")
 	
 	// License
-	TEXT tx_license  10   +20  . 310, label("license")
+	TEXT tx_license  10   +20  . 310, label("license*")
 	COMBOBOX license  80    @  70  .  , dropdownlist contents(license_list)
 	
 	
@@ -172,6 +172,9 @@ BEGIN
 	}
 	if (!make.email | make.email.iseq("")) {
 		stopbox stop "email is required"
+	}
+	if (!make.license | make.license.iseq("select")) {
+		stopbox stop "license is required"
 	}
 	
 
