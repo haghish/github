@@ -26,6 +26,15 @@ Not all packages are installable. Stata repositories must have __toc__ and __pkg
 
 > <img src="https://github.com/haghish/markdoc/raw/master/Resources/images/attention.png" width="20px" height="20px"  align="left" hspace="0" vspace="0"> to make your repository installable, you need __packagename.pkg__ and __stata.toc__ files. The [__MarkDoc Package__](https://github.com/haghish/MarkDoc) can __automatically__ build these files for you, making your package ready to be installable from any platform. __`github`__ package provide an option named `force` that allows you to force install repositories which are not installable. However, the package still gives more credit to installable packages when using the __`github search`__ command. Therefore, by making your package installable, you will receive much more attention from Stata users on GitHub. Using [__MarkDoc Package__](https://github.com/haghish/MarkDoc) you can write the Stata help files using Markdown and build the __toc__ and __pkg__ files effortlessly. 
 
+### Managing installed packages
+
+`github` has a built-in database that keeps track of the packages installed on your machine, and of course, also tells you the versions of the packages. The version is taken from the release of the package that you are installing. You can `list` the installed packages and get helpful information about them, as well as update or uninstall them:
+
+    github list
+
+<center>
+<a href="https://github.com/haghish/github/raw/master/images/list.png"><img src="https://github.com/haghish/github/raw/master/images/list.png"  width="550" hspace="10" vspace="6"></a>
+</center>
 
 ### Uninstalling a package
 To install a package, use the `uninstall` subcommand, followed by the package name. For example:
@@ -37,9 +46,17 @@ To install a package, use the `uninstall` subcommand, followed by the package na
 let's assume you have written a Stata package that requiers other packages to work properly. You can include a `dependency.do` file in your repository to tell `github install` command that these dependencies are necessary. the package will execute this file in Stata after installing your package. You will have plenty of options. For example, you can write the code for installing the package. Or, alternatively, you can simply notify the user... In either case, you should know that the `dependency.do` will be executed after the package installation. 
 
 ### Searching for a Stata package
-You can search GitHub for Stata package using a keyword. Read the help file for more information. This is similar to Stata's `search` or `findit` commands, but instead, only used for searching GitHub packages:
+You can search GitHub for Stata package using a keyword or many keywords. This is similar to Stata's `search` or `findit` commands, but instead, only used for searching GitHub packages:
 
     github search weaver, in(all)
+    
+Searching GitHub API effectively is very important. For this, the package includes a search GUI that shows the syntax you can use to narrow down your search or expand it to include other sources. The search command also analyzes the release dates for packages hosted on the `net` command, which is a very useful feature. To launch the GUI, type:
+
+    db github
+
+<center>
+<a href="https://github.com/haghish/github/raw/master/images/search.png"><img src="https://github.com/haghish/github/raw/master/images/search.png"  width="350" hspace="10" vspace="6"></a>
+</center>
 
 ### Package Versions
 GitHub allows archiving unlimited number of package versions. The `github` command has an option for specifying 
