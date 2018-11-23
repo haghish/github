@@ -55,7 +55,7 @@ Searching GitHub API effectively is very important. For this, the package includ
     db github
 
 <center>
-<a href="https://github.com/haghish/github/raw/master/images/search.png"><img src="https://github.com/haghish/github/raw/master/images/search.png"  width="350" hspace="10" vspace="6"></a>
+<a href="https://github.com/haghish/github/raw/master/images/search.png"><img src="https://github.com/haghish/github/raw/master/images/search.png"  width="400" hspace="10" vspace="6"></a>
 </center>
 
 For example, if you use the `github search` command to search for `markdoc` package, you get the following output:
@@ -120,34 +120,14 @@ For example, [__MarkDoc package has a `dependency.do` file__](https://raw.github
  
 
 ### Example of pkg file
-The repository should include a file __with `.pkg` suffix and an identical name as the package name__. 
-The name of the file doesn't have to be identical to the repository name, but it is strongly adviced 
-to name the repository identical to the package name. Below is an example file 
-of the [`github.pkg`](https://raw.githubusercontent.com/haghish/github/master/github.pkg) that is used for installing the package on your system.
-Note that the files that are meant to be copied on your system begin with `F` (bottom of the file)
+Imagine you have created an ado-file and Stata help files. How do you make your repository installable? You need to create a *stata.toc* aand a *packagename.pkg* files manually, specify the required information, files that should be installed, etc. The `
+github` package introduces the `make` GUI that generates the package installations for you in a stricted way. You can just select the files that you wish to install, specify the required information, and have your *toc* and *pkg* files ready. Then, as soon as you copy these files to your repository, it would be installable! To run the GUI, type:
 
-~~~
-d 'GITHUB': module to install Stata packages and their dependencies from GitHub
-d
-d  github is a module for installing Stata packages with a particular
-d  version as well as their dependencies from GitHub.
-d
-d KW: Version control
-d KW: GitHub
-d KW: Git
-d KW: net
-d
-d Requires: Stata version 11 
-d
-d Distribution-Date: 20161103
-d
-d Author: E.F. Haghish, University of Southern Denmark
-d Support: email haghish@imada.sdu.dk
-d
-F github.ado
-F github.sthlp
-F githubQuery.ado
-~~~
+    db make
+ 
+<center>
+<a href="https://github.com/haghish/github/raw/master/images/make.png"><img src="https://github.com/haghish/github/raw/master/images/make.png"  width="450" hspace="10" vspace="6"></a>
+</center>
 
 
 Searching for a package in Stata
