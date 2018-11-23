@@ -2,12 +2,11 @@
 program githubcheck, rclass
 
 	syntax anything
-	tempfile confirm
 	
+	tempfile confirm
 	
 	tempfile api 
 	tempname hitch 
-	
 	
 	capture quietly copy "https://api.github.com/search/code?q=stata+in:path+filename:stata.toc+repo:`anything'" `api', replace
 	if _rc != 0 {
@@ -35,8 +34,6 @@ program githubcheck, rclass
 		di as error "{bf:toc} file was NOT found"
 	}
 	file close `hitch'
-	
-	
 	
 	sleep 3000
 	capture quietly copy "https://api.github.com/search/code?q=stata+extension:pkg+repo:`anything'" `api', replace
@@ -74,7 +71,6 @@ program githubcheck, rclass
 		return local installable 0
 		di as err "(the repository is NOT installable)"
 	}
-	
 	
 end
 

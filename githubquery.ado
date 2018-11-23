@@ -1,12 +1,11 @@
-
-program githubquery
+*cap prog drop githubquery
+program githubquery, rclass
 	
 	syntax anything
 	
 	tempfile api tmp
 	tempname hitch knot
 	
-	*local url "https://api.github.com/repos/`anything'/releases"
 	qui copy "https://api.github.com/repos/`anything'/releases" `api', replace
 	file open `hitch' using "`api'", read
 	qui file open `knot' using "`tmp'", write replace
@@ -15,8 +14,8 @@ program githubquery
 	//remove the beginning brackets
 	local line : subinstr local line "[{" ""
 	
-	di in text _n " {hline 40}" _n												///
-	"  {bf:Version}" _col(16) "{bf:Release Date}" _col(34) "{bf:Install} " _n 	///
+	di in text _n " {hline 40}" _n												                        ///
+	"  {bf:Version}" _col(16) "{bf:Release Date}" _col(34) "{bf:Install} " _n 	  ///
 	" {hline 40}"
 	
 	while r(eof) == 0 {
@@ -60,17 +59,17 @@ program githubquery
 			else {
 				macro shift
 			}	
-			
 		}
-
 		file read `hitch' line
 	}
+	
 	file close `hitch'		
 	file close `knot'
 	
-	
 	file open `hitch' using "`tmp'", read
 	file read `hitch' line
+	local latestversion
+	
 	while r(eof) == 0 {
 		if `"`macval(line)'"' == "html_url" {
 			file read `hitch' line
@@ -87,6 +86,10 @@ program githubquery
 				local date `"`macval(line)'"'
 			}
 			
+			// get the latest version
+			// -----------------------------------------------------------------------
+			if missing("`latestversion'") local latestversion "`version'"
+			
 			if !missing(`"`link'"') & !missing("`version'") & !missing("`date'") {
 				
 				di `"  {browse `link':`version'}"' _skip(8)  "`date'" _skip(7) 	///
@@ -102,6 +105,7 @@ program githubquery
 	}
 	
 	di in text " {hline 40}" _n
-
+	return local latestversion `latestversion' 
+	
 end
 

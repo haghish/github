@@ -194,6 +194,7 @@ PLEASE NOTE
 *cap prog drop github
 prog define github
 
+	version 13
 	
 	syntax anything, [Version(str) force save(str) in(str) 				        ///
 	language(str) all NET                                                       ///
@@ -267,9 +268,9 @@ prog define github
 			//otherwise display the original error
 			else {
 				githubdb check, name("`anything'")
-				exit
 			}
 		}
+		exit
 	}
 	
 	// Uninstall
@@ -426,6 +427,11 @@ prog define github
 		capture quietly ado uninstall "`package'"
 		net install "`package'", from("`pkg'") `replace' `force' 
 		
+		// register the package in the database
+		githubdb add, address("`anything'") username("`username'") 			          	///
+		              reponame("`reponame'") name("`package'") force("`force'")     ///
+									version("`version'")
+									
 		di _n "{title:Checking package dependencies}" 
 		capture quietly findfile "dependency.do", path("`pkg'")
 		if _rc == 0 {
@@ -449,8 +455,15 @@ prog define github
 		
 		net install `package', from("https://raw.githubusercontent.com/`anything'/master/") `replace' //`force' 
 		
-		githubdb add, address("`anything'") username("`username'") 				///
-		              reponame("`reponame'") name("`package'")
+		// check the version of the installing package
+		if missing("`version'") {
+			quietly github query `anything'
+			local version `r(latestversion)'
+		}
+		
+		githubdb add, address("`anything'") username("`username'") 			          	///
+		              reponame("`reponame'") name("`package'") force("`force'")     ///
+									version("`version'")
 		
 		di _n "{title:Checking package dependencies}" 
 		tempfile dep
