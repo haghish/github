@@ -33,7 +33,7 @@ Not all packages are installable. Stata repositories must have __toc__ and __pkg
     github list
 
 <center>
-<a href="https://github.com/haghish/github/raw/master/images/list.png"><img src="https://github.com/haghish/github/raw/master/images/list.png"  width="550" hspace="10" vspace="6"></a>
+<a href="https://github.com/haghish/github/raw/master/images/list.png"><img src="https://github.com/haghish/github/raw/master/images/list.png"  width="650" hspace="10" vspace="6"></a>
 </center>
 
 ### Uninstalling a package
@@ -56,6 +56,12 @@ Searching GitHub API effectively is very important. For this, the package includ
 
 <center>
 <a href="https://github.com/haghish/github/raw/master/images/search.png"><img src="https://github.com/haghish/github/raw/master/images/search.png"  width="350" hspace="10" vspace="6"></a>
+</center>
+
+For example, if you use the `github search` command to search for `markdoc` package, you get the following output:
+
+<center>
+<a href="https://github.com/haghish/github/raw/master/images/example.png"><img src="https://github.com/haghish/github/raw/master/images/example.png"  width="650" hspace="10" vspace="6"></a>
 </center>
 
 ### Package Versions
