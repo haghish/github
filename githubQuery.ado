@@ -1,5 +1,5 @@
 
-program githubQuery
+program githubquery
 	
 	syntax anything
 	

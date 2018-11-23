@@ -227,7 +227,7 @@ prog define github
 	// Query
 	// ---------
 	if "`1'" == "query" {
-		githubQuery `anything'
+		githubquery `anything'
 		exit
 	}
 	
