@@ -1,5 +1,5 @@
 /*** DO NOT EDIT THIS LINE -----------------------------------------------------
-Version: 1.4.5
+Version: 1.4.6
 Title: github
 Description: search, install, and uninstall Stata packages with a particular  
 version (release) as well as their dependencies from 
@@ -251,9 +251,25 @@ prog define github
 		  qui err 198
 		}
 		
-		githubdb check, name("`anything'")
-		github install `r(address)'
-		exit
+		// Make github command to update a package, if the username is also specified 
+		capture githubdb check, name("`anything'")
+		if !missing("`r(address)'") {
+			github install `r(address)'
+		}
+		else {
+			tokenize "`anything'", parse("/")
+			if !missing("`3'") {
+				capture githubdb check, name("`anything'")
+				if !missing("`r(address)'") {
+					github install `r(address)'
+				}
+			}
+			//otherwise display the original error
+			else {
+				githubdb check, name("`anything'")
+				exit
+			}
+		}
 	}
 	
 	// Uninstall
