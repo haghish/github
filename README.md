@@ -41,9 +41,9 @@ For example, if you use the `github search` command to search for `markdoc` pack
 
 ### Managing installed packages
 
-`github` has a built-in database that keeps track of the packages installed on your machine, and of course, also tells you the versions of the packages. The version is taken from the release of the package that you are installing. You can `list` the installed packages and get helpful information about them, as well as update or uninstall them:
+`github` has a built-in database that keeps track of the packages installed on your machine, and of course, also tells you the versions of the packages installed on the machine. The version is taken from the unique release tags of the package, specified by the developer. You can `list` the installed packages and get helpful information about them. **This command also notifies you if there is an available update for any of yout GitHub packages**. For example, in the output below, we know that there are updates available for two of our packages. we can also click on the `(update)` link to update the package to the latest release.
 
-    github list
+    . github list
 
 <center>
 <a href="https://github.com/haghish/github/raw/master/images/list.png"><img src="https://github.com/haghish/github/raw/master/images/list.png"  width="650" hspace="10" vspace="6"></a>
