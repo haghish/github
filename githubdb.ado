@@ -100,6 +100,7 @@ program githubdb, rclass
 		if "`anything'" == "list" {
 			preserve
 			use "`r(fn)'", clear
+			qui sort name
 			local N : di _N
 			if `N' > 0 {
 				di in text " {hline 74}" _n										///
