@@ -107,13 +107,17 @@ program githubdb, rclass
 						   "{bf:Name}" _col(28) 								///
 							 "{bf:Version}" _col(38) 								///
 						   "{bf:user/repository} " _col(58) 					///
-						   "{bf:Action}"    _n                                	///
+						   "{bf:Latest release}"    _n                  ///
 						   " {hline 74}"
 				forvalues i = 1/`N' {
 					local address : di username[`i'] "/" reponame[`i']
 					local short   : di abbrev("`address'", 20) 
 					local name    : di name[`i']
 					local version : di version[`i']
+					quietly github query `address'
+					local latestver `r(latestversion)' 
+					*di as err "latest version:  `latestver'"
+					
 					if missing("`version'") {
 						local version "NA"
 						local vlink "https://github.com/`address'/releases/"
@@ -125,9 +129,17 @@ program githubdb, rclass
 					di " " downloaded[`i']                                       _col(16) ///
 					   name[`i']                                                 _col(28) ///
 					   `"{browse "`vlink'":`version'}"'                          _col(38) ///
-					   `"{browse "http://github.com/`address'":`short'}"'        _col(58) ///
-						 "{stata github update `name' :update}"                             ///
-						   " / {stata github uninstall `name' :uninstall}"
+					   `"{browse "http://github.com/`address'":`short'}"'        _col(58) _continue
+					
+					if "`version'" == "`latestver'" di "`latestver'"
+					else if "`latestver'" != "" {
+					  di `"{browse "https://github.com/`address'/releases/tag/`latestver'":`latestver'}"' _col(68)  ///
+						   "({stata github install `address', version(`latestver') :update})"
+					}
+					else di "NA"
+					//	 "{stata github update `name' :update}"                             
+					//	   " / {stata github uninstall `name' :uninstall}"
+					*sleep 500
 				}
 				di in text " {hline 74}"
 			}

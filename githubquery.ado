@@ -6,7 +6,15 @@ program githubquery, rclass
 	tempfile api tmp
 	tempname hitch knot
 	
-	qui copy "https://api.github.com/repos/`anything'/releases" `api', replace
+	capture qui copy "https://api.github.com/repos/`anything'/releases" `api', replace
+	if _rc {
+		// Identify the errors with useful information
+		if _rc == 679 display as err "GitHub API rate limit exceeded... try again after some time"
+
+		error _rc
+	} 
+	
+	
 	file open `hitch' using "`api'", read
 	qui file open `knot' using "`tmp'", write replace
 	file read `hitch' line
