@@ -13,6 +13,27 @@ You can install the latest version of the `github` command by executing the foll
 ```{js}
 net install github, from("https://haghish.github.io/github/")
 ```
+Syntax
+-----------------------
+
+The general syntax of the package can be summarized as:
+
+    github [subcommand] [...]
+
+Where the [*subcommand*] can be:
+
+| Subcommand | Description                                                 |
+|------------|-------------------------------------------------------------|
+| search     | finds a Stata package on GitHub                             |
+| install    | installs a package from GitHub                              |
+| list       | provides information about packages installed with `github` |
+| query      | lists all previous releases of a packag                     |
+| check      | tests whether a repository is installable                   |
+| uninstall  | removes a package from Stata                                |
+| update     | updates a package from GitHub                               |
+| version    | returns the version of an installed package                 |
+
+and the [*...*] can be whether *username/repository* or *packagename* based on the specified subcommand.
 
 ### Installing a package
 To install a package, all you need is the GitHub username and the name of the repository. The combination of username and repository name - seperated by a slash - provides the needed URL to the repository.  For example, 
