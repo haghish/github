@@ -22,16 +22,16 @@ The general syntax of the package can be summarized as:
 
 Where the [*subcommand*] can be:
 
-| Subcommand | Description                                                 |
-|------------|-------------------------------------------------------------|
-| search     | finds a Stata package on GitHub                             |
-| install    | installs a package from GitHub                              |
-| list       | provides information about packages installed with `github` |
-| query      | lists all previous releases of a packag                     |
-| check      | tests whether a repository is installable                   |
-| uninstall  | removes a package from Stata                                |
-| update     | updates a package from GitHub                               |
-| version    | returns the version of an installed package                 |
+| Subcommand   | Description                                                 |
+|--------------|-------------------------------------------------------------|
+| `search`     | finds a Stata package on GitHub                             |
+| `install`    | installs a package from GitHub                              |
+| `list`       | provides information about packages installed with `github` |
+| `query`      | lists all previous releases of a packag                     |
+| `check`      | tests whether a repository is installable                   |
+| `uninstall`  | removes a package from Stata                                |
+| `update`     | updates a package from GitHub                               |
+| `version`    | returns the version of an installed package                 |
 
 and the [*...*] can be whether *username/repository* or *packagename* based on the specified subcommand.
 
