@@ -213,22 +213,17 @@ prog define github
 	
 	
 	
-	
-	
-	// Setpath ??? WHY I HAD ADDED THIS CODE?
-	// =======
-	*else if substr(trim(`"`macval(0)'"'),1,7) == "setpath" {
-	if `"`macval(1)'"' == "setpath" | `"`macval(1)'"' == "setpath:" {
-		local 0 : subinstr local 0 "setpath" ""
-		confirm file `0'
-		
-		exit
-	}
-	
 	// Query
 	// ---------
 	if "`1'" == "query" {
 		githubquery `anything'
+		exit
+	}
+	
+	// Version     //CHANGE THIS TO INFO?
+	// ---------
+	if "`1'" == "version" {
+		githubdb version, name(`anything')
 		exit
 	}
 	

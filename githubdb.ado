@@ -65,6 +65,32 @@ program githubdb, rclass
 			restore
 		}
 		
+		// version 
+		// ----------------
+		if "`anything'" == "version" {
+			if missing("`name'") err 198
+			preserve
+			use "`r(fn)'", clear
+			qui keep if name == "`name'"  
+			if _N == 0 {
+				di as err "`name' package was not found"
+			}
+			if _N > 1 {
+				di as err "{p}multiple packages with this name are found!"      ///
+						"this can be caused if you had installed multiple "     ///
+						"packages from different repositories, but with an "    ///
+						"identical name..." _n
+				list
+			}
+			if _N == 1 {
+				local version : di version[1]
+				display as txt "`version'"
+				return local version `version'
+			}
+			
+			restore
+		}
+		
 		// add 
 		// --------------
 		if "`anything'" == "add" {
