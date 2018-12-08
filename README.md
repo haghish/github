@@ -78,7 +78,7 @@ Not all packages are installable. Stata repositories must have __toc__ and __pkg
 
 
 
-> <img src="https://github.com/haghish/markdoc/raw/master/Resources/images/attention.png" width="20px" height="20px"  align="left" hspace="0" vspace="0">This is rather important point to pay attention to because the `github search` command that is used for searching Stata packages on GitHub, tends to dismiss Stata repositories that are not installable. In other words, if your repository does not include these files, it will not be considered a Stata package, unless you specify the option `all` in your search (see below). However, the `github` package also includes a GUI gor building these files. Using the GUI that comes with `github`, zou can easily build these files for your repository (see below).
+> <img src="https://github.com/haghish/markdoc/raw/master/Resources/images/attention.png" width="20px" height="20px"  align="left" hspace="0" vspace="0">This is rather important point to pay attention to because the `github search` command that is used for searching Stata packages on GitHub, tends to dismiss Stata repositories that are not installable. In other words, if your repository does not include these files, it will not be considered a Stata package, unless you specify the option `all` in your search (in the search GUI check the **show GitHub repositories that are not installable** option). However, the `github` package also includes a GUI for building these files. Using the GUI that comes with `github`, you can easily build these files for your repository (see below).
 
 
 
@@ -129,6 +129,13 @@ For example, to list [__MarkDoc__](https://github.com/haghish/MarkDoc/releases)'
   3.6.7        2016-02-27        Install
  ----------------------------------------
 ```
+
+When writing an analysis with a dynamic documentation software, such as [**MarkDoc**](https://github.com/haghish/markdoc), you should report the version of the packages that use are using in your analysis. You can obtain the version of an installed package programmatically using the `version` subcommand, followed by the :
+
+~~~
+. github version markdoc
+3.8.0
+~~~
 
 ### Package Dependencies
 Some packages rely on other packages. The `github` command allows you to install the package 
