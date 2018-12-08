@@ -291,6 +291,10 @@ program githubsearch
 		quietly gsort - installable - score
 	}
 	
+	
+	// for very rare API issues
+	drop if address == ""
+	
 	// -----------------------------------------------------------------------
 	// Save the results
 	// =======================================================================
