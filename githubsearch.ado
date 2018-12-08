@@ -28,6 +28,8 @@ program githubsearch
 	}
 	
 	// search domain
+	local inoriginal "`in'"
+	local in : subinstr local in " " "", all       //remove spaces
 	if missing("`in'") {
 		local in "name,description"
 		local savein "name,description"
@@ -40,7 +42,7 @@ program githubsearch
 	"`in'" != "all" & "`in'" != "name,description" & "`in'" != 					///
 	"description,name" & "`in'" != "name,description,readme" 					///
 	& "`in'" != "description,name,readme" & !missing("`in'") {
-		di as err "in(`in') is unacceptable"
+		di as err `"option in("`inoriginal'") is unacceptable"'
 		err 198
 	}
 	
@@ -312,10 +314,13 @@ program githubsearch
 	// Drawing the output table
 	// =======================================================================
 	if missing("`quiet'") {
+		if !missing("`debug'") {
+			display as txt _n(5) "ANYTHING:`anything'" _n "in:`in'" _n "number:`number'"
+		}
 		githuboutput `anything', in("`in'") `all' number(`number') language(`savelang')
 	}	
 
 	restore
 end
 
-  
+
