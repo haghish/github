@@ -92,12 +92,15 @@ To install a package, use the `uninstall` subcommand, followed by the package na
 
 
 ### Package Versions
+
+#### Installing a particular version
 GitHub allows archiving unlimited number of package versions. The `github` command has an option for specifying 
 the package version, allowing installing previous package versions. For example, for installing an older 
 version of MarkDoc package, say `3.8.0`. you can type:
 
     github install haghish/MarkDoc , version("3.8.0")
 
+#### Listing all previous releases
 But were can you see the package versions? GitHub has a ___release___ tab that lists all of the previous releases of the software ([__See for example the previous releases of MarkDoc__](https://github.com/haghish/MarkDoc/releases)). But the good news is that `github` has a subcommand for listing all of the previous releases in Stata results windows and allows you to install any of them (_as well as their package dependencies for that particular version, if specified_) with a single mouse click or programmatically. To do so, type:
 
     github query username/repository
@@ -129,6 +132,7 @@ For example, to list [__MarkDoc__](https://github.com/haghish/MarkDoc/releases)'
   3.6.7        2016-02-27        Install
  ----------------------------------------
 ```
+#### Getting the version of an installed package
 
 When writing an analysis with a dynamic documentation software, such as [**MarkDoc**](https://github.com/haghish/markdoc), you should report the version of the packages that use are using in your analysis. You can obtain the version of an installed package programmatically using the `version` subcommand, followed by the :
 
@@ -136,6 +140,8 @@ When writing an analysis with a dynamic documentation software, such as [**MarkD
 . github version markdoc
 3.8.0
 ~~~
+
+This command does not have any other uses because the `github list` command already shows the version of the installed packages and also checks whether there is a newer version of them available...
 
 ### Package Dependencies
 Some packages rely on other packages. The `github` command allows you to install the package 
