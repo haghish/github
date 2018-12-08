@@ -80,6 +80,7 @@ program githubsearch
 	if _rc != 0 {
 		di as err "{p}the GitHub API is not responsive right now. Try again in " ///
 		"10 or 20 seconds. this can happen if you search GitHub very frequent..."
+		di as txt ""
 		exit
 	}
 	file open `hitch' using "`apifile'", read

@@ -3,8 +3,8 @@
 program githubsearchsteps
 	
 	syntax [anything] [, language(str) save(str) in(str) all created(str) 		///
-	reference(str) duration(numlist max=1) pushed(str) Number(numlist max=1) 	///
-	append replace quiet]
+	reference(str) stopdate(str) duration(numlist max=1) pushed(str) Number(numlist max=1) 	///
+	append replace quiet debug]
 	
 	if missing("`anything'") {
 		local anything stata
@@ -16,14 +16,19 @@ program githubsearchsteps
 	if missing("`duration'") {
 		local duration 30
 	}
-
-	local today: display date(c(current_date), "DMY")
+	
+	if missing("`stopdate'") {
+		local stopdate: display date(c(current_date), "DMY")
+	}
+	*else {
+	*	local stopdate: display date(`stopdate', "DMY")
+	*}
 	local reference : display date("`reference'","YMD")
 	local future `reference'
 	
 	local n 0							// indicator of the first dataset
 	
-	while `today' > `future' {
+	while `stopdate' >= `future' {
 		
 		local reference `future'
 		local future = `reference' + `duration'
@@ -32,6 +37,8 @@ program githubsearchsteps
 		// -------------------------
 		local reference : di %tdCCYY-NN-DD `reference'
 		local future : di %tdCCYY-NN-DD `future'
+		
+		if missing("`quiet'") display "from  `reference'  to  `future'"
 		
 		sleep 6000
 		githubsearch `anything', language(`language') save(`"`save'"') in(`in')	///

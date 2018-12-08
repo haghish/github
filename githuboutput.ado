@@ -79,8 +79,12 @@ prog githuboutput
 					if length(`"`macval(description)'"') <= 5 {
 						local description "No description, website, or topics provided."
 					}
+					else {
+						local description : subinstr local description "`" "'", all
+					}
 					
-					local l : di length(`"`description'"')
+
+					local l : di length(`"`macval(description)'"')
 					local n 1
 					local end 1
 					

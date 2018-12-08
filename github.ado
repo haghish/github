@@ -1,5 +1,5 @@
 /*** DO NOT EDIT THIS LINE -----------------------------------------------------
-Version: 1.5.1
+Version: 1.5.5
 Title: github
 Description: search, install, and uninstall Stata packages with a particular  
 version (release) as well as their dependencies from 
@@ -196,10 +196,11 @@ prog define github
 
 	version 13
 	
-	syntax anything, [Version(str) force save(str) in(str) 				        ///
-	language(str) all NET                                                       ///
-	/// some of the options of the program are not documented yet               ///
-	created(str) pushed(str) debug reference(str)			                    ///
+	syntax anything, [Version(str) force save(str) in(str) 				                ///
+	language(str) all NET                                                         ///
+	/// some of the options of the program are not documented yet                 ///
+	created(str) pushed(str) debug reference(str)			                            ///
+	duration(numlist max=1)                                                       ///
 	append replace Number(numlist max=1) local] 
 	
 	
@@ -307,7 +308,7 @@ prog define github
 	// Listpack (EXPERIMENTAL, UNDOCUMENTED)
 	// ---------
 	else if "`1'" == "listpack" {
-		githublist `2' ,  language(`language') 									///
+		githublistpack `2' ,  language(`language') duration(`duration')							///
 		save(`save') created(`created') pushed(`pushed') `debug' `append' 		///
 		`replace'
 		exit
