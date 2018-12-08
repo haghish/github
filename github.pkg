@@ -13,7 +13,7 @@ F githubcheck.ado
 F githubconfirm.ado
 F githubdb.ado
 F githubdependency.ado
-F githublist.ado
+F githublistpack.ado
 F githubmake.ado
 F githuboutput.ado
 F githubquery.ado
