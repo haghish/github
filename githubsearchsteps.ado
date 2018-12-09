@@ -35,7 +35,7 @@ program githubsearchsteps
 		local reference : di %tdCCYY-NN-DD `reference'
 		local future : di %tdCCYY-NN-DD `future'
 		
-		if missing("`quiet'") display "from  `reference'  to  `future'"
+		if missing("`quiet'") display as txt "from  `reference'  to  `future'"
 		
 		sleep 6000
 		githubsearch `anything', language(`language') save(`"`save'"') in(`in')	///
