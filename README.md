@@ -15,7 +15,7 @@ which is a wrapper for:
 
     github install username/packagename
 
-It is just shorter and a nicer way to install Stata packages from GitHub! The `gitget` data base is updated monthly, therefore **newly created** packages will not be available in `gitget` instantly. 
+It is just shorter and a nicer way to install Stata packages from GitHub! The `gitget` data base is updated monthly, therefore **newly created** packages will not be available in `gitget` instantly. In Stata, type **help gitget** for more information.
 
 - - -
 
