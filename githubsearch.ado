@@ -1,7 +1,7 @@
 *cap prog drop githubsearch
 program githubsearch
 
-	syntax anything , [language(str) save(str) in(str) all created(str) 		///
+	syntax [anything] , [language(str) save(str) in(str) all created(str) 		///
 	pushed(str) debug append replace quiet Number(numlist max=1) scoreless] 
 	
 	// defaults language is Stata
