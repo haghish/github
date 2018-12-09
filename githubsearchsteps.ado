@@ -6,9 +6,6 @@ program githubsearchsteps
 	reference(str) stopdate(str) duration(numlist max=1) pushed(str) Number(numlist max=1) 	///
 	append replace quiet debug]
 	
-	if missing("`anything'") {
-		local anything stata
-	}
 	if missing("`reference'") {
 		di as txt "(the default time reference is used which is {bf:2016-01-01})"
 		local reference "2016-01-01"
