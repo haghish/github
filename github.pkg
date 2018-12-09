@@ -6,6 +6,9 @@ d Distribution-Date: 20181209
 d
 F findall.ado
 F findall.sthlp
+F gitget.ado
+F gitget.dta
+F gitget.sthlp
 F github.ado
 F github.dlg
 F github.sthlp
