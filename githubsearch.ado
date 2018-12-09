@@ -293,7 +293,7 @@ program githubsearch
 	
 	
 	// for very rare API issues
-	drop if address == ""
+	qui drop if address == ""
 	
 	// -----------------------------------------------------------------------
 	// Save the results
@@ -303,7 +303,7 @@ program githubsearch
 			quietly save `save', `replace'
 		}
 		else {
-			capture findfile `"`save'.dta"'
+			capture confirm file `"`save'.dta"'
 			if _rc == 0 {
 				qui append using `"`save'.dta"'
 				capture duplicates drop address, force
