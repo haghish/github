@@ -228,6 +228,13 @@ prog define github
 		exit
 	}
 	
+	// Hot
+	// ---------
+	if "`1'" == "hot" {
+		githubhot `anything'
+		exit
+	}
+	
 	// List
 	// ---------
 	else if "`1'" == "list" {
