@@ -14,7 +14,7 @@ program githubhot
 	capture findfile gitget.dta, path("`c(sysdir_plus)'g/")
 	if _rc == 0 {
 		preserve
-		quietly use "`r(fn)'", clear
+		use "`r(fn)'", clear
 		gsort -score
 		if _N == 0 {
 			display as err "{bf:gitget.dta} is empty!!!"
