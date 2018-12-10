@@ -196,6 +196,12 @@ Change the working directory to the repository path and then run the GUI, typing
 
 write down the required information and select the files that should be installed. Press OK, and enjoy! 
 
+List of Stata Packages Recognized by gitget command
+---------------------------------------------------
+
+The `gitget` data set is downloaded along with `github` package. This data set is updated monthly. [Click here to see the complete list of __`gitget`__ packages](https://github.com/haghish/github/blob/master/gitget.md). 
+
+
 Author
 ------
   **E. F. Haghish**  
