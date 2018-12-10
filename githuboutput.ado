@@ -30,7 +30,18 @@ prog githuboutput
 			missing("`language'") | "`language'" == "all" & address[`N'] != "" {		
 				if installable[`N'] == 1 | !missing("`all'") {
 					local address : di address[`N']
-					capture githubdependency `address'
+					
+					// checking for dependencies
+					// =========================================================
+					capture confirm variable dependency
+					if _rc {
+						capture githubdependency `address'
+						local dependency `r(dependency)'
+					}
+					else {
+						local dependency dependency[`N']
+					}
+					
 					
 					local pushed : di %tcCCYY-NN-DD pushed[`N']
 					
@@ -152,7 +163,7 @@ prog githuboutput
 						di _col(58) "{bf:Lang:}" trim("`lang'") _c
 					}	
 					
-					if `r(dependency)' == 1 {
+					if `dependency' == 1 {
 						if "`alternative'" == "1" {
 							di _col(70) `"({browse "http://github.com/`address'/blob/master/dependency.do":dependency})"' 
 						}
