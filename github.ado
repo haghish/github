@@ -200,7 +200,7 @@ prog define github
 	language(str) all NET                                                         ///
 	/// some of the options of the program are not documented yet                 ///
 	created(str) pushed(str) debug reference(str)			                            ///
-	duration(numlist max=1)                                                       ///
+	duration(numlist max=1) perpage(numlist max=1)                              ///
 	append replace Number(numlist max=1) local] 
 	
 	
@@ -286,7 +286,8 @@ prog define github
 	  }
 	  else {
 		githubsearch `2', language(`language') in(`in') save(`save') `all' 		///
-		created(`created') pushed(`pushed') `debug' `append' `replace' number(`number')
+		  created(`created') pushed(`pushed') `debug' `append' `replace'        ///
+		  number(`number') perpage(`perpage')
 		exit
 	  }
 	}

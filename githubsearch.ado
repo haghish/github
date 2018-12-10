@@ -2,10 +2,15 @@
 program githubsearch
 
 	syntax [anything] , [language(str) save(str) in(str) all created(str) 		///
-	pushed(str) debug append replace quiet Number(numlist max=1) scoreless] 
+	pushed(str) perpage(numlist max=1) debug append replace quiet Number(numlist max=1) scoreless] 
 	
 	// defaults language is Stata
 	// --------------------------
+	if missing("`perpage'") local perpage 50
+	if "`perpage'" > "100" {
+		display as err "the maximum {bf:perpage} value is 100"
+		local perpage 100
+	}
 	if "`language'" == "all" {
 		local savelang `language'
 		local language  //nothing!
@@ -70,12 +75,12 @@ program githubsearch
 	*di as err "{p}https://api.github.com/search/repositories?q=`anything'`language'+in:`in'&per_page=100"
 	
 	if !missing("`debug'") {
-		di as err "{p}https://api.github.com/search/repositories?q=`anything'`language'`created'`pushed'+in:`in'&sort=stars&order=desc&per_page=50" _n
-		copy "https://api.github.com/search/repositories?q=`anything'`language'`created'`pushed'+in:`in'&sort=stars&order=desc&per_page=50" "base.json", replace
+		di as err "{p}https://api.github.com/search/repositories?q=`anything'`language'`created'`pushed'+in:`in'&sort=stars&order=desc&per_page=`perpage'" _n
+		copy "https://api.github.com/search/repositories?q=`anything'`language'`created'`pushed'+in:`in'&sort=stars&order=desc&per_page=`perpage'" "base.json", replace
 	}
 	tempfile apifile tmp
 	tempname hitch knot
-	capture qui copy "https://api.github.com/search/repositories?q=`anything'`language'`created'`pushed'+in:`in'&sort=stars&order=desc&per_page=50" `apifile', replace
+	capture qui copy "https://api.github.com/search/repositories?q=`anything'`language'`created'`pushed'+in:`in'&sort=stars&order=desc&per_page=`perpage'" `apifile', replace
 
 	if _rc != 0 {
 		di as err "{p}the GitHub API is not responsive right now. Try again in " ///
