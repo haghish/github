@@ -56,6 +56,12 @@ to install [MarkDoc](https://github.com/haghish/MarkDoc) package, which is hoste
 
     github install haghish/markdoc
 
+The `github` package includes a database for the complete list of Stata packages hosted on GitHub. Therefore, you can also install a package just by specifying the package name. The __`gitget`__ command - which is a wrapper for `github install` - can install or update Stata packages from GitHub only by asking the package name:
+
+    gitget packagename
+
+For example, if you wish to install `markdoc` package, typing `gitget markdoc` would be as goo as typing `github install haghish/markdoc`. If you wish to inspect the list of Stata packages hosted on GitHub, see the `gitget.dta` data set.
+
 ### Searching for a Stata package
 You can search GitHub for Stata package using a keyword or many keywords. This is similar to Stata's `search` or `findit` commands, but instead, only used for searching GitHub packages:
 
