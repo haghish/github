@@ -1,6 +1,6 @@
 quietly use "packagelist.dta", clear
 capture drop dependency
-capture drop release
+generate dependency = .
 
 local j 0
 local last = _N
