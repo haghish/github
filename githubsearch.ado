@@ -7,7 +7,7 @@ program githubsearch
 	// defaults language is Stata
 	// --------------------------
 	if missing("`perpage'") local perpage 50
-	if "`perpage'" > "100" {
+	if `perpage' > 100 {
 		display as err "the maximum {bf:perpage} value is 100"
 		local perpage 100
 	}
