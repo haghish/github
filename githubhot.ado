@@ -22,7 +22,7 @@ program githubhot
 		else {
 			quietly gsort -score
 			quietly keep in 1/`anything'
-			githuboutput, depignore
+			githuboutput
 		}
 		restore
 	}
