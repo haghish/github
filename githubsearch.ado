@@ -86,6 +86,12 @@ program githubsearch
 		di as err "{p}the GitHub API is not responsive right now. Try again in " ///
 		"10 or 20 seconds. this can happen if you search GitHub very frequent..."
 		di as txt ""
+		
+		if "`c(checksum)'" = "on" {
+			display as txt "this might be caused by your {help checksum} operation. " ///
+			    "try again after turning checksum off"
+		}
+		
 		exit
 	}
 	file open `hitch' using "`apifile'", read
