@@ -56,4 +56,4 @@ forval i = 1/`last' {
 }
 
 file close `knot'
-copy "`tmp1'" packagelist.md , replace
+copy "`tmp1'" gitget.md , replace
