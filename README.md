@@ -15,7 +15,7 @@ which is a wrapper for:
 
     github install username/packagename
 
-It is just shorter and a nicer way to install Stata packages from GitHub! [Click here to see the complete list of __`gitget`__ packages](https://github.com/haghish/github/blob/master/gitget.md). The `gitget` package list is updated monthly.
+It is just shorter and a nicer way to install Stata packages from GitHub! [Click here to see the complete list of __`gitget`__ packages](https://github.com/haghish/github/blob/master/gitget.md). 
 
 - - -
 
