@@ -9,6 +9,8 @@ a package. It is a combination of several Stata commands such as `search`, `find
 
 <img src="./images/news.png" width="140px" height="140px"  align="left" hspace="10" vspace="6">**NEWS**: Introducing `gitget` command. `gitget` further simplifies installing and updating a package by providing a database for all existing Stata packages on GitHub. to install a package that is hosted on GitHub - and is known by `gitget`, simply type `gitget packagename`. It is just shorter and a nicer way to install Stata packages from GitHub! [Click here to see the complete list of __`gitget`__ packages](https://github.com/haghish/github/blob/master/gitget.md). 
 
+<br>
+
 - - -
 
 
