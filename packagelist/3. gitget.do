@@ -1,3 +1,24 @@
+quietly use "packagelist.dta", clear
+capture drop dependency
+capture drop release
+
+local j 0
+local last = _N
+forval N = 1/`last' {
+	if installable[`N'] == 1 {
+		display as txt "`N'/`last'" 
+		local j = `j'+1
+		local address : di address[`N']
+		capture githubdependency `address'
+		if `r(dependency)' == 1 {
+			replace dependency = 1 in `N'
+		}
+	}
+}
+
+saveold "packagelist.dta", replace
+
+
 /***
 Generating `gitget.dta` data set
 ============================================================
@@ -10,8 +31,13 @@ used by the `gitget` command
 
 use "packagelist.dta", clear
 keep if installable == 1
-
 saveold "gitget.dta", replace
+
+
+
+
+
+
 
 
 
