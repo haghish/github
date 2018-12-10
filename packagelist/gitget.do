@@ -31,6 +31,12 @@ tempfile tmp1
 tempname knot 
 
 qui cap file open `knot' using "`tmp1'", write replace
+
+file write `knot' "List of Stata Packages Recognized by `gitget` command" _n ///
+                  "=====================================================" _n(2)
+									
+file write `knot' "packages are listed based on their __Hits__ score" _n(2)
+
 file write `knot'  "#|Package|Hits|Updated|Dependecy|Size|Description" _n       ///
 		"--------:|:--------|:--------|:--------|:--------|:--------|:--------" _n
 
