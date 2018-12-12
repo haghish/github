@@ -59,7 +59,7 @@ tempname knot
 
 qui cap file open `knot' using "`tmp1'", write replace
 
-local now : di %td_CY-N-D  date("$S_DATE", "DMY") " $S_TIME"
+local now : di %td_D-N-CY  date("$S_DATE", "DMY") " $S_TIME"
 
 file write `knot' "_updated on `now'_" _n(2)
 
