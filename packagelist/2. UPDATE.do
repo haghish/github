@@ -30,12 +30,33 @@ Execution time
 
 timer list 1
 
+use "update.dta", clear
+
 txt "there are " _N " obserbations in the data set"
 
-use "packagelist.dta", clear
-append using "update.dta"
+
+capture drop dependency
+generate dependency = .
+
+local j 0
+local last = _N
+forval N = 1/`last' {
+	if installable[`N'] == 1 {
+		display as txt "`N'/`last'" 
+		local j = `j'+1
+		local address : di address[`N']
+		capture githubdependency `address'
+		if `r(dependency)' == 1 {
+			replace dependency = 1 in `N'
+		}
+	}
+}
+
+
+append using "packagelist.dta"
 duplicates drop address, force
 saveold "packagelist.dta", replace
+
 erase update.dta
 
 qui log c
