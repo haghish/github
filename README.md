@@ -7,7 +7,7 @@ a package. It is a combination of several Stata commands such as `search`, `find
 
 - - -
 
-<img src="./images/news.png" width="140px" height="140px"  align="left" hspace="10" vspace="6">**NEWS**: Introducing `gitget` command. `gitget` further simplifies installing and updating a package. it provides a database for [all existing Stata packages on GitHub](https://github.com/haghish/github/blob/master/gitget.md), which allows you to install a package that is hosted on GitHub - and is known by `gitget`, simply type:
+<img src="./images/news.png" width="140px" height="140px"  align="left" hspace="10" vspace="6">**NEWS**: Introducing `gitget` command. `gitget` further simplifies installing and updating a package. it provides a database for [all existing Stata packages on GitHub](https://github.com/haghish/github/blob/master/gitget.md), which allows you to install a package that is hosted on GitHub - and is known by `gitget`, simply by typing:
 
     gitget packagename
 
