@@ -292,10 +292,15 @@ program githubsearch
 	*qui rename type language
 	
 	//generate score
+	qui gen star2 = 1+star
+	qui gen fork2 = 1+fork*4
+
 	if missing("`scoreless'") {
-		quietly gen score = (watchers*5 + star*5 + fork) - 5
+		quietly gen score = (star2 * fork2) - 1
 		quietly replace score = 0 if score < 0
 	}	
+	qui drop star2
+	qui drop fork2
 	
 	// sort the data based on installable and score 
 	if missing("`scoreless'") {
