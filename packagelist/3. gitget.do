@@ -51,7 +51,8 @@ Creating packagelist.md file
 ***/
 
 use "gitget.dta", clear
-quietly recode score (0 = .)
+
+quietly recode score (. = 0)
 gsort -score -star
 tempfile tmp1
 tempname knot 
