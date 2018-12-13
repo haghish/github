@@ -1,7 +1,9 @@
-_updated on   12-12-2018 15:26:18_  
-to install any of the packages in this list, simply type:
+_updated on   `12-12-2018 15:26:18`_  
+to install any of the packages in this list in Stata, simply type:
 
     gitget name
+
+- - -
 
 List of Stata Packages Recognized by `gitget` command
 =====================================================
