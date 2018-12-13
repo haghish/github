@@ -5,8 +5,6 @@
 `github` is a Stata module for searching and installing Stata packages from GitHub, including previous releases of 
 a package. It is a combination of several Stata commands such as `search`, `findit`, and `ssc`, but instead, made for managing Stata packages hosted on GitHub. In addition, the package provides new features for version control which are not available to Stata users elsewhere (for example, the package allows installing older releases of a Stata package to reproduce an analysis carried out with older software). 
 
-<br>
-
 <img src="./images/news.png" width="140px" height="140px"  align="left" hspace="10" vspace="6">**NEWS**: Introducing `gitget` command. `gitget` further simplifies installing and updating a package. it provides a database for [all existing Stata packages on GitHub](https://github.com/haghish/github/blob/master/gitget.md), which allows you to install a package that is hosted on GitHub - and is known by `gitget`, simply by typing:
 
     gitget packagename
