@@ -1,5 +1,5 @@
-_updated on `13-12-2018 10:29:08`_
-to install a Stata package included in this list, simply type:
+_updated on `12-12-2018 10:29:08`_   
+this is the complete list of *installable* Stata packages on GitHub, up to the date specified above. to install a Stata package included in this list, simply type:
 
     gitget packagename
 
