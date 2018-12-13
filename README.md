@@ -54,13 +54,15 @@ and the [*...*] can be whether *username/repository* or *packagename* based on t
 To install a package, all you need is the GitHub username and the name of the repository. The combination of username and repository name - seperated by a slash - provides the needed URL to the repository.  For example, 
 to install [MarkDoc](https://github.com/haghish/MarkDoc) package, which is hosted on <https://github.com/haghish/markdoc>, it is enough to type:
 
-    github install haghish/markdoc
+    github install haghish/markdoc [, stable version("") force]
 
 The `github` package includes a database for the complete list of Stata packages hosted on GitHub. Therefore, you can also install a package just by specifying the package name. The __`gitget`__ command - which is a wrapper for `github install` - can install or update Stata packages from GitHub only by asking the package name:
 
-    gitget packagename
+    gitget packagename [, stable version("")]
 
 For example, if you wish to install `markdoc` package, typing `gitget markdoc` would be as goo as typing `github install haghish/markdoc`. If you wish to inspect the list of Stata packages hosted on GitHub, see the `gitget.dta` data set.
+
+> The `gitget` and `github install` commands take similar options. If you add the `stable` option, e.g. `gitget markdoc, stable`, the latest stable release will be installed. However, if you avoid this option, the development version of the repository is installed. the `version("")` option is for installing a particular older stable release. 
 
 ### Searching for a Stata package
 You can search GitHub for Stata package using a keyword or many keywords. This is similar to Stata's `search` or `findit` commands, but instead, only used for searching GitHub packages:
