@@ -1,5 +1,5 @@
 _updated on `12-12-2018 10:29:08`_   
-this is the complete list of *installable* Stata packages on GitHub, up to the date specified above. to install a Stata package included in this list, simply use the syntax below. by default, the development version will be installed. However, adding the `stable` option will install the latest stable release of the software whereas the `version("")` option is for installing a particular stable release. the package list is updated monthly. the code for updating the list [can be found here](https://github.com/haghish/github/tree/master/packagelist).
+this is the complete list of *installable* Stata packages on GitHub, up to the date specified above. to install a Stata package included in this list, simply use the syntax below:
 
     gitget packagename  [, stable version("")]
 
