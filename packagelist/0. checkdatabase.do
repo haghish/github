@@ -8,9 +8,9 @@ Count number of Stata repositories
 ***/
 
 forval i = 0/9 {
-	di "{title:packages created before 201`i'}"
+	di "{title:repositories created before 201`i'}"
 	noisily githubsearch, language(Stata) perpage(1) quiet created("<201`i'")
-	quietly use "packagelist.dta", clear
+	quietly use "repolist.dta", clear
 	quietly gen year = year(dofc(created))
 	quietly keep if year < 201`i'
 	txt "the database has " _N " observations"

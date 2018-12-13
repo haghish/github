@@ -1,6 +1,6 @@
 // this document uses commands provided by MarkDoc package
 
-qui log using packagelist, replace smcl
+qui log using repolist, replace smcl
 
 /***
 `github` package data sets
@@ -19,7 +19,7 @@ starting reference date
 qui log off
 timer clear 1
 timer on 1
-githublistpack , language(Stata) append replace save("packagelist")             ///
+githublistpack , language(Stata) append replace save("repolist")             ///
                  duration(1) all in(all) perpage(100)
 timer off 1
 qui log on

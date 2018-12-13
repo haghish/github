@@ -7,7 +7,7 @@ Updating list of Stata repositories on GitHub
 The list of Stata repositories provides a valuable database for simplifying 
 the syntax of the `github` package. You can update the package list from a 
 starting reference date. the `reference("yyyy-mm-dd")` in the example below 
-shows the __last update__ made for the *packagelist.dta* dataset
+shows the __last update__ made for the *repolist.dta* dataset
 ***/
 
 //OFF
@@ -53,9 +53,9 @@ forval N = 1/`last' {
 }
 
 
-append using "packagelist.dta"
+append using "repolist.dta"
 duplicates drop address, force
-saveold "packagelist.dta", replace
+saveold "repolist.dta", replace
 
 erase update.dta
 
