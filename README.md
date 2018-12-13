@@ -19,8 +19,7 @@ a package. It is a combination of several Stata commands such as `search`, `find
 <br>
 <br>
 
-1. Installing `github` module
-=============================
+# 1. Installing `github` module
 
 You can install the latest version of the `github` command by executing the following code:
 
@@ -28,8 +27,7 @@ You can install the latest version of the `github` command by executing the foll
 net install github, from("https://haghish.github.io/github/")
 ```
 
-2. Syntax
-=========
+# 2. Syntax
 
 The general syntax of the package can be summarized as:
 
@@ -50,8 +48,7 @@ Where the [*subcommand*] can be:
 
 and the [*...*] can be whether *username/repository* or *packagename* based on the specified subcommand.
 
-3. `github` subcommands
-=======================
+# 3. `github` subcommands
 
 ## 3.1 Installing a package
 To install a package, all you need is the GitHub username and the name of the repository. The combination of username and repository name - seperated by a slash - provides the needed URL to the repository.  For example, 
@@ -185,8 +182,7 @@ in the repository, it executes it.
 For example, [__MarkDoc package has a `dependency.do` file__](https://raw.githubusercontent.com/haghish/MarkDoc/master/dependency.do) that can serve as an example how the dependency file should be created. Naturally, the `dependenc.do` file is only executable by __`github install`__ command.
  
 
-4. Building package installation files automatically
-====================================================
+# 4. Building package installation files automatically
 
 Imagine you have created an ado-file and Stata help files. How do you make your repository installable? You need to create a *stata.toc* aand a *packagename.pkg* files manually, specify the required information, files that should be installed, etc. The `
 github` package introduces the `make` GUI that generates the package installations for you, using a strict layout. You can just select the files that you wish to install, specify the required information, and have your *toc* and *pkg* files ready. Then, as soon as you copy these files to your repository, it would be installable! 
@@ -201,8 +197,7 @@ Change the working directory to the repository path and then run the GUI, typing
 
 write down the required information and select the files that should be installed. Press OK, and enjoy! 
 
-5. List of Stata Packages Recognized by `gitget` command
-========================================================
+# 5. List of Stata Packages Recognized by `gitget` command
 
 The `gitget` data set is downloaded along with `github` package. This data set is updated monthly. [Click here to see the complete list of __`gitget`__ packages](https://github.com/haghish/github/blob/master/gitget.md). 
 
