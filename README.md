@@ -14,7 +14,7 @@ a package. It is a combination of several Stata commands such as `search`, `find
 <br>
 
 
-<img src="./images/archive.jpg" width="140px" height="140px"  align="left" hspace="10" vspace="6">The `gitget` command relies on a complete list of Stata packages on GitHub to identify the URL of a project. This list is created programmatically using a search program that detects Stata packages. First, all of the Stata repositories are identified and stored in *[packagelist.dta](https://github.com/haghish/github/blob/master/packagelist.dta)*. Next, the installable packages are extracted and stored in *[gitget.dta](https://github.com/haghish/github/blob/master/gitget.dta)* which also is installed with the package on your machine. [**The complete list of the archive is also available for preview within this repository**](https://github.com/haghish/github/blob/master/gitget.md)
+<img src="./images/white.png" width="140px" height="140px"  align="left" hspace="10" vspace="6">The `gitget` command relies on a complete list of Stata packages on GitHub to identify the URL of a project. This list is created programmatically using a search program that detects Stata packages. First, all of the Stata repositories are identified and stored in *[packagelist.dta](https://github.com/haghish/github/blob/master/packagelist.dta)*. Next, the installable packages are extracted and stored in *[gitget.dta](https://github.com/haghish/github/blob/master/gitget.dta)* which also is installed with the package on your machine. [**The complete list of the archive is also available for preview within this repository**](https://github.com/haghish/github/blob/master/gitget.md)
 
 <br>
 <br>
