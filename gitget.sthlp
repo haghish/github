@@ -10,7 +10,7 @@
 
 {title:Syntax}
 
-{p 8 8 2} {bf: {browse "https://github.com/haghish/github":gitget}} {it:packagename} [, stable version({it:str}) ]
+{p 8 8 2} {bf:gitget} {it:packagename} [, stable version({it:str}) ]
 
 {p 4 4 2}
 {it:options}
