@@ -1,5 +1,5 @@
 {smcl}
-{right:version 1.6.0}
+{right:version 1.8.0}
 {title:Title}
 
 {phang}
@@ -65,10 +65,11 @@ searching for a keyword. The table shows the options accordingly:
 {synopthdr}
 {synoptline}
 {syntab:Installation Options}
-{synopt:{opt v:ersion(str)}}specifies a particular version (release tags) for 
+{synopt:{opt stable}}will install the latest released version of the software. otherwise, the depelopment version of the package will be installed.{p_end}
+{synopt:{opt v:ersion(str)}}specifies a particular stable version (release tags) for 
 installing a new repository{p_end}
 {synopt:{opt force}}specifies that the downloaded files be installed even if the 
-{bf:packagename.pkg} and {bf:Stata.toc} files are missing. Use this option 
+__packagename.pkg__ and __Stata.toc__ files are missing. Use this option 
 wisely because by forcing the installation, you are installing a software that 
 is not prepared for installation. {p_end}
 
@@ -124,37 +125,43 @@ install the dependencies.
 {p 4 4 2}
 {bf:examples of installing and uninstalling packages} 
 
-    install the latest version of MarkDoc package from GitHub
+    {it:install the latest developing version of MarkDoc package from GitHub}
         . github install haghish/markdoc
-
-    install MarkDoc version 3.8.1 from GitHub (older version)
-        . github haghish/markdoc, version("3.8.1")
+      {it:or}
+        . gitget markdoc
 		
-    Uninstall MarkDoc repository
+    {it:install the latest released stable version of MarkDoc package from GitHub}
+        . github install haghish/markdoc , stable
+      {it:or}
+        . gitget markdoc, stable
+
+    {it:install MarkDoc version 3.8.1 from GitHub (older version)}
+        . github haghish/markdoc, version("3.8.1")
+      {it:or}
+        . gitget markdoc, version("3.8.1")
+		
+    {it:Uninstall MarkDoc repository}
         . github uninstall markdoc
 		
-    list all of the available versions of the MarkDoc package
+    {it:list all of the available versions of the MarkDoc package}
         . github query haghish/markdoc
 		
 		
 {p 4 4 2}
 {bf:examples of searching for a package} 
 		
-    search for MarkDoc package on GitHub
+    {it:search for MarkDoc package on GitHub}
         . github search markdoc
 		
-    search for a Stata package named "weaver"
+    {it:search for a Stata package named "weaver"}
         . github search weaver, language(stata)
 	
-    search for Stata packages that mention the keyword "likelihood" 
+    {it:search for Stata packages that mention the keyword "likelihood" }
         . github search likelihood, language(stata) in(all)
-		
-    search for a repository named "github" and published in November 2016 
-        . github search github, created("2016-11-01..2016-11-30") 
 
 
 {p 4 4 2}
-{bf:list the installed packages from GiutHub} 
+{bf:listing and managing the installed packages from GiutHub} 
 		
         . github list
 		

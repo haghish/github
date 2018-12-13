@@ -43,7 +43,7 @@ program gitget
 	
 	version 13
 	
-	syntax anything
+	syntax anything [, stable version(str)]
 	
 	// find the gitget dataset
 	// -----------------------------------------------------------------------
@@ -60,7 +60,7 @@ program gitget
 			githuboutput
 			di as txt _n
 			local address = address[1]
-			noisily github install `address'
+			noisily github install `address', `stable' version(`version')
 		}
 		else if _N > 1 {
 			display as txt "multiple Stata packages were found! "  

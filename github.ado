@@ -1,5 +1,5 @@
 /*** DO NOT EDIT THIS LINE -----------------------------------------------------
-Version: 1.5.5
+Version: 1.8.0
 Title: github
 Description: search, install, and uninstall Stata packages with a particular  
 version (release) as well as their dependencies from 
@@ -71,7 +71,8 @@ searching for a keyword. The table shows the options accordingly:
 {synopthdr}
 {synoptline}
 {syntab:Installation Options}
-{synopt:{opt v:ersion(str)}}specifies a particular version (release tags) for 
+{synopt:{opt stable}}will install the latest released version of the software. otherwise, the depelopment version of the package will be installed.{p_end}
+{synopt:{opt v:ersion(str)}}specifies a particular stable version (release tags) for 
 installing a new repository{p_end}
 {synopt:{opt force}}specifies that the downloaded files be installed even if the 
 __packagename.pkg__ and __Stata.toc__ files are missing. Use this option 
@@ -196,7 +197,7 @@ prog define github
 
 	version 13
 	
-	syntax anything, [Version(str) force save(str) in(str) 				                ///
+	syntax anything, [stable Version(str) force save(str) in(str) 				        ///
 	language(str) all NET                                                         ///
 	/// some of the options of the program are not documented yet                 ///
 	created(str) pushed(str) debug reference(str)			                            ///
@@ -393,6 +394,18 @@ prog define github
 	//BY HERE we have the username, repositoryname, and packagename. what else?
 	//link address, and possibly downloaded date
 	
+	
+	// Installing a stable version
+	// -----------------------------------------------------------------------
+	if !missing("`version'") & !missing("`stable'") {
+		di as txt "when you specify {bf:version}, adding {bf:stable} is redundant!"
+		local stable //reset
+	}
+	if missing("`version'") & !missing("`stable'") {
+		quietly github query `anything'
+		local version `r(latestversion)' 
+	}
+		
 	// Installing an archived version
 	// -----------------------------------------------------------------------
 	if !missing("`version'") | !missing("`force'") {
