@@ -1,0 +1,10 @@
+v 1.0.0
+d 'ECHO': echoes the given text
+d 
+d a program that displays the given string in Stata
+d 
+d Distribution-Date:   20181121
+d License: MIT
+d 
+F echo.sthlp
+F echo.ado
