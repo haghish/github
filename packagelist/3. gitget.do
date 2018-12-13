@@ -60,8 +60,12 @@ tempname knot
 qui cap file open `knot' using "`tmp1'", write replace
 
 local now : di %td_D-N-CY  date("$S_DATE", "DMY") " $S_TIME"
+local now : di trim("`now'")
 
-file write `knot' "_updated on `now'_" _n(2)
+file write `knot' "_updated on " "``now'" "`" "_" _n
+file write `knot' "to install a Stata package included in this list, simply type:" _n(2)
+file write `knot' "    gitget packagename" _n(2)
+file write `knot' "- - -" _n(2)
 
 file write `knot' "List of Stata Packages Recognized by `gitget` command" _n ///
                   "=====================================================" _n(2)
