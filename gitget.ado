@@ -1,15 +1,24 @@
 /***
-_v. 1.0.3_ 
+_v. 1.0.4_ 
 
 Title
 ====== 
 
-gitget -- install/update a package from GitHub using the _packagename_ only 
+__[gitget](https://github.com/haghish/github)__ -- install or update a package from GitHub using the _packagename_ only 
 
 Syntax
 ------ 
 
-> __gitget__ _packagename_ 
+> __gitget__ _packagename_ [, stable version(_str_) ]
+
+_options_
+
+- - -
+
+stable: installs the latest released version of a package   
+***v***ersion(_str_): installs a particular released version   
+
+- - -
 
 Description
 -----------
@@ -19,11 +28,18 @@ __gitget.dta__ data set, which is installed with __github__ package to obtain
 the _username/reponame_ of the package. if multiple packages with identical name 
 are found, the command describes them in a table without installing any module.  
 
+by default, the command installs the development version of a repository. if you 
+wish to install a stable release rather than the developmnt version, add the 
+__stable__ option or specify the version within the __version__ option. 
+
 Example
 ----------
 
     installing markdoc package and its dependencies
         . gitget markdoc
+				
+    installing the latest stable version of markdoc package and its dependencies
+        . gitget markdoc, stable
 
 Author
 ------
@@ -74,3 +90,4 @@ program gitget
 	}
 
 end 
+
