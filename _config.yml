@@ -2,7 +2,7 @@ title: GitHub
 description: a module for installing Stata packages from GitHub
 google_analytics: 
 show_downloads: true
-theme: jekyll-theme-minimal
+theme: jekyll-theme-cayman
 
 gems:
   - jekyll-mentions
