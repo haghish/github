@@ -57,7 +57,7 @@ The `github` package includes a database for the complete list of Stata packages
 
     gitget packagename [, stable version("")]
 
-For example, if you wish to install `markdoc` package, typing `gitget markdoc` would be as goo as typing `github install haghish/markdoc`. If you wish to inspect the list of Stata packages hosted on GitHub, see the `gitget.dta` data set.
+For example, if you wish to install `markdoc` package, typing `gitget markdoc` would be as goo as typing `github install haghish/markdoc`. If you wish to inspect the list of Stata packages hosted on GitHub, see the *[gitget.dta](https://github.com/haghish/github/blob/master/gitget.dta)* data set.
 
 > The `gitget` and `github install` commands take similar options. If you add the `stable` option, e.g. `gitget markdoc, stable`, the latest stable release will be installed. However, if you avoid this option, the development version of the repository is installed. the `version("")` option is for installing a particular older stable release. 
 
