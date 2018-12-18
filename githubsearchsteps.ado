@@ -37,7 +37,7 @@ program githubsearchsteps
 		
 		if missing("`quiet'") display as txt "from  `reference'  to  `future'"
 		
-		sleep 6000
+		sleep 10000
 		githubsearch `anything', language(`language') save(`"`save'"') in(`in')	///
 		`all' created("`reference'..`future'") pushed("`pushed'") quiet			///
 		`append' `replace'

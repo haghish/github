@@ -1,4 +1,38 @@
-quietly use "packagelist.dta", clear
+/***
+Updated repositories
+============================================================
+
+check all of the Stata repositories to see a repository has been 
+updated to be an installable package
+***/ 
+
+quietly use "repolist.dta", clear
+local j 0
+local last = _N
+forval N = 1/`last' {
+	display as txt "`N'/`last'" 
+	local address : di address[`N']
+	github check `address'
+	if "`r(installable)'" == "1" {
+		if installable[`N'] != 1 {
+			replace installable = 1 in `N'
+		}
+	}
+	else {
+		if installable[`N'] != 1 {
+			di as err address[`N']
+			replace installable = 0 in `N'
+		}
+	}
+}
+
+saveold "repolist.dta", replace
+
+
+
+
+
+quietly use "repolist.dta", clear
 capture drop dependency
 generate dependency = .
 
@@ -16,7 +50,7 @@ forval N = 1/`last' {
 	}
 }
 
-saveold "packagelist.dta", replace
+saveold "repolist.dta", replace
 
 
 /***
@@ -29,7 +63,7 @@ In this document, I will create a subset of the installable repositories to be
 used by the `gitget` command
 ***/
 
-use "packagelist.dta", clear
+use "repolist.dta", clear
 keep if installable == 1
 saveold "gitget.dta", replace
 
@@ -92,7 +126,7 @@ forval i = 1/`last' {
 	local description = description[`i']
 	local description : subinstr local description "`" "'", all
 	local description : di substr(`"`macval(description)'"', 1, 180)
-	file write `knot' `"`i'|[`name'](https://github.com/`address')|"'   ///
+	file write `knot' `"`i'|["' "__" `"`name'"' "__" `"](https://github.com/`address')|"'   ///
 						`"`hits'|`updated'|`dependency'|`kb'kb|`description'"' _n
 }
 
