@@ -19,6 +19,7 @@ prog make
 	        install(str)      ///
 				 ]
 	
+
 	//title of the package
 	//local anything : di `anything'
 	local capital : di ustrupper("`anything'") 
@@ -86,7 +87,7 @@ prog make
 	
 	//if install and ancillary are empty, list all files 
 	if missing("`install'") & missing("`ancillary'") {
-		local install : dir . files "*" 
+		//local install : dir . files "*" //the files are manually selected
 		tokenize `"`install'"'
 		while `"`macval(1)'"' != "" {
 			if `"`macval(1)'"' != ".DS_Store"  								    ///
