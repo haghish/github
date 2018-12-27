@@ -40,7 +40,13 @@ prog makedlg
 		macro shift
 	} 
 	
-
+	di _n(2) "{title:Executing the make command}" _n
+	di as txt "{p} make `anything', `replace' `toc' `pkg' `readme' " ///
+	   "title(`title') version(`version') "                   ///
+		 `"license("`license'") description(`description') "'   ///
+		 "author(`author') affiliation(`affiliation') "         ///
+		 `"email(`email') url(`url') install("`inst'") "'       ///
+		 `"ancillary("`anc'")"'
 
 	
 	// call the make function 
