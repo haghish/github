@@ -1,3 +1,72 @@
+/***
+_v. 1.0.0_ 
+
+Title
+====== 
+
+__makee__ - builds package installation files
+
+Syntax
+------ 
+
+> __make__ _pakagename_ [, _options_]
+
+| _option_          |  _Description_                       |
+|:------------------|:-------------------------------------|
+| replace            | replace existing files              |
+| toc                | generates __stata.toc__ file        |
+| pkg                | generates __packagename.pkg__ file  |
+| readme             | generates __README.md__ file        |
+| title(_str_)       | title of the package                |
+| version(_str_)     | Version of the package              |
+| description(_str_) | description of the package          |
+| license(_str_)     | license of the package              |
+| author(_str_)      | author of the package               |
+| affiliation(_str_) | author's affiliation                |
+| url(_str_)         | package or relevant url address     |
+| email(_str_)       | package maintainer's email address  |
+| install(_str_)     | installation files, seperated by ";"|
+| ancillary(_str_)   | ancillary files, seperated by ";"   |
+
+
+Description
+-----------
+
+__make__ generates the required files to make a Stata program 
+installable. the command is particularly handy for packages 
+hosted on private websites or GitHub
+
+
+Example(s)
+----------
+
+    building the installation files for "mypackage" program
+        . make mypackage, replace toc pkg readme          ///
+               title(title) version(1.0.0) license("MIT") ///
+               description(describe the package)          ///
+               author(author name)                        ///
+               affiliation(author's affiliation)          ///
+               email(package maintained email)            ///
+               url(relevant URL)                          ///
+               install("a.ado;a.sthlp;b.ado;b.sthlp")     ///
+               ancillary("x.dta;y.dta")
+
+
+Author
+------
+
+[E. F. Haghish ](https://github.com/haghish)   
+
+
+- - -
+
+This help file was dynamically produced by 
+[MarkDoc Literate Programming package](http://www.haghish.com/markdoc/) 
+***/
+
+
+
+
 	
 *cap prog drop make
 prog make
