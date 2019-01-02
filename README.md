@@ -16,6 +16,16 @@ a package. It is a combination of several Stata commands such as `search`, `find
 <br>
 <br>
 
+---
+
+In the recent years, Stata users have been increasingly using GitHub for hosting Stata repositories, developing statistical software, and hosting Stata packages, as shown in the figure below. This is indeed a good news! The `github` module, facilitates searching, installing, managing, and even building Stata packages. Furthermore, it allows installing development version or alternatively, stable releases of a package. It also allows specifying package dependencies that will be installed automatically. Here, I quickly show you how to install and use the package.
+
+<center>
+<a href="https://github.com/haghish/github/raw/master/images/combined.png"><img src="https://github.com/haghish/github/raw/master/images/combined.png"  width="650"></a>
+</center>
+
+<br>
+
 # 1. Installing `github` module
 
 You can install the latest version of the `github` command by executing the following code:
