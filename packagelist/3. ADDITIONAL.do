@@ -13,13 +13,13 @@ githubsearch stata, language(all) in(all)  perpage(1) quiet
 
 
 // mining stata-related repositories
-githublistpack stata, language(all) append replace save("archive")              ///
+githublistpack stata, language(all) append replace save("archive") ///
                  duration(1) all in(all) perpage(100)
 
 
 //UPDATE					 
-githublistpack stata, language(all) append replace save("update")              ///
-duration(1) all in(all) reference("2018-12-17") perpage(100)
+githublistpack stata, language(all) append replace save("update") ///
+duration(1) all in(all) reference("2019-01-01") perpage(100)
 
 
 use "archive.dta", clear
@@ -27,6 +27,7 @@ append using "update.dta"
 append using "repolist.dta"
 duplicates drop address, force
 saveold "archive.dta", replace
+erase update.dta
 
 
 use "archive.dta", clear

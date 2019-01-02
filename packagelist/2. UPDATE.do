@@ -16,8 +16,8 @@ timer on 1
 qui log off
 clear
 
-githublistpack , language(Stata) append replace save("update")                  ///
-                 duration(1) all in(all) reference("2018-12-15") perpage(100)
+githublistpack , language(Stata) append replace save("update")            ///
+                 duration(1) all in(all) reference("2019-01-01") perpage(100)
 timer off 1
 qui log on
 //ON
