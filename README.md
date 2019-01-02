@@ -49,7 +49,7 @@ and the [*...*] can be whether *username/repository* or *packagename* based on t
 
 ## 3.1 Installing a package
 To install a package, all you need is the GitHub username and the name of the repository. The combination of username and repository name - seperated by a slash - provides the needed URL to the repository.  For example, 
-to install [MarkDoc](https://github.com/haghish/MarkDoc) package, which is hosted on <https://github.com/haghish/markdoc>, it is enough to type:
+to install [MarkDoc](https://github.com/haghish/markdoc) package, which is hosted on <https://github.com/haghish/markdoc>, it is enough to type:
 
     github install haghish/markdoc [, stable version("")]
 
@@ -122,14 +122,14 @@ GitHub allows archiving unlimited number of package versions. The `github` comma
 the package version, allowing installing previous package versions. For example, for installing an older 
 version of MarkDoc package, say `3.8.0`. you can type:
 
-    github install haghish/MarkDoc , version("3.8.0")
+    github install haghish/markdoc , version("3.8.0")
 
 ### 3.6.2 Listing all previous releases
-But were can you see the package versions? GitHub has a ___release___ tab that lists all of the previous releases of the software ([__See for example the previous releases of MarkDoc__](https://github.com/haghish/MarkDoc/releases)). But the good news is that `github` has a subcommand for listing all of the previous releases in Stata results windows and allows you to install any of them (_as well as their package dependencies for that particular version, if specified_) with a single mouse click or programmatically. To do so, type:
+But were can you see the package versions? GitHub has a ___release___ tab that lists all of the previous releases of the software ([__See for example the previous releases of MarkDoc__](https://github.com/haghish/markdoc/releases)). But the good news is that `github` has a subcommand for listing all of the previous releases in Stata results windows and allows you to install any of them (_as well as their package dependencies for that particular version, if specified_) with a single mouse click or programmatically. To do so, type:
 
     github query username/repository
 
-For example, to list [__MarkDoc__](https://github.com/haghish/MarkDoc/releases)'s previous releases, type:
+For example, to list [__MarkDoc__](https://github.com/haghish/markdoc/releases)'s previous releases, type:
 
 ```
 . github query haghish/markdoc
