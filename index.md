@@ -1,9 +1,9 @@
-# `github` : a module for building Stata packages as well as searching, installing, and managing Stata packages hosted on GitHub
+# GITHUB : a module for building Stata packages as well as searching, installing, and managing Stata packages hosted on GitHub
 
 <a href="http://github.com/haghish/github"><img src="https://github.com/haghish/markdoc/raw/master/Resources/images/github3.png" align="left" width="140" hspace="10" vspace="6"></a>
 
-`github` is a Stata module for searching and installing Stata packages from GitHub, including previous releases of 
-a package. It is a combination of several Stata commands such as `search`, `findit`, and `ssc`, but instead, made for managing Stata packages hosted on GitHub. In addition, the package provides new features for version control which are not available to Stata users elsewhere (for example, the package allows installing older releases of a Stata package to reproduce an analysis carried out with older software). 
+`github` is a Stata module for searching and installing Stata packages from GitHub, including previous releases of
+a package. It is a combination of several Stata commands such as `search`, `findit`, and `ssc`, but instead, made for managing Stata packages hosted on GitHub. In addition, the package provides new features for version control which are not available to Stata users elsewhere (for example, the package allows installing older releases of a Stata package to reproduce an analysis carried out with older software).
 
 <br>
 
@@ -48,24 +48,28 @@ and the [*...*] can be whether *username/repository* or *packagename* based on t
 # 3. `github` subcommands
 
 ## 3.1 Installing a package
-To install a package, all you need is the GitHub username and the name of the repository. The combination of username and repository name - seperated by a slash - provides the needed URL to the repository.  For example, 
-to install [MarkDoc](https://github.com/haghish/MarkDoc) package, which is hosted on <https://github.com/haghish/markdoc>, it is enough to type:
+To install a package, all you need is the GitHub username and the name of the repository. The combination of username and repository name - seperated by a slash - provides the needed URL to the repository.  For example,
+to install [MarkDoc](https://github.com/haghish/markdoc) package, which is hosted on <https://github.com/haghish/markdoc>, it is enough to type:
 
-    github install haghish/markdoc [, stable version("") force]
+    github install haghish/markdoc [, stable version("")]
 
 The `github` package includes a database for the complete list of Stata packages hosted on GitHub. Therefore, you can also install a package just by specifying the package name. The __`gitget`__ command - which is a wrapper for `github install` - can install or update Stata packages from GitHub only by asking the package name:
 
     gitget packagename [, stable version("")]
 
-For example, if you wish to install `markdoc` package, typing `gitget markdoc` would be as goo as typing `github install haghish/markdoc`. If you wish to inspect the list of Stata packages hosted on GitHub, see the `gitget.dta` data set.
+For example, if you wish to install `markdoc` package, typing `gitget markdoc` would be as goo as typing `github install haghish/markdoc`. If you wish to inspect the list of Stata packages hosted on GitHub, see the *[gitget.dta](https://github.com/haghish/github/blob/master/gitget.dta)* data set.
 
-> The `gitget` and `github install` commands take similar options. If you add the `stable` option, e.g. `gitget markdoc, stable`, the latest stable release will be installed. However, if you avoid this option, the development version of the repository is installed. the `version("")` option is for installing a particular older stable release. 
+| Options      | Description                                                 |
+|--------------|-------------------------------------------------------------|
+| `stable`     | installs the latest stable release version of the package   |
+| `version(str)`| installs the specified release version                     |
+
 
 ## 3.2 Searching for a Stata package
 You can search GitHub for Stata package using a keyword or many keywords. This is similar to Stata's `search` or `findit` commands, but instead, only used for searching GitHub packages:
 
     github search weaver
-    
+
 Searching GitHub API effectively is very important. For this, the package includes a search GUI that shows the syntax you can use to narrow down your search or expand it to include other sources. The search command also analyzes the release dates for packages hosted on the `net` command, which is a very useful feature. To launch the GUI, type:
 
     db github
@@ -92,7 +96,7 @@ For example, if you use the `github search` command to search for `markdoc` pack
 
 ## 3.4 Checking a Stata repository
 
-Not all packages are installable. Stata repositories must have __toc__ and __pkg__ files in order to be installable. You can check whether a package is installable or not using the `check` subcommand. 
+Not all packages are installable. Stata repositories must have __toc__ and __pkg__ files in order to be installable. You can check whether a package is installable or not using the `check` subcommand.
 
     github check haghish/markdoc
 
@@ -107,31 +111,31 @@ To install a package, use the `uninstall` subcommand, followed by the package na
 
     github uninstall markdoc
 
- 
+
 
 
 
 ## 3.6 Package Versions
 
 ### 3.6.1 Installing a particular version
-GitHub allows archiving unlimited number of package versions. The `github` command has an option for specifying 
-the package version, allowing installing previous package versions. For example, for installing an older 
+GitHub allows archiving unlimited number of package versions. The `github` command has an option for specifying
+the package version, allowing installing previous package versions. For example, for installing an older
 version of MarkDoc package, say `3.8.0`. you can type:
 
-    github install haghish/MarkDoc , version("3.8.0")
+    github install haghish/markdoc , version("3.8.0")
 
 ### 3.6.2 Listing all previous releases
-But were can you see the package versions? GitHub has a ___release___ tab that lists all of the previous releases of the software ([__See for example the previous releases of MarkDoc__](https://github.com/haghish/MarkDoc/releases)). But the good news is that `github` has a subcommand for listing all of the previous releases in Stata results windows and allows you to install any of them (_as well as their package dependencies for that particular version, if specified_) with a single mouse click or programmatically. To do so, type:
+But were can you see the package versions? GitHub has a ___release___ tab that lists all of the previous releases of the software ([__See for example the previous releases of MarkDoc__](https://github.com/haghish/markdoc/releases)). But the good news is that `github` has a subcommand for listing all of the previous releases in Stata results windows and allows you to install any of them (_as well as their package dependencies for that particular version, if specified_) with a single mouse click or programmatically. To do so, type:
 
     github query username/repository
 
-For example, to list [__MarkDoc__](https://github.com/haghish/MarkDoc/releases)'s previous releases, type:
+For example, to list [__MarkDoc__](https://github.com/haghish/markdoc/releases)'s previous releases, type:
 
 ```
 . github query haghish/markdoc
 
  ----------------------------------------
-  Version      Release Date      Install 
+  Version      Release Date      Install
  ----------------------------------------
   3.8.5        2016-10-16        Install
   3.8.4        2016-10-13        Install
@@ -164,39 +168,39 @@ When writing an analysis with a dynamic documentation software, such as [**MarkD
 This command does not have any other uses because the `github list` command already shows the version of the installed packages and also checks whether there is a newer version of them available...
 
 ## 3.7 Package Dependencies
-Some packages rely on other packages. The `github` command allows you to install the package 
+Some packages rely on other packages. The `github` command allows you to install the package
 dependencies with or without a specific version. To do so:
 
 1. create a file named `dependency.do` and include it in the repository
-2. this file is not meant to be installed in the PLUS directory therefore it should not be mentioned in the 
+2. this file is not meant to be installed in the PLUS directory therefore it should not be mentioned in the
 pkg file, when you are building the package (see below)
-3. include the code for installing the package dependencies in this do file. If the packages 
-are hosted on GitHub, use the `github` command for installing the package dependencies and 
-even specify the requiered version. 
-4. `github` command looks for `dependency.do` after installing the package and if it finds it 
-in the repository, it executes it. 
+3. include the code for installing the package dependencies in this do file. If the packages
+are hosted on GitHub, use the `github` command for installing the package dependencies and
+even specify the requiered version.
+4. `github` command looks for `dependency.do` after installing the package and if it finds it
+in the repository, it executes it.
 
 For example, [__MarkDoc package has a `dependency.do` file__](https://raw.githubusercontent.com/haghish/MarkDoc/master/dependency.do) that can serve as an example how the dependency file should be created. Naturally, the `dependenc.do` file is only executable by __`github install`__ command.
- 
+
 
 # 4. Building package installation files automatically
 
 Imagine you have created an ado-file and Stata help files. How do you make your repository installable? You need to create a *stata.toc* aand a *packagename.pkg* files manually, specify the required information, files that should be installed, etc. The `
-github` package introduces the `make` GUI that generates the package installations for you, using a strict layout. You can just select the files that you wish to install, specify the required information, and have your *toc* and *pkg* files ready. Then, as soon as you copy these files to your repository, it would be installable! 
+github` package introduces the `make` GUI that generates the package installations for you, using a strict layout. You can just select the files that you wish to install, specify the required information, and have your *toc* and *pkg* files ready. Then, as soon as you copy these files to your repository, it would be installable!
 
 Change the working directory to the repository path and then run the GUI, typing:
 
     db make
- 
+
 <center>
 <a href="https://github.com/haghish/github/raw/master/images/make.png"><img src="https://github.com/haghish/github/raw/master/images/make.png"  width="450" hspace="10" vspace="6"></a>
 </center>
 
-write down the required information and select the files that should be installed. Press OK, and enjoy! 
+write down the required information and select the files that should be installed. Press OK, and enjoy!
 
 # 5. List of Stata Packages Recognized by `gitget` command
 
-The `gitget` data set is downloaded along with `github` package. This data set is updated monthly. [Click here to see the complete list of __`gitget`__ packages](https://github.com/haghish/github/blob/master/gitget.md). 
+The `gitget` data set is downloaded along with `github` package. This data set is updated monthly. [Click here to see the complete list of __`gitget`__ packages](https://github.com/haghish/github/blob/master/gitget.md).
 
 
 Author
@@ -205,11 +209,3 @@ Author
   Center for Medical Biometry and Medical Informatics   
   University of Freiburg, Germany      
   _[@Haghish](https://twitter.com/Haghish)_   
-  
-
-    
-
-
-
-
-
