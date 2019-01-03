@@ -22,6 +22,12 @@ __Table of Contents__
 3. [Syntax](#3-Syntax)
 4. [Subcommands](#4-Subcommands)
     1. [Installing a package](#41-Installing-a-package) 
+    2. [Searching for a Stata package](#42-Searching-for-a-Stata-package) 
+    3. [Managing installed packages](#43-Managing-installed-packages) 
+    4. [Checking a Stata repository](#44-Checking-a-Stata-repository) 
+    5. [Uninstalling a package](#45-Uninstalling-a-package) 
+    6. [Package Versions](#46-Package-versions) 
+        1. [Installing a particular version](#411-Installing-a-particular-version)
 
 # 1. Introduction
 
@@ -132,7 +138,7 @@ To install a package, use the `uninstall` subcommand, followed by the package na
 
 
 
-## 4.6 Package Versions
+## 4.6 Package versions
 
 ### 4.6.1 Installing a particular version
 GitHub allows archiving unlimited number of package versions. The `github` command has an option for specifying
