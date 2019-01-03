@@ -18,7 +18,7 @@ a package. It is a combination of several Stata commands such as `search`, `find
 
 __Table of Contents__  
 1. [Introduction](#1-introduction)
-2. [Installation](#2-Installing-GITHUB-module)
+2. [Installation](#2-Installing-github-module)
 3. [Syntax](#3-Syntax)
 4. [Subcommands](#4-Subcommands)
     1. [Installing a package](#41-Installing-a-package) 
@@ -44,7 +44,7 @@ In the recent years, Stata users have been increasingly using GitHub for sharing
 
 <br>
 
-# 2. Installing GITHUB module
+# 2. Installing `github` module
 
 You can install the latest version of the `github` command by executing the following code:
 
