@@ -1,4 +1,4 @@
-# GITHUB : a module for building Stata packages as well as searching, installing, and managing Stata packages hosted on GitHub
+<img src="https://github.com/haghish/markdoc/raw/master/Resources/images/github3.png" align="left" width="140" hspace="5" vspace="6"><h1>a module for building Stata packages as well as searching, installing, and managing Stata packages hosted on GitHub</h1>
 
 <br>
 
