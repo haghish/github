@@ -18,7 +18,9 @@ a package. It is a combination of several Stata commands such as `search`, `find
 
 __Table of Contents__  
 1. [Introduction](#1-introduction)
-
+2. [Installation](#2.-Installing-GITHUB-module)
+3. [Syntax](#3.-Syntax)
+4. [Subcommands](#4.-`github`-subcommands) 
 
 # 1. Introduction
 
