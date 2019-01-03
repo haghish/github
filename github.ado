@@ -1,5 +1,5 @@
 /*** DO NOT EDIT THIS LINE -----------------------------------------------------
-Version: 1.8.0
+Version: 1.9.0
 Title: github
 Description: search, install, and uninstall Stata packages with a particular  
 version (release) as well as their dependencies from 
