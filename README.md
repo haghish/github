@@ -27,7 +27,7 @@ __Table of Contents__
     4. [Checking a Stata repository](#44-Checking-a-Stata-repository) 
     5. [Uninstalling a package](#45-Uninstalling-a-package) 
     6. [Package Versions](#46-Package-versions) 
-        1. [Installing a particular version](#411-Installing-a-particular-version)
+        1. [Installing a particular version](#461-Installing-a-particular-version)
 
 # 1. Introduction
 
