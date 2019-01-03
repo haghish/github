@@ -1,5 +1,5 @@
 title: GitHub
-description: a module for installing Stata packages from GitHub
+description: a module for building, searching, installing, and managing Stata packages from GitHub
 google_analytics: 
 show_downloads: true
 theme: jekyll-theme-cayman
