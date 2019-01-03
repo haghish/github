@@ -1,7 +1,3 @@
-# GITHUB : a module for building, searching, installing, and managing Stata packages from GitHub
-
-<br>
-
 __Table of Contents__  
 1. [Introduction](#1-introduction)
 2. [Installation](#2-Installing-github-module)
