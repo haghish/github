@@ -28,6 +28,10 @@ __Table of Contents__
     5. [Uninstalling a package](#45-Uninstalling-a-package) 
     6. [Package Versions](#46-Package-versions) 
         1. [Installing a particular version](#461-Installing-a-particular-version)
+        2. [Listing all previous releases](#462-Listing-all-previous-releases)
+        3. [Getting the version of an installed package](#463-Getting-the-version-of-an-installed-package) 
+    7. [Package dependencies](#47-Package-dependencies) 
+5. [Building package installation files automatically](#5-Building-package-installation-files-automatically) 
 
 # 1. Introduction
 
@@ -190,7 +194,7 @@ When writing an analysis with a dynamic documentation software, such as [**MarkD
 
 This command does not have any other uses because the `github list` command already shows the version of the installed packages and also checks whether there is a newer version of them available...
 
-## 4.7 Package Dependencies
+## 4.7 Package dependencies
 Some packages rely on other packages. The `github` command allows you to install the package
 dependencies with or without a specific version. To do so:
 
