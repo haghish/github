@@ -3,7 +3,6 @@
 # a module for building Stata packages as well as searching, installing, and managing Stata packages hosted on GitHub
 
 <br>
-<br>
 
 __Table of Contents__  
 1. [Introduction](#1-introduction)
