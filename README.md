@@ -16,8 +16,7 @@ a package. It is a combination of several Stata commands such as `search`, `find
 <br>
 <br>
 
-Table of Contents  
-
+__Table of Contents__  
 1. [Introduction](#1-introduction)
 
 
