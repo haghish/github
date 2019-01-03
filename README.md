@@ -32,6 +32,7 @@ __Table of Contents__
         3. [Getting the version of an installed package](#463-Getting-the-version-of-an-installed-package) 
     7. [Package dependencies](#47-Package-dependencies) 
 5. [Building package installation files automatically](#5-Building-package-installation-files-automatically) 
+6. [List of Stata Packages Recognized by `gitget` command](#6-List-of-Stata-Packages-Recognized-by-gitget-command) 
 
 # 1. Introduction
 
