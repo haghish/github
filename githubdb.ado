@@ -141,9 +141,9 @@ program githubdb, rclass
 					local short   : di abbrev("`address'", 20) 
 					local name    : di name[`i']
 					local version : di version[`i']
-					quietly capture github query `address'
+					capture github query `address'
 					if _rc {
-						local latestver "API disconnected!" 
+						local latestver "API not responding" 
 					}
 					else local latestver `r(latestversion)' 
 					*di as err "latest version:  `latestver'"
@@ -162,9 +162,13 @@ program githubdb, rclass
 					   `"{browse "http://github.com/`address'":`short'}"'        _col(58) _continue
 					
 					if "`version'" == "`latestver'" di "`latestver'"
-					else if "`latestver'" != "" {
+					else if "`latestver'" != "" & "`latestver'" != "API not responding" {
 					  di `"{browse "https://github.com/`address'/releases/tag/`latestver'":`latestver'}"' _col(68)  ///
-						   "({stata github install `address', version(`latestver') :update})"
+						   `"({stata github install `address', version(`latestver') :update})"'
+					}
+					else if "`latestver'" == "API not responding" {
+					  di as err "API not responding" _continue
+					  di as txt ""        //avoid the red color in the next line
 					}
 					else di "NA"
 					//	 "{stata github update `name' :update}"                             
