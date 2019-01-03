@@ -1,10 +1,5 @@
 # GITHUB : a module for building Stata packages as well as searching, installing, and managing Stata packages hosted on GitHub
 
-<a href="http://github.com/haghish/github"><img src="https://github.com/haghish/markdoc/raw/master/Resources/images/github3.png" align="left" width="140" hspace="10" vspace="6"></a>
-
-`github` is a Stata module for searching and installing Stata packages from GitHub, including previous releases of
-a package. It is a combination of several Stata commands such as `search`, `findit`, and `ssc`, but instead, made for managing Stata packages hosted on GitHub. In addition, the package provides new features for version control which are not available to Stata users elsewhere (for example, the package allows installing older releases of a Stata package to reproduce an analysis carried out with older software).
-
 <br>
 
 __Table of Contents__  
