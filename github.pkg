@@ -4,6 +4,7 @@ d {browse "http://www.github.com/haghish/github":GitHub} website
 d
 d Distribution-Date: 20181209
 d
+F abspath.ado
 F findall.ado
 F findall.sthlp
 F gitget.ado
