@@ -1,7 +1,8 @@
 <img src="https://github.com/haghish/markdoc/raw/master/Resources/images/github3.png" align="left" width="140" hspace="5" vspace="6">
-#a module for building Stata packages as well as searching, installing, and managing Stata packages hosted on GitHub
 
-<br>
+# a module for building Stata packages as well as searching, installing, and managing Stata packages hosted on GitHub
+
+
 
 __Table of Contents__  
 1. [Introduction](#1-introduction)
