@@ -20,8 +20,8 @@ __Table of Contents__
 1. [Introduction](#1-introduction)
 2. [Installation](#2-Installing-GITHUB-module)
 3. [Syntax](#3-Syntax)
-4. [Subcommands](#4-`github`-subcommands) 
-  4.1 [Installing a package](##4.1-Installing-a-package) 
+4. [Subcommands](#4-GITHUB-subcommands) 
+  + 4.1 [Installing a package](##4.1-Installing-a-package) 
 
 # 1. Introduction
 
@@ -62,7 +62,7 @@ Where the [*subcommand*] can be:
 
 and the [*...*] can be whether *username/repository* or *packagename* based on the specified subcommand.
 
-# 4. `github` subcommands
+# 4. GITHUB subcommands
 
 ## 4.1 Installing a package
 To install a package, all you need is the GitHub username and the name of the repository. The combination of username and repository name - seperated by a slash - provides the needed URL to the repository.  For example,
