@@ -141,8 +141,11 @@ program githubdb, rclass
 					local short   : di abbrev("`address'", 20) 
 					local name    : di name[`i']
 					local version : di version[`i']
-					quietly github query `address'
-					local latestver `r(latestversion)' 
+					quietly capture github query `address'
+					if _rc {
+						local latestver "API disconnected!" 
+					}
+					else local latestver `r(latestversion)' 
 					*di as err "latest version:  `latestver'"
 					
 					if missing("`version'") {
