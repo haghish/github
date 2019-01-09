@@ -63,6 +63,7 @@ Where the [*subcommand*] can be:
 | Subcommand   | Description                                                 |
 |--------------|-------------------------------------------------------------|
 | `search`     | finds a Stata package on GitHub                             |
+| `findfile`   | searches for a filename among all Stata packages on GitHub  |
 | `install`    | installs a package from GitHub                              |
 | `list`       | provides information about packages installed with `github` |
 | `query`      | lists all previous releases of a packag                     |
