@@ -230,6 +230,8 @@ The `findfile` subcommand searches the `githubfiles.dta` (installed with the pac
  ---------------------------------
 ~~~
 
+These files also include the link to their repositories, if you click on them on the results window.
+
 # 5. Building package installation files automatically
 
 Imagine you have created an ado-file and Stata help files. How do you make your repository installable? You need to create a *stata.toc* aand a *packagename.pkg* files manually, specify the required information, files that should be installed, etc. The `
