@@ -335,8 +335,12 @@ prog define github
 	// -------------------
 	tempfile api tmp
 	tempname hitch knot
-	qui copy "https://api.github.com/repos/`anything'/contents" `api', replace
-	*qui copy "https://api.github.com/repos/`anything'/contents" "sth.txt", replace
+	capture qui copy "https://api.github.com/repos/`anything'/contents" `api', replace
+	if _rc {
+		di as txt `"API error occured. visit {browse "https://api.github.com/repos/`anything'/contents"}"'
+		qui copy "https://api.github.com/repos/`anything'/contents" `api', replace
+	}
+
 	file open `hitch' using "`api'", read
 	qui file open `knot' using "`tmp'", write replace
 	file read `hitch' line
