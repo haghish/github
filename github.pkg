@@ -17,6 +17,7 @@ F githubcheck.ado
 F githubconfirm.ado
 F githubdb.ado
 F githubdependency.ado
+F githubfiles.dta
 F githubhot.ado
 F githublistpack.ado
 F githubmake.ado
