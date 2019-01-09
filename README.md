@@ -31,6 +31,7 @@ __Table of Contents__
         2. [Listing all previous releases](#462-Listing-all-previous-releases)
         3. [Getting the version of an installed package](#463-Getting-the-version-of-an-installed-package) 
     7. [Package dependencies](#47-Package-dependencies) 
+    8. [Searching for a package file](#48-Searching-for-a-package-file) 
 5. [Building package installation files automatically](#5-Building-package-installation-files-automatically) 
 6. [List of Stata Packages Recognized by `gitget` command](#6-List-of-Stata-Packages-Recognized-by-gitget-command) 
 
@@ -211,6 +212,23 @@ in the repository, it executes it.
 
 For example, [__MarkDoc package has a `dependency.do` file__](https://raw.githubusercontent.com/haghish/MarkDoc/master/dependency.do) that can serve as an example how the dependency file should be created. Naturally, the `dependenc.do` file is only executable by __`github install`__ command.
 
+## 4.8 Searching for a package file
+
+The `github` package includes a database of all files that are installed within packages hosted on GitHub. This is an important feature for the developers to avoid creating a file with a name used by another developer because such packages cannot be installed together on the same system (the problem also exists for _program name_). The `github` package allows developers to check whether a particular name has been used in a package before. 
+
+The `findfile` subcommand searches the `githubfiles.dta` (installed with the package) and if found, it points out the repository that includes the file. For example, searching for files that have the keyword "dy" will result in:
+
+~~~
+. github findfile dy
+
+ ---------------------------------
+  Searching githubfiles database
+ ---------------------------------
+  dynpandoc.ado
+  dynpandoc.sthlp
+  dynamicPage1.mata
+ ---------------------------------
+~~~
 
 # 5. Building package installation files automatically
 
