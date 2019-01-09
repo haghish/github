@@ -285,19 +285,63 @@ prog define github
 		exit
 	}
 	
+	else if "`1'" == "findfile" {
+		// searching githubfiles database
+		preserve
+		sysuse githubfiles.dta, clear
+		qui gen found = strpos(file, "`2'")
+		qui keep if found == 1
+		local N = _N
+		if `N' > 0 {
+			di in text _n " {hline 33}" _n												///
+		  "  {bf:Searching githubfiles database}" _n 	///
+		  " {hline 33}"
+			
+			forval j = 1/`N' {
+				local address : di address[`j']
+				local fname : di file[`j']
+				di `"  {browse "https://github.com/`address'":`fname'}"'
+			}
+			di in text " {hline 33}" _n
+		}
+		restore
+		
+		exit
+	}
+	
 	// Search
 	// ---------
 	else if "`1'" == "search" {
+
 	  if !missing("`local'") | !missing("`net'") {
 	    findall `2', language(`language') in(`in') `local'  `net' `all' 
-		exit
 	  }
 	  else {
 		githubsearch `2', language(`language') in(`in') save(`save') `all' 		///
 		  created(`created') pushed(`pushed') `debug' `append' `replace'        ///
 		  number(`number') perpage(`perpage')
-		exit
 	  }
+		
+		// searching githubfiles database
+		preserve
+		sysuse gitget.dta, clear
+		qui gen found = strpos(packagename, "`2'")
+		qui keep if found == 1
+		qui duplicates drop packagename, force
+		local N = _N
+		if `N' > 0 {
+			di in text _n "{ul:Searching gitget package list}" _n
+			
+			forval j = 1/`N' {
+				local address : di address[`j']
+				local fname : di packagename[`j']
+				di `" - {browse "https://github.com/`address'":`fname'}"'
+			}
+			di in text _n
+		}
+		restore
+		
+		exit
 	}
 	
 	// Make
