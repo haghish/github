@@ -304,6 +304,7 @@ prog define github
 			}
 			di in text " {hline 33}" _n
 		}
+		else di in text "({it:nothing found in the database})"
 		restore
 		
 		exit
