@@ -67,7 +67,7 @@ program gitget
 	if _rc == 0 {
 		preserve
 		quietly use "`r(fn)'", clear
-		quietly keep if name == "`anything'"
+		quietly keep if packagename == "`anything'"
 		if _N == 0 {
 			display as err "`anything' package is unknown. try: {stata github search `anything'"
 		}
@@ -76,7 +76,14 @@ program gitget
 			githuboutput
 			di as txt _n
 			local address = address[1]
-			noisily github install `address', `stable' version(`version')
+			local pathaddress = path[1]
+			local packagename = packagename[1]
+			tokenize "`pathaddress'", parse("/")
+			while "`2'" != "" {
+				local path "`path'`1'"
+				macro shift
+			}
+			noisily github install `address', `stable' version(`version') path(`path') packagename(`packagename')
 		}
 		else if _N > 1 {
 			display as txt "multiple Stata packages were found! "  

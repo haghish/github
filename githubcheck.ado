@@ -1,42 +1,50 @@
 
 program githubcheck, rclass
 
-	syntax anything
+	syntax anything [, gettoc getpkg]
+	
+	if missing("`gettoc'") & missing("`getpkg'") {
+		local gettoc gettoc
+		local getpkg getpkg
+	}
 	
 	tempfile confirm
 	
 	tempfile api 
 	tempname hitch 
 	
-	capture quietly copy "https://api.github.com/search/code?q=stata+in:path+filename:stata.toc+repo:`anything'" `api', replace
-	if _rc != 0 {
-		di as err "{p}the GitHub API is not responsive right now. Try again in 10 or 20 seconds." ///
-		" this can happen if you search GitHub very frequent..."
-		exit
+	if !missing("`gettoc'") {
+		capture quietly copy "https://api.github.com/search/code?q=in:path+filename:stata.toc+repo:`anything'" `api', replace
+		if _rc != 0 {
+			di as err "{p}the GitHub API is not responsive right now. Try again in 10 or 20 seconds." ///
+			" this can happen if you search GitHub very frequent..."
+			exit
+		}
+		
+		
+		file open `hitch' using "`api'", read
+		file read `hitch' line
+		
+		// check the number of results
+		// --------------------------------
+		tokenize `"`macval(line)'"' , parse(",")
+		local 1 : display substr(`"`macval(1)'"',16,.)
+		local toc `1' 
+		
+		if `1' > 0 {
+			return local toc 1
+			di as txt "{bf:toc} file was found"
+		}
+		else {
+			return local toc 0
+			di as error "{bf:toc} file was NOT found"
+		}
+		file close `hitch'
 	}
-	
-	
-	file open `hitch' using "`api'", read
-	file read `hitch' line
-	
-	// check the number of results
-	// --------------------------------
-	tokenize `"`macval(line)'"' , parse(",")
-	local 1 : display substr(`"`macval(1)'"',16,.)
-	local toc `1' 
-	
-	if `1' > 0 {
-		return local toc 1
-		di as txt "{bf:toc} file was found"
-	}
-	else {
-		return local toc 0
-		di as error "{bf:toc} file was NOT found"
-	}
-	file close `hitch'
 	
 	sleep 3000
-	capture quietly copy "https://api.github.com/search/code?q=stata+extension:pkg+repo:`anything'" `api', replace
+	
+	capture quietly copy "https://api.github.com/search/code?q=extension:pkg+repo:`anything'" `api', replace
 	if _rc != 0 {
 		di as err "{p}the GitHub API is not responsive right now. Try again in 10 or 20 seconds." ///
 		" this can happen if you search GitHub very frequent..."
@@ -50,28 +58,29 @@ program githubcheck, rclass
 	tokenize `"`macval(line)'"' , parse(",")
 	local 1 : display substr(`"`macval(1)'"',16,.)
 	local pkg `1' 
-	
-	
 	if `1' > 0 {
 		return local pkg 1
-		di as txt "{bf:pkg} file was found"
+		di as txt "`pkg' {bf:pkg} file was found"
 	}
 	else {
 		return local pkg 0
 		di as error "{bf:pkg} file was NOT found"
 	}
+	
 	file close `hitch'
 	
+	// return the results
+	if !missing("`gettoc'") & !missing("`getpkg'") {
+		if `toc' > 0 & `pkg' > 0 {
+			return local installable 1
+			di as txt "(the repository is installable)"
+		}
+		else {
+			return local installable 0
+			di as err "(the repository is NOT installable)"
+		}
+	}
 	
-	if `toc' > 0 & `pkg' > 0 {
-		return local installable 1
-		di as txt "(the repository is installable)"
-	}
-	else {
-		return local installable 0
-		di as err "(the repository is NOT installable)"
-	}
 	
 end
-
 
