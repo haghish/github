@@ -1,5 +1,5 @@
 /*** DO NOT EDIT THIS LINE -----------------------------------------------------
-Version: 1.9.0
+Version: 1.9.1
 Title: github
 Description: search, install, and uninstall Stata packages with a particular  
 version (release) as well as their dependencies from 
@@ -202,7 +202,7 @@ prog define github
 	/// some of the options of the program are not documented yet                 ///
 	created(str) pushed(str) debug reference(str)			                            ///
 	duration(numlist max=1) perpage(numlist max=1)                              ///
-	append replace Number(numlist max=1) local] 
+	append replace Number(numlist max=1) local path(str) packagename(str) ] 
 	
 	
 	// correct the language
@@ -470,7 +470,14 @@ prog define github
 		githubdb erase, name("`package'")
 		capture quietly ado uninstall "`package'"
 		
-		net install `package', from("https://raw.githubusercontent.com/`anything'/master/") `replace' //`force' 
+		if missing("`packagename'") {
+			net install `package', ///
+			from("https://raw.githubusercontent.com/`anything'/master/`path'") `replace' //`force' 
+		}
+		else {
+			net install `packagename', ///
+			from("https://raw.githubusercontent.com/`anything'/master/`path'")
+		}
 		
 		// check the version of the installing package
 		if missing("`version'") {
