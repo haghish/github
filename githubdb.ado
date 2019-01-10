@@ -177,7 +177,10 @@ program githubdb, rclass
 				}
 				di in text " {hline 74}"
 			}
-			else di as txt "no github package was found!"
+			else {
+			  di as txt "no github package was found!"
+				di as txt "type {bf:{stata gitget github}} to allow managing {help github} package"
+			}
 			restore
 		}
 	}
