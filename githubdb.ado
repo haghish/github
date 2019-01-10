@@ -176,11 +176,20 @@ program githubdb, rclass
 					*sleep 500
 				}
 				di in text " {hline 74}"
+				
+				// check that the GITHUB module is in the database
+				qui keep if name == "github"
+				local N : di _N
+				if `N' == 0 {
+					di as txt _n "type {bf:{stata gitget github}} to allow managing {help github} package"
+				}
+				
 			}
 			else {
 			  di as txt "no github package was found!"
 				di as txt "type {bf:{stata gitget github}} to allow managing {help github} package"
 			}
+			
 			restore
 		}
 	}
