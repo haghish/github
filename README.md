@@ -31,7 +31,7 @@ __Table of Contents__
         2. [Listing all previous releases](#462-Listing-all-previous-releases)
         3. [Getting the version of an installed package](#463-Getting-the-version-of-an-installed-package) 
     7. [Package dependencies](#47-Package-dependencies) 
-    8. [Searching for a package file](#48-Searching-for-a-package-file) 
+    8. [Searching for a file in Stata packages](#48-Searching-for-a-package-file) 
 5. [Building package installation files automatically](#5-Building-package-installation-files-automatically) 
 6. [List of Stata Packages Recognized by `gitget` command](#6-List-of-Stata-Packages-Recognized-by-gitget-command) 
 
