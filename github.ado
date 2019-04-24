@@ -231,6 +231,7 @@ prog define github
 	
 	// Hot
 	// ---------
+	// THIS COMMAND IS EXPERIMENTAL AND IS NOT DOCUMENTED YET. 
 	if "`1'" == "hot" {
 		githubhot `anything'
 		exit
