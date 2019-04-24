@@ -196,10 +196,10 @@ prog define github
 	// List
 	// ---------
 	else if "`1'" == "list" {
-		if !missing("`anything'") {
+		if !missing("`3'") {
 			err 198
 		}
-		githubdb list
+		githubdb list, name("`2'")
 		exit
 	}
 	
