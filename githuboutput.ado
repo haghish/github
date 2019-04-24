@@ -78,6 +78,7 @@ prog githuboutput
 					*	local score: di %5.0f score[`N']
 					*}
 					local star : di star[`N']
+					local fork : di fork[`N']
 					local size : di kb[`N']
 					local lang : di language[`N']
 					
@@ -156,7 +157,7 @@ prog githuboutput
 					
 					// Add the additional description
 					// -----------------------------------------------------------
-					di _col(38) "{bf:Hits:}" trim("`score'") _col(48) "{bf:Stars:}" 		///
+					di _col(38) "{bf:Fork:}" trim("`fork'") _col(48) "{bf:Star:}" 		///
 					trim("`star'") _c 
 					
 					if !missing("`lang'") {

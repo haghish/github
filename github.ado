@@ -324,6 +324,7 @@ prog define github
 	  }
 		
 		// searching githubfiles database
+		/*
 		preserve
 		sysuse gitget.dta, clear
 		qui gen found = strpos(packagename, "`2'")
@@ -341,6 +342,7 @@ prog define github
 			di in text _n
 		}
 		restore
+		*/
 		
 		exit
 	}
