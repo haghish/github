@@ -1,38 +1,32 @@
 {smcl}
-{right:version 1.9.1}
+{it:v. 1.9.7}
+
+
 {title:Title}
 
-{phang}
-{cmd:github} {hline 2} search, install, and uninstall Stata packages with a particular    {break} version (release) as well as their dependencies from 
- {browse "http://www.github.com/haghish/github":GitHub} website
- 
+{p 4 4 2}
+{bf:github} - search, install, and uninstall Stata packages with a particular 
+version (release) as well as their dependencies from 
+{browse "http://www.github.com/haghish/github":GitHub} website
+
 
 {title:Syntax}
 
-{p 8 16 2}
-{cmd: github} [ {help github##subcommand:{it:subcommand}} ] [ {it:keywords} | {it:username/repository} ] [{cmd:,} options]
-{p_end}
+{p 8 8 2} {bf:github} [ {it:subcommand} ] [ {it:keyword} | {it:username/repository} ] [, {it:options} ]
+
 
 {p 4 4 2}
-The {bf:github} command takes several subcommands:
+where the subcommands can be:
 
-{marker subcommand}{...}
-{synoptset 20 tabbed}{...}
-{synopthdr:subcommand}
-{synoptline}
-{synopt:{opt search}}followed by {it:keywords}, it searches the GitHub API and Stata.com for Stata packages and repositories.{p_end}
-{synopt:{opt install}}installs the specified repository. The command should be 
-followed by the {bf:username/repository}{p_end}
-{synopt:{opt query}}followed by {bf:username/repository}, it makes a table of 
-all of the released versions of that package and allows you to install any version 
-with a single click.{p_end}
-{synopt:{opt check}}followed by a {bf:username/repository} evaluates whether the 
-repository is installable (i.e. includes {bf:toc} and {bf:pkg} files{p_end}
-{synopt:{opt uninstall}}uninstalls a package. the command should be followed by a {it:package-name}.{p_end}
-{synopt:{opt update}}updates a package. the command should be followed by a {it:package-name}.{p_end}
-{synopt:{opt list}}lists the installed packages from GitHub and allows updating or uninstalling them. {p_end}
-{synoptline}
-{p2colreset}{...}
+{col 5}{it:subcommand}{col 19}{it:Description}
+{space 4}{hline}
+{col 5}install{col 19}followed by the {it:username/repository}, installs the specified repository
+{col 5}query{col 19}followed by {it:username/repository}, returns all released versions of that package
+{col 5}check{col 19}followed by {it:username/repository}, evaluates whether the repository is installable
+{col 5}uninstall{col 19}followed by {it:packagename}, uninstalls a package
+{col 5}search{col 19}followed by {it:keywords}, it searches the GitHub API for relevant packages or repositories
+{col 5}list{col 19}lists the packages installed from GitHub and checkes if they have an update
+{space 4}{hline}
 
 
 {title:Description}
@@ -60,50 +54,30 @@ installed automatically.
 The {bf:github} command also takes several options for installing a package or 
 searching for a keyword. The table shows the options accordingly:
 
-{* the new Stata help format of putting detail before generality}{...}
-{synoptset 20 tabbed}{...}
-{synopthdr}
-{synoptline}
-{syntab:Installation Options}
-{synopt:{opt stable}}will install the latest released version of the software. otherwise, the depelopment version of the package will be installed.{p_end}
-{synopt:{opt v:ersion(str)}}specifies a particular stable version (release tags) for 
-installing a new repository{p_end}
-{synopt:{opt force}}specifies that the downloaded files be installed even if the 
-__packagename.pkg__ and __Stata.toc__ files are missing. Use this option 
-wisely because by forcing the installation, you are installing a software that 
-is not prepared for installation. {p_end}
 
-{syntab:Search Options}
-{synopt:{opt language(str)}}specifies the programming language of the repository. 
-the default is {bf:stata}. To search for all programming languages related 
-to the {it:keyword}, specify {bf:language(all)}. {p_end}
-{synopt:{opt in(str)}}specifies the domain of the search which can be {bf:name} (default) 
-{bf:description}, {bf:readme}, or {bf:all}. To search for the {it:keyword} in 
-repository name, repository description, and the readme.md file, 
-specify {bf:in(all)}. {p_end}
-{synopt:{opt all}}shows repositories that lack the {bf:pkg} and {bf:stata.toc} 
-files. by default these repositories are not shown in the output because they 
-are not installable packages {p_end}
-{synopt:{opt net}}it includes results from Stata.com website, analyzes them, and shows the 
-publication date of the packages{p_end}
-{synopt:{opt local}}it includes results from Stata.com website that might include 
-documents other than packages, such as help files, FAQs, Stata Journal articles, etc.{p_end}
-{synoptline}
-{p2colreset}{...}
+{p 4 4 2}{bf:{bf:github install} options:}
 
+{col 5}{it:option}{col 15}{it:Description}
+{space 4}{hline}
+{col 5}stable{col 15}installs the latest stable release. otherwise the main branch is installed
+{col 5}verson({it:str}){col 15}specifies a particular stable version (release tags) for the installation
+{space 4}{hline}
+
+{p 4 4 2}{bf:{bf:github search} options:}
+
+{col 5}{it:option}{col 15}{it:Description}
+{space 4}{hline}
+{col 5}language({it:str}){col 15}specifies the programming language of the repository. the default is {bf:Stata}
+{col 5}in({it:str}){col 15}specifies the domain of the search which can be {bf:name}, {bf:description}, {bf:readme}, or {bf:all}
+{col 5}all{col 15}shows repositories that lack the {bf:pkg} and {bf:stata.toc} files in the search results
+{space 4}{hline}
 
 
 {title:Installing package dependencies}
 
 {p 4 4 2}
 Packages installed by {bf:github} command can also automatically install the 
-package dependencies. 
-For example, the {browse "https://github.com/haghish/MarkDoc":MarkDoc} package 
-requires two other Stata packages which are 
-{browse "https://github.com/haghish/weaver":Weaver} and
-{browse "https://github.com/haghish/MarkDoc":Statax}. 
-Usually, users have to install these packages manually after installing 
-MarkDoc from GitHub or SSC. However, the {bf:github install} command will look 
+package dependencies. The {bf:github install} command will look 
 for a file named {bf:dependency.do} in the repository and executes this file 
 if it exists. 
 
@@ -125,45 +99,44 @@ install the dependencies.
 {p 4 4 2}
 {bf:examples of installing and uninstalling packages} 
 
-    {it:install the latest developing version of MarkDoc package from GitHub}
+    install the latest development version of MarkDoc package 
         . github install haghish/markdoc
-      {it:or}
-        . gitget markdoc
 		
-    {it:install the latest released stable version of MarkDoc package from GitHub}
-        . github install haghish/markdoc , stable
-      {it:or}
-        . gitget markdoc, stable
+{p 4 4 2}
+		install the latest stable version of MarkDoc package
+        . github haghish/markdoc, stable
 
-    {it:install MarkDoc version 3.8.1 from GitHub (older version)}
+    install MarkDoc version 3.8.1 from GitHub (older version)
         . github haghish/markdoc, version("3.8.1")
-      {it:or}
-        . gitget markdoc, version("3.8.1")
 		
-    {it:Uninstall MarkDoc repository}
+    Uninstall MarkDoc repository
         . github uninstall markdoc
 		
-    {it:list all of the available versions of the MarkDoc package}
+    list all of the available versions of the MarkDoc package
         . github query haghish/markdoc
 		
 		
 {p 4 4 2}
 {bf:examples of searching for a package} 
 		
-    {it:search for MarkDoc package on GitHub}
+    search for MarkDoc package on GitHub
         . github search markdoc
 		
-    {it:search for a Stata package named "weaver"}
+    search for a Stata package named "weaver"
         . github search weaver, language(stata)
 	
-    {it:search for Stata packages that mention the keyword "likelihood" }
+    search for Stata packages that mention the keyword "likelihood" 
         . github search likelihood, language(stata) in(all)
+		
+    search for a repository named "github" and published in November 2016 
+        . github search github, created("2016-11-01..2016-11-30") 
 
 
 {p 4 4 2}
-{bf:listing and managing the installed packages from GiutHub} 
-		
-        . github list
+{bf:examples of searching the popular packages} 
+	
+    build the complete list of Stata packages on GiutHub
+        . github list stata, language(all) in(all) all save(archive) append
 		
 
 {title:Author}
@@ -173,9 +146,10 @@ E. F. Haghish     {break}
 Department of Mathematics and Computer Science (IMADA)      {break}
 University of Southern Denmark      {break}
 
-    {hline}
+{space 4}{hline}
 
 {p 4 4 2}
 This help file was dynamically produced by 
 {browse "http://www.haghish.com/markdoc/":MarkDoc Literate Programming package} 
+
 

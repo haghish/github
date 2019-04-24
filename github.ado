@@ -1,47 +1,30 @@
-/*** DO NOT EDIT THIS LINE -----------------------------------------------------
-Version: 1.9.1
-Title: github
-Description: search, install, and uninstall Stata packages with a particular  
+/***
+_v. 1.9.7_
+
+Title
+=====
+
+__github__ - search, install, and uninstall Stata packages with a particular 
 version (release) as well as their dependencies from 
 [GitHub](http://www.github.com/haghish/github) website
------------------------------------------------------ DO NOT EDIT THIS LINE ***/
 
-
-/***
 Syntax
 ======
 
-{p 8 16 2}
-{cmd: github} [ {help github##subcommand:{it:subcommand}} ] [ {it:keyword} | {it:username/repository} ] [{cmd:,} options]
-{p_end}
+> __github__ [ _subcommand_ ] [ _keyword_ | _username/repository_ ] [, _options_ ]
 
-The __github__ command takes several subcommands:
 
-{marker subcommand}{...}
-{synoptset 20 tabbed}{...}
-{synopthdr:subcommand}
-{synoptline}
-{synopt:{opt install}}installs the specified repository. The command should be 
-followed by the {bf:username/repository}{p_end}
-{synopt:{opt uninstall}}uninstalls a package{p_end}
-{synopt:{opt query}}followed by {bf:username/repository}, it makes a table of 
-all of the released versions of that package and allows you to install any version 
-with a single click.{p_end}
-{synopt:{opt check}}followed by a {bf:username/repository} evaluates whether the 
-repository is installable (i.e. includes {bf:toc} and {bf:pkg} files{p_end}
-{synopt:{opt search}}followed by a {bf:keyword}, it searches the GitHub API in
-repository name (default), repository description, {bf:README.md} file in 
-the repository, or all of the above. the {bf:in(str)} option specifies the 
-field of the API search.{p_end}
-{synopt:{opt list}}GitHub API returns maximum of 100 research results. therefore, 
-a recursive search is needed to build the complete list of Stata packages on 
-GitHub. followed by a keyword (e.g. stata) the {bf:list} command searches the 
-API within a specific time periods and aggregate the results to build the complete 
-list of Stata packages. {p_end}
-the {bf:language}, {bf:all}, and {bf:number} options can be used to narrow 
-or expand the results. {p_end}
-{synoptline}
-{p2colreset}{...}
+where the subcommands can be:
+
+| _subcommand_ |  _Description_                                                           |
+|:-------------|:-------------------------------------------------------------------------|
+| install      | followed by the _username/repository_, installs the specified repository |
+| query        | followed by _username/repository_, returns all released versions of that package |
+| check        | followed by _username/repository_, evaluates whether the repository is installable |
+| uninstall    | followed by _packagename_, uninstalls a package |
+| search       | followed by _keywords_, it searches the GitHub API for relevant packages or repositories |
+| list         | lists the packages installed from GitHub and checkes if they have an update |
+
 
 Description
 ===========
@@ -66,59 +49,29 @@ Options
 The __github__ command also takes several options for installing a package or 
 searching for a keyword. The table shows the options accordingly:
 
-{* the new Stata help format of putting detail before generality}{...}
-{synoptset 20 tabbed}{...}
-{synopthdr}
-{synoptline}
-{syntab:Installation Options}
-{synopt:{opt stable}}will install the latest released version of the software. otherwise, the depelopment version of the package will be installed.{p_end}
-{synopt:{opt v:ersion(str)}}specifies a particular stable version (release tags) for 
-installing a new repository{p_end}
-{synopt:{opt force}}specifies that the downloaded files be installed even if the 
-__packagename.pkg__ and __Stata.toc__ files are missing. Use this option 
-wisely because by forcing the installation, you are installing a software that 
-is not prepared for installation. {p_end}
 
-{syntab:Search Options}
-{synopt:{opt language(str)}}specifies the programming language of the repository. 
-the default is {bf:stata}. To search for all programming languages related 
-to the {it:keyword}, specify {bf:language(all)}. {p_end}
-{synopt:{opt in(str)}}specifies the domain of the search which can be {bf:name} (default) 
-{bf:description}, {bf:readme}, or {bf:all}. To search for the {it:keyword} in 
-repository name, repository description, and the readme.md file, 
-specify {bf:in(all)}. {p_end}
-{synopt:{opt save(str)}}saves the results in a data set with the given name. {p_end}
-{synopt:{opt all}}shows repositories that lack the {bf:pkg} and {bf:stata.toc} 
-files. by default these repositories are not shown in the output because they 
-are not installable packages {p_end}
-{synopt:{opt append}}when the {bf:save} option is specified, the {bf:append} 
-option will add the new results to the saved dataset{p_end}
-{synopt:{opt replace}}when the {bf:save} option is specified, the {bf:replace} 
-option will replaces the dataset, if it exists{p_end}
-{synopt:{opt number(int)}}limits the number of displayed repositories.{p_end}
-{synopt:{opt created(str)}}filters the search results based on the date that the 
-repository was created on github. The date must be written with the format of 
-"{bf:yyyy-mm-dd}" which is required by GitHub. This option can also specify 
-a range of time between two dates. 
-{browse "https://help.github.com/articles/searching-repositories/#search-based-on-when-a-repository-was-created-or-last-updated":See the documentations on GitHub}.{p_end}
-{synopt:{opt pushed(str)}}filters the search results based on the date that the 
-repository was last updated on github. The format for entering the date 
-is identical to the {bf:created} option.{p_end}
-{synoptline}
-{p2colreset}{...}
+### __github install__ options:
+
+| _option_ |  _Description_                                                           |
+|:---------|:-------------------------------------------------------------------------|
+| stable   | installs the latest stable release. otherwise the main branch is installed |
+| verson(_str_) | specifies a particular stable version (release tags) for the installation |
+
+
+### __github search__ options:
+
+| _option_ |  _Description_                                                           |
+|:---------|:-------------------------------------------------------------------------|
+| language(_str_)   | specifies the programming language of the repository. the default is __Stata__ |
+| in(_str_) | specifies the domain of the search which can be __name__, __description__, __readme__, or __all__ |
+| all | shows repositories that lack the __pkg__ and __stata.toc__ files in the search results |
 
 
 Installing package dependencies
 ===============================
 
 Packages installed by __github__ command can also automatically install the 
-package dependencies. 
-For example, the {browse "https://github.com/haghish/MarkDoc":MarkDoc} package 
-requires two other Stata packages which are 
-{browse "https://github.com/haghish/weaver":Weaver} and
-{browse "https://github.com/haghish/MarkDoc":Statax}. 
-Usually, users have to install these packages manually after installing 
-MarkDoc from GitHub or SSC. However, the __github install__ command will look 
+package dependencies. The __github install__ command will look 
 for a file named __dependency.do__ in the repository and executes this file 
 if it exists. 
 
@@ -137,8 +90,11 @@ Example(s)
 
 __examples of installing and uninstalling packages__ 
 
-    install the latest version of MarkDoc package from GitHub
+    install the latest development version of MarkDoc package 
         . github install haghish/markdoc
+		
+		install the latest stable version of MarkDoc package
+        . github haghish/markdoc, stable
 
     install MarkDoc version 3.8.1 from GitHub (older version)
         . github haghish/markdoc, version("3.8.1")
@@ -197,11 +153,11 @@ prog define github
 
 	version 13
 	
-	syntax anything, [stable Version(str) force save(str) in(str) 				        ///
+	syntax anything, [stable Version(str) save(str) in(str) 				              ///
 	language(str) all NET                                                         ///
-	/// some of the options of the program are not documented yet                 ///
-	created(str) pushed(str) debug reference(str)			                            ///
-	duration(numlist max=1) perpage(numlist max=1)                              ///
+	/// the options below are not documented yet                                  ///
+	force created(str) pushed(str) debug reference(str)			                      ///
+	duration(numlist max=1) perpage(numlist max=1)                                ///
 	append replace Number(numlist max=1) local path(str) packagename(str) ] 
 	
 	
