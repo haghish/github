@@ -1,10 +1,10 @@
 
-
+capture prog drop githubsearchsteps
 program githubsearchsteps
 	
 	syntax [anything] [, language(str) save(str) in(str) all created(str) 		///
-	reference(str) stopdate(str) duration(numlist max=1) pushed(str) Number(numlist max=1) 	///
-	append replace quiet debug]
+	reference(str) duration(numlist max=1) pushed(str) Number(numlist max=1) 	///
+	delay(numlist max=1) append replace quiet debug]
 	
 	if missing("`reference'") {
 		di as txt "(the default time reference is used which is {bf:2016-01-01})"
@@ -13,13 +13,12 @@ program githubsearchsteps
 	if missing("`duration'") {
 		local duration 30
 	}
-	
-	if missing("`stopdate'") {
-		local stopdate: display date(c(current_date), "DMY")
+	if missing("`delay'") {
+		local delay 10000
 	}
-	*else {
-	*	local stopdate: display date(`stopdate', "DMY")
-	*}
+	
+	local stopdate: display date(c(current_date), "DMY")
+
 	local reference : display date("`reference'","YMD")
 	local future `reference'
 	
@@ -37,10 +36,18 @@ program githubsearchsteps
 		
 		if missing("`quiet'") display as txt "from  `reference'  to  `future'"
 		
-		sleep 10000
-		githubsearch `anything', language(`language') save(`"`save'"') in(`in')	///
+		sleep `delay'
+		capture noisily githubsearch `anything', language(`language') save(`"`save'"') in(`in')	///
 		`all' created("`reference'..`future'") pushed("`pushed'") quiet			///
 		`append' `replace'
+		
+		while _rc {
+			di as err "the GitHub API is not responsive right now. Try again in 10 or 20 seconds. this can happen if you search GitHub very frequent..."
+			sleep `delay'
+			capture noisily githubsearch `anything', language(`language') save(`"`save'"') in(`in')	///
+		`all' created("`reference'..`future'") pushed("`pushed'") quiet			///
+		`append' `replace'
+		}
 	
 		// return the value of date back to numeric
 		local future : display date("`future'","YMD")
