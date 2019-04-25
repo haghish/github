@@ -207,7 +207,7 @@ prog define github
 	// ---------
 	if "`1'" == "update" {
 		
-		// if a package name is specified, update it
+		// if a package name is specified
 		if missing("`anything'") {
 		  di as err "package name is required"
 		  qui err 198
@@ -237,6 +237,11 @@ prog define github
 	// Uninstall
 	// ---------
 	else if "`1'" == "uninstall" {
+		// if a package name is specified
+		if missing("`anything'") {
+		  di as err "package name is required"
+		  qui err 198
+		}
 		githubdb erase, name("`2'")
 		ado uninstall `2'
 		exit
