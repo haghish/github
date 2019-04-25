@@ -31,6 +31,7 @@ narrowing down or expanding the search.
 {col 5}in({it:str}){col 20}specifies the domain of the search which can be {bf:name}, {bf:description}, {bf:readme}, or {bf:all}
 {col 5}all{col 20}shows repositories that lack the {bf:pkg} and {bf:stata.toc} files in the search results
 {col 5}duration({it:num}){col 20}search time frame in number of days. the default is {bf:1}
+{col 5}delay{col 20}number of miliseconds to let the API rest after each search. the default is 10000 ms
 {col 5}save{col 20}saves the search results in a data set
 {col 5}replace{col 20}replaces existing data set
 {col 5}append{col 20}appends results to an existing data set
