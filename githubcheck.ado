@@ -15,11 +15,13 @@ program githubcheck, rclass
 	
 	if !missing("`gettoc'") {
 		capture quietly copy "https://api.github.com/search/code?q=in:path+filename:stata.toc+repo:`anything'" `api', replace
-		if _rc != 0 {
-			di as err "{p}the GitHub API is not responsive right now. Try again in 10 or 20 seconds." ///
-			" this can happen if you search GitHub very frequent..."
-			exit
-		}
+		while _rc != 0 {
+		di as txt "{p}the GitHub API is not responsive right now. Try again in 10 or 20 seconds." ///
+		" this can happen if you search GitHub very frequent..." _n
+		sleep 5000
+		
+		capture quietly copy "https://api.github.com/search/code?q=in:path+filename:stata.toc+repo:`anything'" `api', replace
+	}
 		
 		
 		file open `hitch' using "`api'", read
@@ -42,13 +44,15 @@ program githubcheck, rclass
 		file close `hitch'
 	}
 	
-	sleep 3000
+	sleep 10000
 	
 	capture quietly copy "https://api.github.com/search/code?q=extension:pkg+repo:`anything'" `api', replace
-	if _rc != 0 {
-		di as err "{p}the GitHub API is not responsive right now. Try again in 10 or 20 seconds." ///
-		" this can happen if you search GitHub very frequent..."
-		exit
+	while _rc != 0 {
+		di as txt "{p}the GitHub API is not responsive right now. Try again in 10 or 20 seconds." ///
+		" this can happen if you search GitHub very frequent..." _n
+		sleep 5000
+		
+		capture quietly copy "https://api.github.com/search/code?q=extension:pkg+repo:`anything'" `api', replace
 	}
 	file open `hitch' using "`api'", read
 	file read `hitch' line

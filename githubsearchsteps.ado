@@ -1,5 +1,5 @@
 
-capture prog drop githubsearchsteps
+*capture prog drop githubsearchsteps
 program githubsearchsteps
 	
 	syntax [anything] [, language(str) save(str) in(str) all created(str) 		///

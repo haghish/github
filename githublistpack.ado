@@ -67,7 +67,7 @@ This help file was dynamically produced by
 [MarkDoc Literate Programming package](http://www.haghish.com/markdoc/) 
 ***/
 
-capture prog drop githublistpack
+*capture prog drop githublistpack
 prog githublistpack
 	
 	syntax [anything] [, language(str) in(str) all save(str) created(str) 		///

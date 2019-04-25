@@ -38,6 +38,14 @@ githublistpack stata, language(all) append replace save("archive_update")       
 //ON
 
 
+
+
+
+
+
+
+
+
 /***
 Next, we will merge these data sets with the previously built data sets. To do 
 so, first we will update _gitget_ and _archive_ with their updates. 
@@ -64,6 +72,5 @@ saveold "archive.dta", replace
 
 use "archive.dta", clear
 keep if installable == 1
-append using "gitget.dta"
 duplicates drop address, force
 saveold "gitget.dta", replace

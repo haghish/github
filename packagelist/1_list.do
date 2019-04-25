@@ -78,8 +78,9 @@ saveold "archive.dta", replace
 
 use "archive.dta", clear
 keep if installable == 1
-append using "gitget.dta"
 duplicates drop address, force
 saveold "gitget.dta", replace
+
+
 
 

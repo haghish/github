@@ -5,60 +5,21 @@
 
 Once you have created the **archive.dta** and the **gitget.dta**, you still 
 need to do a few quality checks on them. This task is done in this section. 
-In addition, the **gitget.dta** data set is also created in this section, after 
-doing some quality checks.
-
-3.1 Dependency
-------------------------------------
-
-We need to check whether the packages include dependencies
+In addition, the **githubfiles.dta** data set is also created in this section,  
+after doing some quality checks.
 ***/
 
-use "update.dta", clear
-txt "there are " _N " obserbations in the data set"
-
-capture drop dependency
-generate dependency = .
-
-local j 0
-local last = _N
-forval N = 1/`last' {
-	if installable[`N'] == 1 {
-		display as txt "`N'/`last'" 
-		local j = `j'+1
-		local address : di address[`N']
-		capture githubdependency `address'
-		if `r(dependency)' == 1 {
-			replace dependency = 1 in `N'
-		}
-	}
-}
-
-
-append using "gitget.dta"
-duplicates drop address, force
-saveold "gitget.dta", replace
-
-use "archive.dta", clear
-append using "gitget.dta"
-duplicates drop address, force
-saveold "archive.dta", replace
-
-erase update.dta
-
-qui log c
-
-
-
 /***
-2.3 Updated repositories' address
+3.1 Updated repositories' address
 ---------------------------------
 
-check all of the Stata repositories to see a repository has been 
+check all of the Stata repositories to see if a repository has been 
 updated to be an installable package
 ***/ 
 
-quietly use "gitget.dta", clear
+// THIS CODE IS VERY SLOW TO EXECUTE
+/*
+quietly use "archive.dta", clear
 local j 0
 local last = _N
 forval N = 1/`last' {
@@ -76,15 +37,24 @@ forval N = 1/`last' {
 			replace installable = 0 in `N'
 		}
 	}
+	sleep 10000
 }
 
+saveold "archive.dta", replace
+keep if installable == 1
+duplicates drop address, force
 saveold "gitget.dta", replace
+*/
 
 /***
-2.4 Updated dependency variable
--------------------------------
-***/ 
-quietly use "gitget.dta", clear
+3.2 Dependency
+------------------------------------
+
+We need to check whether the packages include dependencies. To do so, we search 
+for _dependency.do_ file within each installable 
+***/
+
+use "gitget.dta", clear
 capture drop dependency
 generate dependency = .
 
@@ -106,53 +76,12 @@ saveold "gitget.dta", replace
 
 
 /***
-2.5 Creating packagelist.md file
+3.3 Creating packagelist.md file
 --------------------------------
 ***/
 
 use "gitget.dta", clear
-
-quietly recode score (. = 0)
-gsort -score -star
-tempfile tmp1
-tempname knot 
-qui cap file open `knot' using "`tmp1'", write replace
-local now : di %td_D-N-CY  date("$S_DATE", "DMY") " $S_TIME"
-local now : di trim("`now'")
-file write `knot' "_updated on " "``now'" "`" "_   " _n
-file write `knot' "this is the complete list of *installable* Stata packages on GitHub, up to the date specified above. to install a Stata package included in this list, simply type:" _n(2)
-file write `knot' "    gitget packagename" _n(2)
-file write `knot' "- - -" _n(2)
-file write `knot' "List of Stata Packages Recognized by `gitget` command" _n    ///
-                  "=====================================================" _n(2)
-file write `knot' "packages are listed based on their __Hits__ score" _n(2)
-file write `knot'  "#|Package|Hits|Updated|Dependecy|Size|Description" _n       ///
-		"--------:|:--------|:--------|:--------|:--------|:--------|:--------" _n
-
-local last = _N 
-forval i = 1/`last' {
-	local name = name[`i']
-	local address = address[`i']
-	local hits = score[`i']
-	local updated : di %td dofc(updated[`i']) 
-	local dependency = dependency[`i']
-	if "`dependency'" == "1" {
-		local dependency "[dependency.do](https://github.com/`address'/blob/master/dependency.do)"
-	}
-	else {
-		local dependency 
-	}
-	local kb = kb[`i']
-	local description = description[`i']
-	local description : subinstr local description "`" "'", all
-	local description : di substr(`"`macval(description)'"', 1, 180)
-	file write `knot' `"`i'|["' "__" `"`name'"' "__" `"](https://github.com/`address')|"'   ///
-						 `"`hits'|`updated'|`dependency'|`kb'kb|`description'"' _n
-}
-
-file close `knot'
-copy "`tmp1'" gitget.md , replace
-
+gitgetlist, export("gitget.md")
 
 
 // monitoring 
@@ -170,10 +99,6 @@ rcall clear
 rcall : library(jsonlite)
 rcall : data = NULL
 
-// navigate to the working directory for the repository
-cap cd "C:\Users\haghish.fardzadeh\Documents\GitHub\github"
-cap cd "/Users/haghish/Documents/Packages/github"
-
 clear
 tempfile githubfiles
 qui generate str20 address = ""
@@ -181,7 +106,7 @@ qui generate str20 name = ""
 qui generate str20 file = ""
 qui save "githubfiles.dta", replace
 
-sysuse gitget, clear
+use "gitget.dta", clear
 
 local N : di _N
 
@@ -194,49 +119,31 @@ forval i = 1/`N' {
 	
 	capture rcall : json = fromJSON("`URL'"); ///
 	        json = as.data.frame(json[['items']][c("name","path")]); 
-					
+	
 	if _rc != 0 {
-		di as err "TRY AGAIN 3"
+		local loop = 1
+		local loopNum = 1
+	}
+	else {
+		local loop = 0
+	}
+	
+	while `loop' != 0 {
+		di as err "API error. wait a few seconds"
 		sleep 30000
 		capture rcall : json = fromJSON("`URL'"); ///
 	        json = as.data.frame(json[['items']][c("name","path")]); 
-	}
-	
-	if _rc != 0 {
-		di as err "TRY AGAIN 5"
-		sleep 50000
-		capture rcall : json = fromJSON("`URL'"); ///
-	        json = as.data.frame(json[['items']][c("name","path")]); 
-	}
-	
-	if _rc != 0 {
-		di as err "TRY AGAIN 10"
-		sleep 100000
-		capture rcall : json = fromJSON("`URL'"); ///
-	        json = as.data.frame(json[['items']][c("name","path")]); 
-	}
-	
-	if _rc != 0 {
-		di as err "TRY AGAIN 60"
-		sleep 60000
-		capture rcall : json = fromJSON("`URL'"); ///
-	        json = as.data.frame(json[['items']][c("name","path")]); 
-	}
-	
-	if _rc != 0 {
-		di as err "TRY AGAIN 90"
-		sleep 90000
-		capture rcall : json = fromJSON("`URL'"); ///
-	        json = as.data.frame(json[['items']][c("name","path")]); 
-					
-	}
-	
-	if _rc != 0 {
-		di as err "TRY AGAIN 120"
-		sleep 120000
-		capture rcall : json = fromJSON("`URL'"); ///
-	        json = as.data.frame(json[['items']][c("name","path")]); 
-					
+		if _rc != 0 {
+			local loop = 1
+			local loopnum = `loopnum' + 1
+			if `loopnum' > 5 {
+				di "`address' seems to have a vital problem"
+				local loop 0
+			}
+		}
+		else {
+			local loop = 0
+		}
 	}
 	
 	rcall : if (ncol(json) > 0) {json\$address = "`address'"} else {json = data.frame(name=NA, path=NA, address="`address'")};
