@@ -13,10 +13,10 @@ Syntax
 
 _options_
 
-- - -
-
-stable: installs the latest released version of a package   
-***v***ersion(_str_): installs a particular released version   
+| _option_ |  _Description_                                                           |
+|:---------|:-------------------------------------------------------------------------|
+| stable   | installs the latest stable release. otherwise the main branch is installed |
+| verson(_str_) | specifies a particular stable version (release tags) for the installation |
 
 - - -
 
@@ -83,7 +83,7 @@ program gitget
 				local path "`path'`1'"
 				macro shift
 			}
-			noisily github install `address', `stable' version(`version') path(`path') packagename(`packagename')
+			noisily github install `address', `stable' version(`version') path(`path') package(`package')
 		}
 		else if _N > 1 {
 			display as txt "multiple Stata packages were found! "  

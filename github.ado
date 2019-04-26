@@ -21,7 +21,7 @@ where the subcommands can be:
 | install      | followed by the _username/repository_, installs the specified repository |
 | query        | followed by _username/repository_, returns all released versions of that package |
 | check        | followed by _username/repository_, evaluates whether the repository is installable |
-| uninstall    | followed by _packagename_, uninstalls a package |
+| uninstall    | followed by _package name_, uninstalls a package |
 | search       | followed by _keywords_, it searches the GitHub API for relevant packages or repositories |
 | list         | lists the packages installed from GitHub and checkes if they have an update |
 
@@ -52,16 +52,17 @@ searching for a keyword. The table shows the options accordingly:
 
 ### __github install__ options:
 
-| _option_ |  _Description_                                                           |
-|:---------|:-------------------------------------------------------------------------|
+| _option_    |  _Description_                                                           |
+|:------------|:-------------------------------------------------------------------------|
+| package(_str_) | the package name. only needed if the repository name is not identical to the package name |
 | stable   | installs the latest stable release. otherwise the main branch is installed |
 | verson(_str_) | specifies a particular stable version (release tags) for the installation |
 
 
 ### __github search__ options:
 
-| _option_ |  _Description_                                                           |
-|:---------|:-------------------------------------------------------------------------|
+| _option_     |  _Description_                                                           |
+|:-------------|:-------------------------------------------------------------------------|
 | language(_str_)   | specifies the programming language of the repository. the default is __Stata__ |
 | in(_str_) | specifies the domain of the search which can be __name__, __description__, __readme__, or __all__ |
 | all | shows repositories that lack the __pkg__ and __stata.toc__ files in the search results |
@@ -154,11 +155,11 @@ prog define github
 	version 13
 	
 	syntax anything, [stable Version(str) save(str) in(str) 				              ///
-	language(str) all NET                                                         ///
+	language(str) all NET package(str)                                            ///
 	/// the options below are not documented yet                                  ///
 	force created(str) pushed(str) debug reference(str)			                      ///
 	duration(numlist max=1) perpage(numlist max=1)                                ///
-	append replace Number(numlist max=1) local path(str) packagename(str) ] 
+	append replace Number(numlist max=1) local path(str)] 
 	
 	
 	// correct the language
@@ -374,7 +375,7 @@ prog define github
 				local name : di substr(`"`macval(1)'"', 3,`l'-3) 
 				if substr(`"`macval(name)'"', -4,.) == ".pkg" {
 					local l strlen(`"`macval(name)'"')
-					local package : di substr(`"`macval(name)'"', 1,`l'-4)
+					local packagename : di substr(`"`macval(name)'"', 1,`l'-4)
 				}
 				macro shift
 			}
@@ -400,8 +401,13 @@ prog define github
 		local reponame "`1'"
 		macro shift
 	}
+	if missing("`packagename'") {
+		local packagename `reponame'
+	}
+	
+	//If the user has not specified the package name, use the repository name
 	if missing("`package'") {
-		local package `reponame'
+		local package `packagename'
 	}
 	
 	//BY HERE we have the username, repositoryname, and packagename. what else?
@@ -431,9 +437,9 @@ prog define github
 			local version master
 		}
 		
-		quietly copy "`path'" "`package'-`version'.zip", replace
-		quietly unzipfile "`package'-`version'.zip", replace
-		local dir "`package'-`version'"
+		quietly copy "`path'" "`packagename'-`version'.zip", replace
+		quietly unzipfile "`packagename'-`version'.zip", replace
+		local dir "`packagename'-`version'"
 		local wd : pwd
 		qui cd "`dir'" 
 		local pkg : pwd
@@ -483,12 +489,12 @@ prog define github
 		githubdb erase, name("`package'")
 		capture quietly ado uninstall "`package'"
 		
-		if missing("`packagename'") {
-			net install `package', ///
+		if missing("`package'") {
+			net install `packagename', ///
 			from("https://raw.githubusercontent.com/`anything'/master/`path'") `replace' //`force' 
 		}
 		else {
-			net install `packagename', ///
+			net install `package', ///
 			from("https://raw.githubusercontent.com/`anything'/master/`path'")
 		}
 		

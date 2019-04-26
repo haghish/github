@@ -23,7 +23,7 @@ where the subcommands can be:
 {col 5}install{col 19}followed by the {it:username/repository}, installs the specified repository
 {col 5}query{col 19}followed by {it:username/repository}, returns all released versions of that package
 {col 5}check{col 19}followed by {it:username/repository}, evaluates whether the repository is installable
-{col 5}uninstall{col 19}followed by {it:packagename}, uninstalls a package
+{col 5}uninstall{col 19}followed by {it:package name}, uninstalls a package
 {col 5}search{col 19}followed by {it:keywords}, it searches the GitHub API for relevant packages or repositories
 {col 5}list{col 19}lists the packages installed from GitHub and checkes if they have an update
 {space 4}{hline}
@@ -57,19 +57,20 @@ searching for a keyword. The table shows the options accordingly:
 
 {p 4 4 2}{bf:{bf:github install} options:}
 
-{col 5}{it:option}{col 15}{it:Description}
+{col 5}{it:option}{col 18}{it:Description}
 {space 4}{hline}
-{col 5}stable{col 15}installs the latest stable release. otherwise the main branch is installed
-{col 5}verson({it:str}){col 15}specifies a particular stable version (release tags) for the installation
+{col 5}package({it:str}){col 18}the package name. only needed if the repository name is not identical to the package name
+{col 5}stable{col 18}installs the latest stable release. otherwise the main branch is installed
+{col 5}verson({it:str}){col 18}specifies a particular stable version (release tags) for the installation
 {space 4}{hline}
 
 {p 4 4 2}{bf:{bf:github search} options:}
 
-{col 5}{it:option}{col 15}{it:Description}
+{col 5}{it:option}{col 19}{it:Description}
 {space 4}{hline}
-{col 5}language({it:str}){col 15}specifies the programming language of the repository. the default is {bf:Stata}
-{col 5}in({it:str}){col 15}specifies the domain of the search which can be {bf:name}, {bf:description}, {bf:readme}, or {bf:all}
-{col 5}all{col 15}shows repositories that lack the {bf:pkg} and {bf:stata.toc} files in the search results
+{col 5}language({it:str}){col 19}specifies the programming language of the repository. the default is {bf:Stata}
+{col 5}in({it:str}){col 19}specifies the domain of the search which can be {bf:name}, {bf:description}, {bf:readme}, or {bf:all}
+{col 5}all{col 19}shows repositories that lack the {bf:pkg} and {bf:stata.toc} files in the search results
 {space 4}{hline}
 
 
