@@ -1,3 +1,6 @@
+# let's measure the run time
+tictoc::tic()
+
 # change the working directory to the packagelist directory
 setwd("C:/Users/haghish.fardzadeh/Documents/GitHub/github/packagelist")
 
@@ -15,3 +18,5 @@ data$name = tools::file_path_sans_ext(basename(data$name))
 
 # write the results in a Stata file
 write_dta(data, "UNIQUE.dta")
+
+tictoc::toc()
