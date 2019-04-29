@@ -1,5 +1,5 @@
 /***
-_v. 1.9.7_
+_v. 1.9.8_
 
 Title
 =====
@@ -23,6 +23,7 @@ where the subcommands can be:
 | check        | followed by _username/repository_, evaluates whether the repository is installable |
 | uninstall    | followed by _package name_, uninstalls a package |
 | search       | followed by _keywords_, it searches the GitHub API for relevant packages or repositories |
+| findfile     | followed by a _keyword_, it searches Stata packages for files that include the keyword |
 | list         | lists the packages installed from GitHub and checkes if they have an update |
 
 
@@ -118,8 +119,8 @@ __examples of searching for a package__
     search for Stata packages that mention the keyword "likelihood" 
         . github search likelihood, language(stata) in(all)
 		
-    search for a repository named "github" and published in November 2016 
-        . github search github, created("2016-11-01..2016-11-30") 
+    search for a script files with the name _dy_
+        . github findfile dy
 
 
 __examples of searching the popular packages__ 
