@@ -60,10 +60,11 @@ githublistpack stata, language(all) append replace save("archive2") ///
 use "archive2.dta", clear
 append using "archive1.dta"
 duplicates drop address, force
+drop _merge 
 saveold "archive.dta", replace
 
-erase "archive1.dta"
-erase "archive2.dta"
+*erase "archive1.dta"
+*erase "archive2.dta"
 
 
 /***
@@ -97,17 +98,20 @@ AFTER RUNNING rcode.r FILE, execute:
 use unique.dta, clear
 merge m:m address using "toc.dta"
 drop _merge 
-saveold "unique.dta", replace
+saveold "temp.dta", replace
 
 
 use archive.dta, clear
-merge 1:m address packagename path using "unique.dta"
+duplicates drop address, force
+drop package path
+merge 1:m address using "temp.dta"
 capture drop _merge 
 
 replace installable = 0
 replace installable = 1 if (packagename != "") & (toc == 1) 
 
 saveold "archive.dta", replace
+erase temp.dta
 ~~~
 
 REMEMBER THAT FROM NOW ON, 'address' is no longer unique
@@ -159,7 +163,7 @@ saveold "gitget.dta", replace
 
 
 /***
-1.7 Creating packagelist.md file
+1.6 Creating packagelist.md file
 --------------------------------
 ***/
 
@@ -171,3 +175,80 @@ gitgetlist, export("gitget.md")
 gsort - installable language
 replace language="0" if language==""
 tab installable language if installable == 1
+
+/***
+1.7 Creating githubfiles data
+--------------------------------
+***/
+
+clear
+tempfile githubfiles
+qui generate str20 address = ""
+qui generate str20 packagename = ""
+qui generate str20 file = ""
+qui save "githubfiles.dta", replace
+
+quietly sysuse gitget, clear
+
+
+tempfile confirm
+local N : di _N
+forval i = 1/`N' {
+	
+	tempfile api 
+	tempname hitch 
+	qui local link : display "https://raw.githubusercontent.com/" address[`i'] "/master/" path[`i']
+  capture quietly copy  "`link'" `api', replace
+	local loop = 0
+	local count = 1
+	local continue = 1
+	
+	if _rc != 0 {
+		local continue = 0
+		di as err "`link'"
+		local loop = 1
+		while `loop' == 1 {
+			di as txt "wait a few seconds and try a gain (`count'/10)"
+			sleep 3000
+			local count = `count' + 1
+			capture quietly copy  "`link'" `api', replace
+			if _rc == 0 {
+				local loop = 0
+				local continue = 1
+			}
+			if `count' > 10 {
+				local loop = 0
+			}
+		}
+	}
+	
+  if `continue' == 1 {
+		display as txt "`i'"
+		local address = address[`i']
+		local packagename = packagename[`i']
+		file open `hitch' using "`api'", read
+		file read `hitch' line
+		while r(eof) == 0 { 
+			if substr(trim(`"`macval(line)'"'),1,2) == "F " |       ///
+			substr(trim(`"`macval(line)'"'),1,2) == "f " {
+				preserve
+				use githubfiles.dta, clear
+				local NEXT : di _N + 1
+				qui set obs `NEXT'
+				qui replace address = "`address'" in `NEXT'
+				qui replace packagename = "`packagename'" in `NEXT'
+				qui replace file = substr(trim(`"`macval(line)'"'),3,.) in `NEXT'
+				qui save "githubfiles.dta", replace
+				restore
+			}
+			file read `hitch' line
+    }
+		file close `hitch'
+		capture rm "`api'"
+  }
+	
+	sleep 250
+}
+
+
+use githubfiles.dta, clear
