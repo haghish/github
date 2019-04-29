@@ -36,23 +36,23 @@ githubunique = function(df) {
     while(loop == 1) {
       Sys.sleep(10)
       warning("API error. wait a few seconds")
-      if (N >= 60) {
+      if (N >= 10) {
         loop = 0
         print(paste(address, "seems to have a vital problem"))
+      } else {
+        json = tryCatch(
+          {
+            fromJSON(URL)
+          },
+          error=function(cond) {
+            message(cond)
+            cat("\n")
+            return(NULL)
+          }
+        )
+        if (is.null(json)) loop = 1
+        else loop = 0
       }
-      
-      json = tryCatch(
-        {
-          fromJSON(URL)
-        },
-        error=function(cond) {
-          message(cond)
-          cat("\n")
-          return(NULL)
-        }
-      )
-      if (is.null(json)) loop = 1
-      else loop = 0
       
       N = N + 1
     } 
