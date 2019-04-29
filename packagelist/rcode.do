@@ -53,4 +53,4 @@ sdecode address, gen(address2)
 drop address
 rename address2 address
 rename name packagename
-saveold "UNIQUE2.dta", replace
+saveold "unique.dta", replace

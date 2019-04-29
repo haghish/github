@@ -13,10 +13,20 @@ source("githubunique.r")
 gitget = read_dta("archive.dta")
 
 # parse the json data obtained from the API
-data = githubunique(gitget)
+data = githubunique(gitget, search="pkg")
 data$name = tools::file_path_sans_ext(basename(data$name))
 
 # write the results in a Stata file
-write_dta(data, "UNIQUE.dta")
+write_dta(data, "unique.dta")
+
+# subset the data to search for stata.toc files in repositories
+# -------------------------------------------------------------
+data = data[data$packagename != "", ]
+data = data[!duplicated(data$address),]
+toc = githubunique(data, search="toc")
+
+toc$toc = 0
+toc$toc[toc$name == "stata.toc"] = 1
+write_dta(toc, "toc.dta")
 
 tictoc::toc()

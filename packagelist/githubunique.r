@@ -1,4 +1,4 @@
-githubunique = function(df) {
+githubunique = function(df, search="pkg", sleep=2) {
   
   warning("This might take a long time tp complete...")
   
@@ -11,7 +11,7 @@ githubunique = function(df) {
   for (i in 1:nrow(df)) {
     loop = 0
     address = df$address[i]
-    URL = paste0("https://api.github.com/search/code?q=extension:pkg+repo:",
+    URL = paste0("https://api.github.com/search/code?q=extension:",search,"+repo:",
                  address)
     cat("\n")
     message(paste0(i,".  ", URL))
@@ -34,7 +34,7 @@ githubunique = function(df) {
     
     N = 1
     while(loop == 1) {
-      Sys.sleep(10)
+      Sys.sleep(sleep*5)
       warning("API error. wait a few seconds")
       if (N >= 10) {
         loop = 0
@@ -67,7 +67,7 @@ githubunique = function(df) {
       print(json)
       data = rbind(data, json)
     }
-    Sys.sleep(2)
+    Sys.sleep(sleep)
   }
   return(data)
 }
