@@ -190,7 +190,7 @@ qui save "githubfiles.dta", replace
 
 quietly sysuse gitget, clear
 
-
+//ATTENTION: currently it only searches the master branch...
 tempfile confirm
 local N : di _N
 forval i = 1/`N' {
@@ -208,7 +208,7 @@ forval i = 1/`N' {
 		di as err "`link'"
 		local loop = 1
 		while `loop' == 1 {
-			di as txt "wait a few seconds and try a gain (`count'/10)"
+			di as txt "wait a few seconds and try a gain (`count'/3)"
 			sleep 3000
 			local count = `count' + 1
 			capture quietly copy  "`link'" `api', replace
@@ -216,8 +216,9 @@ forval i = 1/`N' {
 				local loop = 0
 				local continue = 1
 			}
-			if `count' > 10 {
+			if `count' > 3 {
 				local loop = 0
+				di as err "no luck!"
 			}
 		}
 	}
@@ -229,7 +230,8 @@ forval i = 1/`N' {
 		file open `hitch' using "`api'", read
 		file read `hitch' line
 		while r(eof) == 0 { 
-			if substr(trim(`"`macval(line)'"'),1,2) == "F " |       ///
+			capture local line : subinstr local line "`" "", all
+			capture if substr(trim(`"`macval(line)'"'),1,2) == "F " |       ///
 			substr(trim(`"`macval(line)'"'),1,2) == "f " {
 				preserve
 				use githubfiles.dta, clear
@@ -244,7 +246,7 @@ forval i = 1/`N' {
 			file read `hitch' line
     }
 		file close `hitch'
-		capture rm "`api'"
+		capture rm `"`api'"'
   }
 	
 	sleep 250
