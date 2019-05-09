@@ -16,8 +16,8 @@ prog githuboutput
 	// make sure one of the observations is installable 
 	if `c(N)' > 0 & `max' != 0 | `c(N)' > 0 & !missing("`all'") {
 		di in text _n " {hline 80}" _n												///
-		"  {bf:Repository}" _col(17) "{bf:Username}" _col(29) "{bf:Install}" 	///
-		_col(38) "{bf:Description} "  _n 	///
+		"  {bf:Repository}" _col(19) "{bf:Username}" _col(31) "{bf:Install}" 	///
+		_col(40) "{bf:Description} "  _n 	///
 		" {hline 80}"
 		
 		// limit the output
@@ -45,7 +45,7 @@ prog githuboutput
 					
 					local pushed : di %tcCCYY-NN-DD pushed[`N']
 					
-					local short : di abbrev(name[`N'], 13) 
+					local short : di abbrev(name[`N'], 15) 
 					
 					tokenize `address', parse("/")
 					local user : di abbrev(`"`1'"', 11) 
@@ -60,14 +60,14 @@ prog githuboutput
 					
 					
 					di `"  {bf:{browse "http://github.com/`address'":`short'}}"' ///
-					_col(17) `"{browse "http://github.com/`1'":`user'}"' _c
+					_col(19) `"{browse "http://github.com/`1'":`user'}"' _c
 					
 					local install : di installable[`N']
 					if "`install'" == "1" {
-						di _col(29) "{stata github install `address':Install}" _c
+						di _col(31) "{stata github install `address':Install}" _c
 					}
 					else {
-						di _col(29) "" _c
+						di _col(31) "" _c
 						*di _col(29) "({stata github install `address', force:{it:force}})" _c
 					}
 					
@@ -123,12 +123,12 @@ prog githuboutput
 						local n `++n'
 					}
 
-					if `"`l1'"' != "" di _col(38) `"`l1'"'
+					if `"`l1'"' != "" di _col(40) `"`l1'"'
 					
 					//Add the package size
 					*if trim(`"`l1'"') != "" {
 					if "`install'" == "1" & trim(`"`l1'"') != "" {
-						di _col(29) "{it:`size'k}" _c
+						di _col(31) "{it:`size'k}" _c
 					}
 					//else {
 					else if "`install'" == "1" {
@@ -139,7 +139,7 @@ prog githuboutput
 					
 					// continue with the description
 					while `m' <= `n' {
-						if `"`l`m''"' != "" di _col(37) `"`l`m''"' 
+						if `"`l`m''"' != "" di _col(39) `"`l`m''"' 
 						local l`m' //RESET
 						local m `++m'
 					}
@@ -147,43 +147,43 @@ prog githuboutput
 					// Add the Homepage
 					// -----------------------------------------------------------
 					if `"`homepage'"' != "" {
-						di _col(38) `"homepage {browse "`homepage'":`homeabbrev'}"'
+						di _col(40) `"homepage {browse "`homepage'":`homeabbrev'}"'
 						local homepage //RESET
 					}
 					
 					// Add the last update
 					// -----------------------------------------------------------
-					di _col(38) `"updated on `pushed'"'
+					di _col(40) `"updated on `pushed'"'
 					
 					// Add the additional description
 					// -----------------------------------------------------------
-					di _col(38) "{bf:Fork:}" trim("`fork'") _col(48) "{bf:Star:}" 		///
+					di _col(40) "{bf:Fork:}" trim("`fork'") _col(50) "{bf:Star:}" 		///
 					trim("`star'") _c 
 					
 					if !missing("`lang'") {
-						di _col(58) "{bf:Lang:}" trim("`lang'") _c
+						di _col(60) "{bf:Lang:}" trim("`lang'") _c
 					}	
 					
 					if `dependency' == 1 {
 						if "`alternative'" == "1" {
-							di _col(70) `"({browse "http://github.com/`address'/blob/master/dependency.do":dependency})"' 
+							di _col(72) `"({browse "http://github.com/`address'/blob/master/dependency.do":dependency})"' 
 						}
 						else {
-							di _col(70) `"({browse "http://github.com/`address'/blob/master/dependency.do":dependency})"' _n
+							di _col(72) `"({browse "http://github.com/`address'/blob/master/dependency.do":dependency})"' _n
 						}
 					}	
 					else {
 						if "`alternative'" == "1" {
-							di _col(75)  
+							di _col(77)  
 						}
 						else {
-							di _col(75) _n 
+							di _col(77) _n 
 						}
 					}	
 					
 					//Add the package size if the description was empty
 					if "`alternative'" == "1"  {
-						di _col(29) "{it:`size'k}" _n
+						di _col(31) "{it:`size'k}" _n
 						local alternative //RESET
 					}
 				}
