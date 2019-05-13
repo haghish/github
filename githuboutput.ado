@@ -15,10 +15,10 @@ prog githuboutput
 	
 	// make sure one of the observations is installable 
 	if `c(N)' > 0 & `max' != 0 | `c(N)' > 0 & !missing("`all'") {
-		di in text _n " {hline 80}" _n												///
+		di in text _n " {hline 82}" _n												///
 		"  {bf:Repository}" _col(19) "{bf:Username}" _col(31) "{bf:Install}" 	///
 		_col(40) "{bf:Description} "  _n 	///
-		" {hline 80}"
+		" {hline 82}"
 		
 		// limit the output
 		if missing("`number'") local number `c(N)'
@@ -191,7 +191,7 @@ prog githuboutput
 			local N `++N'
 		}
 		
-		di " {hline 80}"
+		di " {hline 82}"
 	}
 	else if missing("`quiet'") & "`language'" != "all" & "`in'" != "name,description,readme" {
 		di as txt _n "repository {bf:`anything'} was not found for {bf:in(`in')} and {bf:language(`language')}" 
