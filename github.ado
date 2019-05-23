@@ -486,6 +486,11 @@ prog define github
 	// -----------------------------------------------------------------------
 	else {		
 		
+		// if stable is specified but version is not found, generate an error without stopping
+		if !missing("`stable'") & missing("`version'") {
+			di as err "the repository does not have any stable release. checking the development version:{txt}"
+		}
+		
 		// make sure it is first uninstalled 
 		githubdb erase, name("`package'")
 		capture quietly ado uninstall "`package'"
