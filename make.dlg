@@ -53,9 +53,15 @@ BEGIN
 	// pkg
 	CHECKBOX pkg  10    +20   @   .  , option(pkg) default(1) ///
 	         label("create packagename.pkg") 
-	// pkg
+	
+	// make
+	CHECKBOX make  10    +20   @   .  , option(make) default(1) ///
+	         label("create make.do") 
+			 
+	// readme
 	CHECKBOX readme  10    +20   @   .  , option(readme) default(1) ///
 	         label("create README.md") 
+	
 	
 	// replace
 	CHECKBOX replace  10    +20   @   .  , option(replace) default(0) ///
@@ -194,6 +200,7 @@ BEGIN
 	option make.replace						// replace
 	option make.toc						    // create toc 
 	option make.pkg						    // create pkg
+	option make.make						// create make.do
 	option make.readme						// create readme
 	
 	
