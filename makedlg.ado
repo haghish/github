@@ -42,16 +42,16 @@ prog makedlg
 	} 
 	
 	di _n(2) "{title:Executing the make command}" _n
-	di as txt "make `anything', `replace' `toc' `pkg' `readme' version(`version')" _col(60) "///" _n ///
-	   `"     license("`license'")"' _col(60) "///" _n ///
-	   "     author(`author')" _col(60) "///" _n ///
-	   "     affiliation(`affiliation')" _col(60) "///" _n ///
-	   "     email(`email')" _col(60) "///" _n ///
-	   "     url(`url')" _col(60) "///" _n ///
-	   "     title(`title')" _col(60) "///" _n ///
-	   "     description(`description')" _col(60) "///" _n ///
-	   `"     install("`inst'")"' _col(60) "///" _n ///
-       `"     iancillary("`anc'")"' _col(60) "///" _n ///
+	di as txt "make `anything', `replace' `toc' `pkg' `readme' version(`version')" _col(70) "///" _n ///
+	   `"     license("`license'")"' _col(70) "///" _n ///
+	   `"     author("`author'")"' _col(70) "///" _n ///
+	   `"     affiliation("`affiliation'")"' _col(70) "///" _n ///
+	   `"     email("`email'")"' _col(70) "///" _n ///
+	   `"     url("`url'")"' _col(70) "///" _n ///
+	   `"     title("`title'")"' _col(70) "///" _n ///
+	   `"     description("`description'")"' _col(70) "///" _n ///
+	   `"     install("`inst'")"' _col(70) "///" _n ///
+       `"     iancillary("`anc'")"' _col(70) "///" _n ///
 	   
 	// generate the make.do
 	if !missing("`make'") {
@@ -63,16 +63,16 @@ prog makedlg
 		                  "// DO NOT FORGET to update the version of the package, if changed!" _n ///
 						  "// for more information visit http://github.com/haghish/github" _n(2)
 						  
-		file write `knot' "make `anything', `replace' `toc' `pkg' `readme' version(`version')" _col(60) "///" _n ///
-	   `"     license("`license'")"' _col(60) "///" _n ///
-	   "     author(`author')" _col(60) "///" _n ///
-	   "     affiliation(`affiliation')" _col(60) "///" _n ///
-	   "     email(`email')" _col(60) "///" _n ///
-	   "     url(`url')" _col(60) "///" _n ///
-	   "     title(`title')" _col(60) "///" _n ///
-	   "     description(`description')" _col(60) "///" _n ///
-	   `"     install("`inst'")"' _col(60) "///" _n ///
-       `"     iancillary("`anc'")"' _col(60) "///" _n ///
+		file write `knot' "make `anything', `replace' `toc' `pkg' `readme' version(`version')" _col(70) "///" _n ///
+	   `"     license("`license'")"' _col(70) "///" _n ///
+	   `"     author("`author'")"' _col(70) "///" _n ///
+	   `"     affiliation("`affiliation'")"' _col(70) "///" _n ///
+	   `"     email("`email'")"' _col(70) "///" _n ///
+	   `"     url("`url'")"' _col(70) "///" _n ///
+	   `"     title("`title'")"' _col(70) "///" _n ///
+	   `"     description("`description'")"' _col(70) "///" _n ///
+	   `"     install("`inst'")"' _col(70) "///" _n ///
+       `"     iancillary("`anc'")"' _col(70) "///" _n ///
 	   
         file close `knot' 
 		copy "`temp'" make.do , replace 
