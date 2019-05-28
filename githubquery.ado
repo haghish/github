@@ -21,6 +21,7 @@ program githubquery, rclass
 	
 	//remove the beginning brackets
 	local line : subinstr local line "[{" ""
+	local line : subinstr local line "`" "", all  
 	
 	di in text _n " {hline 40}" _n												                        ///
 	"  {bf:Version}" _col(16) "{bf:Release Date}" _col(34) "{bf:Install} " _n 	  ///
