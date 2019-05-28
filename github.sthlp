@@ -1,5 +1,5 @@
 {smcl}
-{it:v. 1.9.7}
+{it:v. 2.0.0}
 
 
 {title:Title}
@@ -25,6 +25,7 @@ where the subcommands can be:
 {col 5}check{col 19}followed by {it:username/repository}, evaluates whether the repository is installable
 {col 5}uninstall{col 19}followed by {it:package name}, uninstalls a package
 {col 5}search{col 19}followed by {it:keywords}, it searches the GitHub API for relevant packages or repositories
+{col 5}findfile{col 19}followed by a {it:keyword}, it searches Stata packages for files that include the keyword
 {col 5}list{col 19}lists the packages installed from GitHub and checkes if they have an update
 {space 4}{hline}
 
@@ -129,8 +130,8 @@ install the dependencies.
     search for Stata packages that mention the keyword "likelihood" 
         . github search likelihood, language(stata) in(all)
 		
-    search for a repository named "github" and published in November 2016 
-        . github search github, created("2016-11-01..2016-11-30") 
+    search for a script files with the name _dy_
+        . github findfile dy
 
 
 {p 4 4 2}
