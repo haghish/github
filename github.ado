@@ -257,16 +257,17 @@ prog define github
 		qui keep if found == 1
 		local N = _N
 		if `N' > 0 {
-			di in text _n " {hline 33}" _n												///
-		  "  {bf:Searching githubfiles database}" _n 	///
-		  " {hline 33}"
+			di in text _n " {hline 80}" _n												///
+		  "  {bf:File}" _col(28) "{bf:Package}" _col(47) "{bf:Repository}" _n 	///
+		  " {hline 80}"
 			
 			forval j = 1/`N' {
 				local address : di address[`j']
+				local pkgname : di packagename[`j']
 				local fname : di file[`j']
-				di `"  {browse "https://github.com/`address'":`fname'}"'
+				di "  `fname'" _col(28) "`pkgname'" _col(45) `"  {browse "https://github.com/`address'":`address'}"'
 			}
-			di in text " {hline 33}" _n
+			di in text " {hline 80}" _n
 		}
 		else di in text "({it:nothing found in the database})"
 		restore
