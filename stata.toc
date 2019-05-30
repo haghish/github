@@ -4,6 +4,6 @@ d University of Göttingen
 d haghish@med.uni-goettingen.de
 d https://github.com/haghish/github
 
-d 'github': search, build, install, and manage packages from GitHub
+d 'github': search, install, and manage github packages
 
 p github
