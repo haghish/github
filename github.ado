@@ -282,9 +282,9 @@ prog define github
 	    findall `2', language(`language') in(`in') `local'  `net' `all' 
 	  }
 	  else {
-		githubsearch `2', language(`language') in(`in') save(`save') `all' 		///
+		  githubsearch `2', language(`language') in(`in') save(`save') `all' 		///
 		  created(`created') pushed(`pushed') `debug' `append' `replace'        ///
-		  number(`number') perpage(`perpage')
+		  number(`number') perpage(`perpage') scoreless
 	  }
 		
 		// searching githubfiles database

@@ -15,10 +15,10 @@ prog githuboutput
 	
 	// make sure one of the observations is installable 
 	if `c(N)' > 0 & `max' != 0 | `c(N)' > 0 & !missing("`all'") {
-		di in text _n " {hline 82}" _n												///
+		di in text _n " {hline 92}" _n												///
 		"  {bf:Repository}" _col(19) "{bf:Username}" _col(31) "{bf:Install}" 	///
 		_col(40) "{bf:Description} "  _n 	///
-		" {hline 82}"
+		" {hline 92}"
 		
 		// limit the output
 		if missing("`number'") local number `c(N)'
@@ -51,7 +51,7 @@ prog githuboutput
 					local user : di abbrev(`"`1'"', 11) 
 					
 					local homepage : di homepage[`N']
-					local homeabbrev : di abbrev(`"`homepage'"', 30)
+					local homeabbrev : di abbrev(`"`homepage'"', 40)
 				
 					
 					*local user : di address[`N']
@@ -77,6 +77,7 @@ prog githuboutput
 					*if `score' > 100 {
 					*	local score: di %5.0f score[`N']
 					*}
+					local score : di score[`N']
 					local star : di star[`N']
 					local fork : di fork[`N']
 					local size : di kb[`N']
@@ -147,29 +148,30 @@ prog githuboutput
 					// Add the Homepage
 					// -----------------------------------------------------------
 					if `"`homepage'"' != "" {
-						di _col(40) `"homepage {browse "`homepage'":`homeabbrev'}"'
+						di _col(40) `"{bf:homepage}: {browse "`homepage'":`homeabbrev'}"'
 						local homepage //RESET
 					}
 					
 					// Add the last update
 					// -----------------------------------------------------------
-					di _col(40) `"updated on `pushed'"'
+					di _col(40) `"{bf:updated}: `pushed'"'
 					
 					// Add the additional description
 					// -----------------------------------------------------------
-					di _col(40) "{bf:Fork:}" trim("`fork'") _col(50) "{bf:Star:}" 		///
+					di _col(40) "{bf:Score:}" round(`score',.2)  _c
+					di _col(52) "{bf:Fork:}" trim("`fork'") _col(61) "{bf:Star:}" 		///
 					trim("`star'") _c 
 					
 					if !missing("`lang'") {
-						di _col(60) "{bf:Lang:}" trim("`lang'") _c
+						di _col(70) "{bf:Lang:}" trim("`lang'") _c
 					}	
 					
 					if `dependency' == 1 {
 						if "`alternative'" == "1" {
-							di _col(72) `"({browse "http://github.com/`address'/blob/master/dependency.do":dependency})"' 
+							di _col(82) `"({browse "http://github.com/`address'/blob/master/dependency.do":dependency})"' 
 						}
 						else {
-							di _col(72) `"({browse "http://github.com/`address'/blob/master/dependency.do":dependency})"' _n
+							di _col(82) `"({browse "http://github.com/`address'/blob/master/dependency.do":dependency})"' _n
 						}
 					}	
 					else {
@@ -191,7 +193,7 @@ prog githuboutput
 			local N `++N'
 		}
 		
-		di " {hline 82}"
+		di " {hline 92}"
 	}
 	else if missing("`quiet'") & "`language'" != "all" & "`in'" != "name,description,readme" {
 		di as txt _n "repository {bf:`anything'} was not found for {bf:in(`in')} and {bf:language(`language')}" 

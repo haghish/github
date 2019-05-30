@@ -62,6 +62,7 @@ program githubsearch
 	qui generate str language = ""
 	qui generate int star = . 
 	qui generate int fork = . 
+	if !missing("`scoreless'") qui generate int score = . 
 	qui generate str created = ""
 	qui generate str updated = ""
 	qui generate str pushed = ""
@@ -69,6 +70,7 @@ program githubsearch
 	qui generate int watchers = . 
 	qui generate str description = ""
 	qui generate str homepage = ""
+	
 	
 	*quietly copy "https://api.github.com/search/repositories?q=`anything'`language'+size:%3C1+in:description,readme,name&per_page=100" "sth.json", replace
 	*quietly copy "https://api.github.com/search/repositories?q=`anything'`language'+in:name,description,readme&per_page=100" "sth.json", replace
@@ -253,6 +255,11 @@ program githubsearch
 					quietly replace watchers = `2' in `n'
 					macro shift
 				}
+				else if `"`macval(1)'"' == "score" { 
+					local 2 : di substr(`"`macval(2)'"', 2,.)	
+					quietly replace score = `2' in `n'
+					macro shift
+				}
 				else {
 					macro shift
 				}
@@ -292,15 +299,15 @@ program githubsearch
 	*qui rename type language
 	
 	//generate score
-	qui gen star2 = 1+star
-	qui gen fork2 = 1+fork*4
-
 	if missing("`scoreless'") {
+		qui gen star2 = 1+star
+	  qui gen fork2 = 1+fork*4
 		quietly gen score = (star2 * fork2) - 1
 		quietly replace score = 0 if score < 0
+		qui drop star2
+	  qui drop fork2
 	}	
-	qui drop star2
-	qui drop fork2
+	
 	
 	// sort the data based on installable and score 
 	if missing("`scoreless'") {
