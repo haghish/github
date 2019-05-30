@@ -59,7 +59,7 @@ BEGIN
 	         label("create make.do") 
 			 
 	// readme
-	CHECKBOX readme  10    +20   @   .  , option(readme) default(1) ///
+	CHECKBOX readme  10    +20   @   .  , option(readme) default(0) ///
 	         label("create README.md") 
 	
 	
@@ -126,7 +126,7 @@ BEGIN
 		  
 		  
 	// select installable files
-	TEXT tx_summary3  10   +40  . 310, label("Select the package installation and/or ancillary files*  (hold CTRL key)")
+	TEXT tx_summary3  10   +40  . 310, label("select installation and/or ancillary files*  (hold CTRL/CMD key)")
 	
 	TEXT tx_summary4  10   +20  . 310, label("installation")
 	FILE ffile	 80 @  310  .  , error("Open file")  ///
