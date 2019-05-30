@@ -72,7 +72,7 @@ prog makedlg
 	   `"     title("`title'")"' _col(70) "///" _n ///
 	   `"     description("`description'")"' _col(70) "///" _n ///
 	   `"     install("`inst'")"' _col(70) "///" _n ///
-     `"     iancillary("`anc'")"' _col(70) "///" _n(3) 
+     `"     ancillary("`anc'")"' _col(70)  _n(3) 
 		 
 	   
     file close `knot' 

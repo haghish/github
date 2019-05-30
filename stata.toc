@@ -1,5 +1,9 @@
 v 2.0.0
-d 'GITHUB': search, install, and uninstall Stata packages with a particular    {break}
-d version (release) as well as their dependencies from 
-d {browse "http://www.github.com/haghish/github":GitHub} website
+d Materials by E. F. Haghish
+d University of Göttingen
+d haghish@med.uni-goettingen.de
+d https://github.com/haghish/github
+
+d 'github': search, build, install, and manage packages from GitHub
+
 p github
