@@ -1,9 +1,11 @@
-d 'GITHUB': search, install, and uninstall Stata packages with a particular    {break}
-d version (release) as well as their dependencies from 
-d {browse "http://www.github.com/haghish/github":GitHub} website
-d
-d Distribution-Date: 20192105
-d
+v 2.0.0
+d 'GITHUB': github package manager
+d 
+d search, install, and manage github packages
+d 
+d Distribution-Date:   20190531
+d License: MIT
+d 
 F abspath.ado
 F findall.ado
 F findall.sthlp
@@ -27,12 +29,12 @@ F githuboutput.ado
 F githubquery.ado
 F githubsearch.ado
 F githubsearchsteps.ado
-F pkgzip.ado
-F pkgzip.sthlp
 F make.ado
 F make.dlg
 F make.sthlp
 F makedlg.ado
+F pkgzip.ado
+F pkgzip.sthlp
 F ssclastupdate.ado
 F sscminer.ado
-F sscminer.sthlp
+F sscminer.sthlpM

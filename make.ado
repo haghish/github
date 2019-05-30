@@ -180,12 +180,26 @@ prog make
 	if !missing("`install'") {
 		// get the file names install option
 		tokenize `"`install'"', parse(";")	
+		preserve
+		qui clear
+		qui generate str files = ""
+		qui set obs 1000
+		local start = 0
 		while !missing("`1'") {
 				if "`1'" != ";" {
-				file write `pkgfile' `"F `1'"' _n
+				local start = `start' + 1
+				qui replace files = `"`1'"' in `start'
 			}
 			macro shift
 		}
+		list in 1/30
+		qui drop if files==""
+		qui sort files
+		forval m = 1/`start' {
+		  local n : di files[`m']
+		  file write `pkgfile' `"F `n'"' _n
+		}
+		restore
 	}
 	if !missing("`ancillary'") {
 		// get the file names ancillary option
