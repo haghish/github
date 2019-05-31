@@ -1,5 +1,5 @@
 /***
-_v. 1.1_ 
+_v. 1.2_ 
 
 Title
 ====== 
@@ -34,11 +34,13 @@ __stable__ option or specify the version within the __version__ option.
 Example
 ----------
 
-    installing markdoc package and its dependencies
-        . gitget markdoc
-				
-    installing the latest stable version of markdoc package and its dependencies
-        . gitget markdoc, stable
+installing markdoc package and its dependencies
+
+    . gitget markdoc
+
+installing the latest stable version of markdoc package and its dependencies
+
+    . gitget markdoc, stable
 
 Author
 ------

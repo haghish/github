@@ -1,5 +1,5 @@
 /***
-version: 1.2
+version: 1.3
 
 Title
 =====
@@ -9,12 +9,12 @@ SSC, and the web. ths program is executed by __github search__ command, with
 the __net__ option and is not called on its own.
 
 Syntax
-======
+------
 
 > __findall__ _keyword_
 
 Description
-===========
+-----------
 
 __findall__ is a general command for searching for Stata packages on variety of 
 web hosts, including GitHub, Stata, SSC, etc. The command wraps the Stata's 
@@ -26,13 +26,14 @@ SSC as well as GitHub, allowing the users to get the most recent version of the
 package.  
 
 Example
-=================
+-------
 
-    search for markdoc package on SSC and GitHub and show the last update 
-        . findall markdoc
+search for markdoc package on SSC and GitHub and show the last update
+
+    . findall markdoc
 
 Author
-======
+------
 
 __E. F. Haghish__     
 Center for Medical Biometry and Medical Informatics     

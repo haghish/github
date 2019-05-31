@@ -1,3 +1,5 @@
+// documentation are written for MARKDOC package
+
 /***
 _v. 2.0.0_
 
@@ -9,7 +11,7 @@ version (release) as well as their dependencies from
 [GitHub](http://www.github.com/haghish/github) website
 
 Syntax
-======
+------
 
 > __github__ [ _subcommand_ ] [ _keyword_ | _username/repository_ ] [, _options_ ]
 
@@ -28,7 +30,7 @@ where the subcommands can be:
 
 
 Description
-===========
+-----------
 
 __github__ simplifies searching and installing Stata packages from 
 [GitHub](http://www.github.com/) website. The package also allows installing 
@@ -45,7 +47,7 @@ the user to view the dependencies and their particular version that will be
 installed automatically. 
 
 Options
-=======
+-------
 
 The __github__ command also takes several options for installing a package or 
 searching for a keyword. The table shows the options accordingly:
@@ -70,7 +72,7 @@ searching for a keyword. The table shows the options accordingly:
 
 
 Installing package dependencies
-===============================
+-------------------------------
 
 Packages installed by __github__ command can also automatically install the 
 package dependencies. The __github install__ command will look 
@@ -87,49 +89,58 @@ Note that the __dependency.do__ file will only be executed by __github install__
 command and other installation commands such as __net install__ will not 
 install the dependencies. 
 
-Example(s)
-=================
+Examples
+--------
 
-__examples of installing and uninstalling packages__ 
+### examples of installing and uninstalling packages
 
-    install the latest development version of MarkDoc package 
+install the latest development version of MarkDoc package 
+
         . github install haghish/markdoc
-		
-		install the latest stable version of MarkDoc package
+
+install the latest stable version of MarkDoc package
+
         . github haghish/markdoc, stable
 
-    install MarkDoc version 3.8.1 from GitHub (older version)
+install MarkDoc version 3.8.1 from GitHub (older version)
+
         . github haghish/markdoc, version("3.8.1")
-		
-    Uninstall MarkDoc repository
+
+Uninstall MarkDoc repository
+
         . github uninstall markdoc
-		
-    list all of the available versions of the MarkDoc package
+
+list all of the available versions of the MarkDoc package
+
         . github query haghish/markdoc
-		
-		
-__examples of searching for a package__ 
-		
-    search for MarkDoc package on GitHub
+
+### examples of searching for a package
+
+search for MarkDoc package on GitHub
+
         . github search markdoc
-		
-    search for a Stata package named "weaver"
+
+search for a Stata package named "weaver"
+
         . github search weaver, language(stata)
-	
-    search for Stata packages that mention the keyword "likelihood" 
+
+search for Stata packages that mention the keyword "likelihood" 
+
         . github search likelihood, language(stata) in(all)
-		
-    search for a script files with the name _dy_
+
+search for a script files with the name _dy_
+
         . github findfile dy
 
 
-__examples of searching the popular packages__ 
-	
-    build the complete list of Stata packages on GiutHub
-        . github list stata, language(all) in(all) all save(archive) append
-		
+### examples of searching the popular packages
+
+build the complete list of Stata packages on GiutHub
+
+    . github list stata, language(all) in(all) all save(archive) append
+
 Author
-======
+------
 
 E. F. Haghish   
 Department of Mathematics and Computer Science (IMADA)    

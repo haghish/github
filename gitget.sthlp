@@ -1,5 +1,5 @@
 {smcl}
-{it:v. 1.1} 
+{it:v. 1.2} 
 
 
 {title:Title}
@@ -38,11 +38,15 @@ wish to install a stable release rather than the developmnt version, add the
 
 {title:Example}
 
-    installing markdoc package and its dependencies
-        . gitget markdoc
-				
-    installing the latest stable version of markdoc package and its dependencies
-        . gitget markdoc, stable
+{p 4 4 2}
+installing markdoc package and its dependencies
+
+    . gitget markdoc
+
+{p 4 4 2}
+installing the latest stable version of markdoc package and its dependencies
+
+    . gitget markdoc, stable
 
 
 {title:Author}

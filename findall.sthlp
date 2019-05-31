@@ -1,5 +1,5 @@
 {smcl}
-version: 1.2
+version: 1.3
 
 
 {title:Title}
@@ -31,8 +31,10 @@ package.    {break}
 
 {title:Example}
 
-    search for markdoc package on SSC and GitHub and show the last update 
-        . findall markdoc
+{p 4 4 2}
+search for markdoc package on SSC and GitHub and show the last update
+
+    . findall markdoc
 
 
 {title:Author}

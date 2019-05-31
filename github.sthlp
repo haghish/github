@@ -96,50 +96,65 @@ command and other installation commands such as {bf:net install} will not
 install the dependencies. 
 
 
-{title:Example(s)}
+{title:Examples}
+
+{p 4 4 2}{bf:examples of installing and uninstalling packages}
 
 {p 4 4 2}
-{bf:examples of installing and uninstalling packages} 
+install the latest development version of MarkDoc package 
 
-    install the latest development version of MarkDoc package 
         . github install haghish/markdoc
-		
+
 {p 4 4 2}
-		install the latest stable version of MarkDoc package
+install the latest stable version of MarkDoc package
+
         . github haghish/markdoc, stable
 
-    install MarkDoc version 3.8.1 from GitHub (older version)
-        . github haghish/markdoc, version("3.8.1")
-		
-    Uninstall MarkDoc repository
-        . github uninstall markdoc
-		
-    list all of the available versions of the MarkDoc package
-        . github query haghish/markdoc
-		
-		
 {p 4 4 2}
-{bf:examples of searching for a package} 
-		
-    search for MarkDoc package on GitHub
+install MarkDoc version 3.8.1 from GitHub (older version)
+
+        . github haghish/markdoc, version("3.8.1")
+
+{p 4 4 2}
+Uninstall MarkDoc repository
+
+        . github uninstall markdoc
+
+{p 4 4 2}
+list all of the available versions of the MarkDoc package
+
+        . github query haghish/markdoc
+
+{p 4 4 2}{bf:examples of searching for a package}
+
+{p 4 4 2}
+search for MarkDoc package on GitHub
+
         . github search markdoc
-		
-    search for a Stata package named "weaver"
+
+{p 4 4 2}
+search for a Stata package named "weaver"
+
         . github search weaver, language(stata)
-	
-    search for Stata packages that mention the keyword "likelihood" 
+
+{p 4 4 2}
+search for Stata packages that mention the keyword "likelihood" 
+
         . github search likelihood, language(stata) in(all)
-		
-    search for a script files with the name _dy_
+
+{p 4 4 2}
+search for a script files with the name {it:dy}
+
         . github findfile dy
 
 
+{p 4 4 2}{bf:examples of searching the popular packages}
+
 {p 4 4 2}
-{bf:examples of searching the popular packages} 
-	
-    build the complete list of Stata packages on GiutHub
-        . github list stata, language(all) in(all) all save(archive) append
-		
+build the complete list of Stata packages on GiutHub
+
+    . github list stata, language(all) in(all) all save(archive) append
+
 
 {title:Author}
 

@@ -1,18 +1,18 @@
 /***
 version: 1.1.0
 
-Intro Description
-=================
+Title
+=====
 
-abspath - Stata program that returns the absolute path of any given _filename_  
+__abspath__ - Stata program that returns the absolute path of any given _filename_  
 
 Syntax
-=================
+------
 
 > abspath _filename_
 
 Example
-=================
+-------
 
 Return absolute path of a file with relative path in Stata
 
@@ -20,7 +20,7 @@ Return absolute path of a file with relative path in Stata
     . abspath "./my file.smcl"
 
 Author
-======
+------
 
 E. F. Haghish
 Center for Medical Biometry and Medical Informatics
