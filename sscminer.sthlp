@@ -12,7 +12,13 @@
 
 {p 8 8 2} {bf:sscminer} , {it:save(str)} [ {it:download} ]
 
+{p 4 4 2}{bf:options}
 
+{col 5}{it:option}{col 18}{it:Description}
+{space 4}{hline}
+{col 5}save({it:str}){col 18}specifies the name of the data set to include packages information
+{col 5}download{col 18}downloads and archives SSC packages in zip files
+{space 4}{hline}
 
 {title:Description}
 
@@ -25,24 +31,16 @@ them based on the Stata programming language they are using (ado, mata, dlg, etc
 originally, the archive was developed for education purpose. 
 
 
-{title:Options}
+{title:Examples}
 
 {p 4 4 2}
-The {bf:github} command also takes several options for installing a package or 
-searching for a keyword. The table shows the options accordingly:
+mine Stata packages on SSC without downloading any package
 
-{col 5}{it:option}{col 18}{it:Description}
-{space 4}{hline}
-{col 5}save({it:str}){col 18}specifies the name of the data set to include packages information
-{col 5}download{col 18}downloads and archives SSC packages in zip files
-{space 4}{hline}
-
-{title:Example(s)}
-
-    mine Stata packages on SSC without downloading any package
         . sscminer, save("archive.dta")
 
-    mine stata packages and download the files
+{p 4 4 2}
+mine stata packages and download the files
+
         . sscminer, save("archive.dta") download
 
 

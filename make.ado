@@ -1,5 +1,5 @@
 /***
-_v. 1.0.0_ 
+_v. 1.1_ 
 
 Title
 ====== 
@@ -10,6 +10,8 @@ Syntax
 ------ 
 
 > __make__ _pakagename_ [, _options_]
+
+### options
 
 | _option_          |  _Description_                       |
 |:------------------|:-------------------------------------|
@@ -40,7 +42,8 @@ hosted on private websites or GitHub
 Example(s)
 ----------
 
-    building the installation files for "mypackage" program
+building the installation files for "mypackage" program
+
         . make mypackage, replace toc pkg readme          ///
                title(title) version(1.0.0) license("MIT") ///
                description(describe the package)          ///
@@ -51,12 +54,11 @@ Example(s)
                install("a.ado;a.sthlp;b.ado;b.sthlp")     ///
                ancillary("x.dta;y.dta")
 
-
 Author
 ------
 
 [E. F. Haghish ](https://github.com/haghish)   
-
+University of Göttingen
 
 - - -
 

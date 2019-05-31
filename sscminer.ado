@@ -7,13 +7,19 @@ Title
 __sscminer__ - mines and archives SSC packages based on their updates
 
 Syntax
-======
+------
 
 > __sscminer__ , _save(str)_ [ _download_ ]
 
+### options
+
+| _option_    |  _Description_                                                           |
+|:------------|:-------------------------------------------------------------------------|
+| save(_str_) | specifies the name of the data set to include packages information       |
+| download    | downloads and archives SSC packages in zip files                         |
 
 Description
-===========
+-----------
 
 __sscminer__ mines packages on SSC server and summarizes them in a data set. 
 it also list the files that are installable within each packages and categorizes 
@@ -21,28 +27,19 @@ them based on the Stata programming language they are using (ado, mata, dlg, etc
 
 originally, the archive was developed for education purpose. 
 
-Options
-=======
+Examples
+--------
 
-The __github__ command also takes several options for installing a package or 
-searching for a keyword. The table shows the options accordingly:
+mine Stata packages on SSC without downloading any package
 
-| _option_    |  _Description_                                                           |
-|:------------|:-------------------------------------------------------------------------|
-| save(_str_) | specifies the name of the data set to include packages information |
-| download   | downloads and archives SSC packages in zip files |
-
-Example(s)
-=================
-
-    mine Stata packages on SSC without downloading any package
         . sscminer, save("archive.dta")
 
-    mine stata packages and download the files
+mine stata packages and download the files
+
         . sscminer, save("archive.dta") download
 
 Author
-======
+------
 
 E. F. Haghish   
 Department of Mathematics and Computer Science (IMADA)    

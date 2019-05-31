@@ -1,5 +1,5 @@
 {smcl}
-{it:v. 1.0.0} 
+{it:v. 1.1} 
 
 
 {title:Title}
@@ -11,6 +11,8 @@
 {title:Syntax}
 
 {p 8 8 2} {bf:make} {it:pakagename} [, {it:options}]
+
+{p 4 4 2}{bf:options}
 
 {col 5}{it:option}{col 24}{it:Description}
 {space 4}{hline 57}
@@ -42,7 +44,9 @@ hosted on private websites or GitHub
 
 {title:Example(s)}
 
-    building the installation files for "mypackage" program
+{p 4 4 2}
+building the installation files for "mypackage" program
+
         . make mypackage, replace toc pkg readme          ///
                title(title) version(1.0.0) license("MIT") ///
                description(describe the package)          ///
@@ -54,12 +58,11 @@ hosted on private websites or GitHub
                ancillary("x.dta;y.dta")
 
 
-
 {title:Author}
 
 {p 4 4 2}
 {browse "https://github.com/haghish":E. F. Haghish}     {break}
-
+University of Göttinge
 
 {space 4}{hline}
 

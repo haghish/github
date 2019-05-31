@@ -13,7 +13,6 @@
 {p 8 8 2} {bf:pkgzip} {it:packagename} 
 
 
-
 {title:Description}
 
 {p 4 4 2}
@@ -24,13 +23,12 @@ within the package description and instead, the release date is used to show
 package versions. 
 
 
+{title:Examples}
 
-{title:Example(s)}
-		
 {p 4 4 2}
 download adoedit package from SSC, along with its version
 
-    . pkgzip adoedit
+        . pkgzip adoedit
 
 
 {title:Author}
