@@ -194,7 +194,7 @@ prog make
 			}
 			macro shift
 		}
-		list in 1/30
+
 		qui drop if files==""
 		qui sort files
 		forval m = 1/`start' {
