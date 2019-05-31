@@ -12,18 +12,7 @@
 
 {p 8 8 2} {bf:githublistpack} [ {it:keyword} ] [, {it:options} ]
 
-
-
-{title:Description}
-
-{p 4 4 2}
-{bf:githublistpack} searches for repositories on GitHub within 
-a limited time frame (i.e. {it:duration}). It can save and update
-the results in a data set. It also provides options for 
-narrowing down or expanding the search. 
-
-
-{title:Options}
+{p 4 4 2}{bf:Options}
 
 {col 5}{it:option}{col 20}{it:Description}
 {space 4}{hline}
@@ -43,20 +32,35 @@ narrowing down or expanding the search.
 {col 5}debug{col 20}detailed output log
 {space 4}{hline}
 
-{title:Example(s)}
+{title:Description}
 
 {p 4 4 2}
-{bf:examples of mining Stata packages on packages} 
+{bf:githublistpack} searches for repositories on GitHub within 
+a limited time frame (i.e. {it:duration}). It can save and update
+the results in a data set. It also provides options for 
+narrowing down or expanding the search. 
 
-    list all GitHub repositories in Stata language 
+
+
+
+{title:Examples}
+
+{p 4 4 2}{bf:examples of mining Stata packages on packages }
+
+{p 4 4 2}
+list all GitHub repositories in Stata language 
+
         . githublistpack , language(Stata) append replace   ///
-          save("repolist") duration(1) all in(all) perpage(100)
+          save("repolist") duration(1) all in(all)          ///
+					perpage(100)
 
-    search for repositories created from 2019 on  
+{p 4 4 2}
+search for repositories created from 2019 on    {break}
+
         . githublistpack , language(Stata) append replace   ///
           save("update") duration(1) all in(all)            ///
           reference("2019-01-01") perpage(100)
-		
+
 
 {title:Author}
 

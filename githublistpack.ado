@@ -7,21 +7,11 @@ Title
 __githublistpack__ - mines the GitHub API for Stata repositories
 
 Syntax
-======
+------
 
 > __githublistpack__ [ _keyword_ ] [, _options_ ]
 
-
-Description
-===========
-
-__githublistpack__ searches for repositories on GitHub within 
-a limited time frame (i.e. _duration_). It can save and update
-the results in a data set. It also provides options for 
-narrowing down or expanding the search. 
-
-Options
-=======
+### Options
 
 | _option_      |  _Description_                                                           |
 |:--------------|:-------------------------------------------------------------------------|
@@ -40,22 +30,35 @@ Options
 | quite | avoids output log |
 | debug | detailed output log |
 
-Example(s)
-=================
+Description
+-----------
 
-__examples of mining Stata packages on packages__ 
+__githublistpack__ searches for repositories on GitHub within 
+a limited time frame (i.e. _duration_). It can save and update
+the results in a data set. It also provides options for 
+narrowing down or expanding the search. 
 
-    list all GitHub repositories in Stata language 
+
+
+Examples
+--------
+
+### examples of mining Stata packages on packages 
+
+list all GitHub repositories in Stata language 
+
         . githublistpack , language(Stata) append replace   ///
-          save("repolist") duration(1) all in(all) perpage(100)
+          save("repolist") duration(1) all in(all)          ///
+					perpage(100)
 
-    search for repositories created from 2019 on  
+search for repositories created from 2019 on  
+
         . githublistpack , language(Stata) append replace   ///
           save("update") duration(1) all in(all)            ///
           reference("2019-01-01") perpage(100)
-		
+
 Author
-======
+------
 
 E. F. Haghish   
 Department of Mathematics and Computer Science (IMADA)    
