@@ -1,5 +1,5 @@
 /***
-_v. 1.0.0_
+_v. 1.1_
 
 Title
 =====
@@ -25,10 +25,10 @@ package versions.
 Example(s)
 =================
 		
-    download adoedit package from SSC, along with its version
-        . pkgzip adoedit
-		
-		
+download adoedit package from SSC, along with its version
+
+    . pkgzip adoedit
+
 Author
 ======
 
@@ -41,8 +41,6 @@ University of Southern Denmark
 This help file was dynamically produced by 
 [MarkDoc Literate Programming package](http://www.haghish.com/markdoc/) 
 ***/
-
-
 
 
 *cap prog drop pkgzip

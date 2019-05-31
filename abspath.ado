@@ -1,36 +1,39 @@
-/*** DO NOT EDIT THIS LINE -----------------------------------------------------
-
-Version: 1.0.0
+/***
+version: 1.1.0
 
 Intro Description
 =================
 
-abspath | abspath(str) -- Stata program and Mata function that returns the 
-absolute path of any given {help filename}.  
+abspath - Stata program that returns the absolute path of any given _filename_  
 
-
-Author(s) section
+Syntax
 =================
+
+> abspath _filename_
+
+Example
+=================
+
+Return absolute path of a file with relative path in Stata
+
+    . abspath ../../myfile.smcl
+    . abspath "./my file.smcl"
+
+Author
+======
 
 E. F. Haghish
 Center for Medical Biometry and Medical Informatics
 University of Freiburg, Germany
 _haghish@imbi.uni-freiburg.de_
-_ {browse "http://www.haghish.com/stat"} _
 
-Syntax
-=================
+- - -
 
-{opt abspath} {it:{help filename:filename}}
------------------------------------------------------ DO NOT EDIT THIS LINE ***/
-
-/***
-Mata Syntax
-===========
-
-{p 8 16 2}
-{opt abspath}{bf:(}{it:"{help filename:filename}"}{bf:)}
+This help file was dynamically produced by 
+[MarkDoc Literate Programming package](http://www.haghish.com/markdoc/) 
 ***/
+
+
 
 
 program abspath, rclass
@@ -95,20 +98,4 @@ program abspath, rclass
 	return local fname `filename'
 end
 
-
-
-/***
-Example
-=================
-
-    Return absolute path of a file with relative path in Stata
-	
-        . abspath ../../myfile.smcl
-        . abspath "./my file.smcl"
-
-    Return absolute path of a file with relative path in Mata
-	
-        . mata: abspath("../../myfile.smcl")
-        . mata: abspath("./my file.smcl")
-***/
 

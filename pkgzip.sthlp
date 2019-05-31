@@ -1,5 +1,5 @@
 {smcl}
-{it:v. 1.0.0}
+{it:v. 1.1}
 
 
 {title:Title}
@@ -27,10 +27,11 @@ package versions.
 
 {title:Example(s)}
 		
-    download adoedit package from SSC, along with its version
-        . pkgzip adoedit
-		
-		
+{p 4 4 2}
+download adoedit package from SSC, along with its version
+
+    . pkgzip adoedit
+
 
 {title:Author}
 

@@ -23,3 +23,39 @@ make github, replace toc pkg  version(2.0.0)                         ///
      ancillary("")                                                  
 
 
+/*
+Generating the package documentation
+====================================
+
+The package documentation is written in Markdown language. 
+The MARKDOC package extract these documentation and 
+create the Stata help files as well as Markdown 
+documentation for GitHub Wiki. Learn more about MARKDOC
+here: https://github.com/haghish/markdoc
+
+Generating Stata Help Files
+---------------------------
+*/
+
+markdoc "abspath.ado", mini export(sthlp) replace
+markdoc "findall.ado", mini export(sthlp) replace
+markdoc "gitget.ado", mini export(sthlp) replace
+markdoc "github.ado", mini export(sthlp) replace
+markdoc "githublistpack.ado", mini export(sthlp) replace
+markdoc "make.ado", mini export(sthlp) replace
+markdoc "pkgzip.ado", mini export(sthlp) replace
+markdoc "sscminer.ado", mini export(sthlp) replace
+
+/*
+Generating markdown files for GitHub Wiki
+-----------------------------------------
+*/
+
+markdoc "abspath.ado", mini export(md) replace
+markdoc "findall.ado", mini export(md) replace
+markdoc "gitget.ado", mini export(md) replace
+markdoc "github.ado", mini export(md) replace
+markdoc "githublistpack.ado", mini export(md) replace
+markdoc "make.ado", mini export(md) replace
+markdoc "pkgzip.ado", mini export(md) replace
+markdoc "sscminer.ado", mini export(md) replace

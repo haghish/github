@@ -1,16 +1,18 @@
 {smcl}
-{right:version 1.0.0}
+version: 1.2
+
+
 {title:Title}
 
-{phang}
-{cmd:findall} {hline 2} a Stata module to search for Stata packages on GitHub, Stata Journal, SSC, and the web. The command also shows the last update of the module on each 
- server. 
- 
+{p 4 4 2}
+{bf:findall} - a program to search for Stata packages on GitHub, Stata Journal, 
+SSC, and the web. ths program is executed by {bf:github search} command, with 
+the {bf:net} option and is not called on its own.
+
 
 {title:Syntax}
 
-{p 8 16 2}
-{cmd: findall} {it:keyword} {p_end}
+{p 8 8 2} {bf:findall} {it:keyword}
 
 
 {title:Description}
@@ -44,9 +46,10 @@ Department of Mathematics and Computer Science         {break}
 University of Southern Denmark       {break}
 haghish@imbi.uni-freiburg.de          {break}
 
-    {hline}
+{space 4}{hline}
 
 {p 4 4 2}
 This help file was dynamically produced by 
 {browse "http://www.haghish.com/markdoc/":MarkDoc Literate Programming package} 
+
 

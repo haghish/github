@@ -1,11 +1,11 @@
 {smcl}
-{it:v. 1.0.4} 
+{it:v. 1.1} 
 
 
 {title:Title}
 
 {p 4 4 2}
-{bf: {browse "https://github.com/haghish/github":gitget}} {hline 2} install or update a package from GitHub using the {it:packagename} only 
+{bf:gitget} - install or update a package from GitHub using the {it:packagename} only 
 
 
 {title:Syntax}
@@ -15,12 +15,10 @@
 {p 4 4 2}
 {it:options}
 
+{col 5}{it:option}{col 24}{it:Description}
 {space 4}{hline}
-
-{p 4 4 2}
-stable: installs the latest released version of a package     {break}
-{ul:v}ersion({it:str}): installs a particular released version     {break}
-
+{col 5}stable{col 24}installs the latest stable release. otherwise the main branch is installed
+{col 5}{ul:v}erson({it:str}){col 24}specifies a particular stable version (release tags) for the installation
 {space 4}{hline}
 
 
@@ -59,4 +57,5 @@ haghish@med.uni-goettingen.de      {break}
 {p 4 4 2}
 This help file was dynamically produced by 
 {browse "http://www.haghish.com/markdoc/":MarkDoc Literate Programming package} 
+
 

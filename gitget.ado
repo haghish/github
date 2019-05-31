@@ -1,10 +1,10 @@
 /***
-_v. 1.0.4_ 
+_v. 1.1_ 
 
 Title
 ====== 
 
-__[gitget](https://github.com/haghish/github)__ -- install or update a package from GitHub using the _packagename_ only 
+__gitget__ - install or update a package from GitHub using the _packagename_ only 
 
 Syntax
 ------ 
@@ -13,12 +13,11 @@ Syntax
 
 _options_
 
-| _option_ |  _Description_                                                           |
-|:---------|:-------------------------------------------------------------------------|
-| stable   | installs the latest stable release. otherwise the main branch is installed |
-| verson(_str_) | specifies a particular stable version (release tags) for the installation |
+| _option_          |  _Description_                                                           |
+|:------------------|:-------------------------------------------------------------------------|
+| stable            | installs the latest stable release. otherwise the main branch is installed |
+| **v**erson(_str_) | specifies a particular stable version (release tags) for the installation |
 
-- - -
 
 Description
 -----------

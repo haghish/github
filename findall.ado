@@ -1,18 +1,17 @@
-/*** DO NOT EDIT THIS LINE -----------------------------------------------------
-Version: 1.1
-Title: findall
-Description: a Stata module to search for Stata packages on GitHub, Stata Journal, 
-SSC, and the web. The command also shows the last update of the module on each 
-server. 
------------------------------------------------------ DO NOT EDIT THIS LINE ***/
-
-
 /***
+version: 1.2
+
+Title
+=====
+
+__findall__ - a program to search for Stata packages on GitHub, Stata Journal, 
+SSC, and the web. ths program is executed by __github search__ command, with 
+the __net__ option and is not called on its own.
+
 Syntax
 ======
 
-{p 8 16 2}
-{cmd: findall} {it:keyword} {p_end}
+> __findall__ _keyword_
 
 Description
 ===========
