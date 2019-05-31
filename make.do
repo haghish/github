@@ -19,7 +19,7 @@ make github, replace toc pkg  version(2.0.0)                         ///
 		 "githuboutput.ado;githubquery.ado;githubsearch.ado;"            ///
 		 "githubmake.ado;githubsearchsteps.ado;pkgzip.ado;"              ///
 		 "pkgzip.sthlp;make.ado;make.dlg;make.sthlp;makedlg.ado;"        ///
-		 "ssclastupdate.ado;sscminer.ado;sscminer.sthlpM")               ///
+		 "ssclastupdate.ado;sscminer.ado;sscminer.sthlp")               ///
      ancillary("")                                                  
 
 
