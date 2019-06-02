@@ -37,25 +37,53 @@ Generating Stata Help Files
 ---------------------------
 */
 
-markdoc "abspath.ado", mini export(sthlp) replace
-markdoc "findall.ado", mini export(sthlp) replace
-markdoc "gitget.ado", mini export(sthlp) replace
 markdoc "github.ado", mini export(sthlp) replace
-markdoc "githublistpack.ado", mini export(sthlp) replace
+markdoc "gitget.ado", mini export(sthlp) replace
 markdoc "make.ado", mini export(sthlp) replace
 markdoc "pkgzip.ado", mini export(sthlp) replace
+markdoc "githublistpack.ado", mini export(sthlp) replace
 markdoc "sscminer.ado", mini export(sthlp) replace
+markdoc "abspath.ado", mini export(sthlp) replace
+markdoc "findall.ado", mini export(sthlp) replace
 
 /*
 Generating markdown files for GitHub Wiki
 -----------------------------------------
 */
 
-markdoc "abspath.ado", mini export(md) replace
-markdoc "findall.ado", mini export(md) replace
-markdoc "gitget.ado", mini export(md) replace
 markdoc "github.ado", mini export(md) replace
-markdoc "githublistpack.ado", mini export(md) replace
+markdoc "gitget.ado", mini export(md) replace
 markdoc "make.ado", mini export(md) replace
 markdoc "pkgzip.ado", mini export(md) replace
+markdoc "githublistpack.ado", mini export(md) replace
 markdoc "sscminer.ado", mini export(md) replace
+markdoc "abspath.ado", mini export(md) replace
+markdoc "findall.ado", mini export(md) replace
+
+/*
+Generating the package vignette
+-----------------------------------------
+
+change the WD to the cloned Wiki repository and then generate the vignettes
+*/
+
+cd "/Users/haghish/Documents/GitHub/github.wiki"
+
+markdoc "vignette.do", export(tex) toc replace master                        ///
+        title("github v. 2.0.0 package vignette")                            ///
+				author("E. F. Haghish")                                              ///
+				affiliation("University of Goettingen")                              ///
+				address("haghish@med.uni-goettingen.de") 
+
+markdoc "vignette.do", export(html) toc replace master                       ///
+        title("github v. 2.0.0 package vignette")                            ///
+				author("E. F. Haghish")                                              ///
+				affiliation("University of Goettingen")                              ///
+				address("haghish@med.uni-goettingen.de") 
+
+
+
+
+
+
+å

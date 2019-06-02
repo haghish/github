@@ -1,10 +1,13 @@
+// documentation is written for markdoc package (github.com/haghish/markdoc) 
+// . markdoc make.ado, mini export(sthlp) replace
+
 /***
 _v. 1.1_ 
 
-Title
-====== 
+make
+====
 
-__makee__ - builds package installation files
+__make__ builds package installation files
 
 Syntax
 ------ 
@@ -39,8 +42,8 @@ installable. the command is particularly handy for packages
 hosted on private websites or GitHub
 
 
-Example(s)
-----------
+Example
+-------
 
 building the installation files for "mypackage" program
 
@@ -57,8 +60,15 @@ building the installation files for "mypackage" program
 Author
 ------
 
-[E. F. Haghish ](https://github.com/haghish)   
-University of Göttingen
+E. F. Haghish   
+University of Göttingen    
+_haghish@med.uni-goesttingen.de_  
+[https://github.com/haghish](https://github.com/haghish)
+
+License
+-------
+
+MIT License
 
 - - -
 
