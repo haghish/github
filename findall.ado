@@ -1,10 +1,10 @@
 /***
 version: 1.3
 
-Title
-=====
+findall
+=======
 
-__findall__ - a program to search for Stata packages on GitHub, Stata Journal, 
+a program to search for Stata packages on GitHub, Stata Journal, 
 SSC, and the web. ths program is executed by __github search__ command, with 
 the __net__ option and is not called on its own.
 

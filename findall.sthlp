@@ -2,10 +2,10 @@
 version: 1.3
 
 
-{title:Title}
+{title:findall}
 
 {p 4 4 2}
-{bf:findall} - a program to search for Stata packages on GitHub, Stata Journal, 
+a program to search for Stata packages on GitHub, Stata Journal, 
 SSC, and the web. ths program is executed by {bf:github search} command, with 
 the {bf:net} option and is not called on its own.
 

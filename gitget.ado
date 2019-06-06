@@ -1,10 +1,11 @@
 /***
 _v. 1.2_ 
 
-Title
+gitget
 ====== 
 
-__gitget__ - install or update a package from GitHub using the _packagename_ only 
+__gitget__ installs or updates a package from GitHub using the _packagename_ only. 
+this is an exploratory alternative to __github__ command. 
 
 Syntax
 ------ 

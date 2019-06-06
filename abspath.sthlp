@@ -2,10 +2,10 @@
 version: 1.1.0
 
 
-{title:Title}
+{title:abspath}
 
 {p 4 4 2}
-{bf:abspath} - Stata program that returns the absolute path of any given {it:filename}    {break}
+a Stata program that returns the absolute path of any given {it:filename}    {break}
 
 
 {title:Syntax}

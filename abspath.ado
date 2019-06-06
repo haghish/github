@@ -1,10 +1,10 @@
 /***
 version: 1.1.0
 
-Title
-=====
+abspath
+=======
 
-__abspath__ - Stata program that returns the absolute path of any given _filename_  
+a Stata program that returns the absolute path of any given _filename_  
 
 Syntax
 ------

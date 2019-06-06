@@ -2,10 +2,11 @@
 {it:v. 1.2} 
 
 
-{title:Title}
+{title:gitget}
 
 {p 4 4 2}
-{bf:gitget} - install or update a package from GitHub using the {it:packagename} only 
+{bf:gitget} installs or updates a package from GitHub using the {it:packagename} only. 
+this is an exploratory alternative to {bf:github} command. 
 
 
 {title:Syntax}
