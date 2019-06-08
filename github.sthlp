@@ -2,11 +2,11 @@
 {it:v. 2.0.0}
 
 
-{title:Title}
+{title:github}
 
 {p 4 4 2}
-{bf:github} - search, install, and uninstall Stata packages with a particular 
-version (release) as well as their dependencies from 
+{bf:github} is a program for searching, installing, and managing Stata packages 
+{space 1}as well as their dependencies from 
 {browse "http://www.github.com/haghish/github":GitHub} website
 
 
@@ -28,7 +28,6 @@ where the subcommands can be:
 {col 5}findfile{col 19}followed by a {it:keyword}, it searches Stata packages for files that include the keyword
 {col 5}list{col 19}lists the packages installed from GitHub and checkes if they have an update
 {space 4}{hline}
-
 
 {title:Description}
 
@@ -73,7 +72,6 @@ searching for a keyword. The table shows the options accordingly:
 {col 5}in({it:str}){col 19}specifies the domain of the search which can be {bf:name}, {bf:description}, {bf:readme}, or {bf:all}
 {col 5}all{col 19}shows repositories that lack the {bf:pkg} and {bf:stata.toc} files in the search results
 {space 4}{hline}
-
 
 {title:Installing package dependencies}
 

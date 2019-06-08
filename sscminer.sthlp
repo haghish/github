@@ -2,10 +2,10 @@
 {it:v. 1.0.0}
 
 
-{title:Title}
+{title:sscminer}
 
 {p 4 4 2}
-{bf:sscminer} - mines and archives SSC packages based on their updates
+mines and archives SSC packages based on their updates
 
 
 {title:Syntax}

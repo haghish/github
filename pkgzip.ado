@@ -1,10 +1,10 @@
 /***
 _v. 1.1_
 
-Title
-=====
+pkgzip
+======
 
-__pkgzip__ - creates and downloads a Zip file from SSC and names it based on the package release date
+creates and downloads a Zip file from SSC and names it based on the package release date
 
 Syntax
 ------

@@ -1,10 +1,10 @@
 /***
 _v. 1.0.0_
 
-Title
-=====
+githublistpack
+==============
 
-__githublistpack__ - mines the GitHub API for Stata repositories
+mines the GitHub API for Stata repositories
 
 Syntax
 ------

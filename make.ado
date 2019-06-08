@@ -7,7 +7,7 @@ _v. 1.1_
 make
 ====
 
-__make__ builds package installation files
+builds package installation files
 
 Syntax
 ------ 

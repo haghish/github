@@ -2,10 +2,10 @@
 {it:v. 1.1}
 
 
-{title:Title}
+{title:pkgzip}
 
 {p 4 4 2}
-{bf:pkgzip} - creates and downloads a Zip file from SSC and names it based on the package release date
+creates and downloads a Zip file from SSC and names it based on the package release date
 
 
 {title:Syntax}

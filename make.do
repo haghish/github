@@ -63,11 +63,13 @@ markdoc "findall.ado", mini export(md) replace
 /*
 Generating the package vignette
 -----------------------------------------
-
-change the WD to the cloned Wiki repository and then generate the vignettes
 */
 
-cd "/Users/haghish/Documents/GitHub/github.wiki"
+markdoc "vignette.do", mini export(html) replace                             ///
+        title("github v. 2.0.0 package vignette")                            ///
+				author("E. F. Haghish")                                              ///
+				affiliation("University of Goettingen")                              ///
+				address("haghish@med.uni-goettingen.de") 
 
 markdoc "vignette.do", export(tex) toc replace master                        ///
         title("github v. 2.0.0 package vignette")                            ///
@@ -75,11 +77,6 @@ markdoc "vignette.do", export(tex) toc replace master                        ///
 				affiliation("University of Goettingen")                              ///
 				address("haghish@med.uni-goettingen.de") 
 
-markdoc "vignette.do", export(html) toc replace master                       ///
-        title("github v. 2.0.0 package vignette")                            ///
-				author("E. F. Haghish")                                              ///
-				affiliation("University of Goettingen")                              ///
-				address("haghish@med.uni-goettingen.de") 
 
 
 

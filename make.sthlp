@@ -2,10 +2,10 @@
 {it:v. 1.1} 
 
 
-{title:Title}
+{title:make}
 
 {p 4 4 2}
-{bf:makee} - builds package installation files
+builds package installation files
 
 
 {title:Syntax}
@@ -42,7 +42,7 @@ hosted on private websites or GitHub
 
 
 
-{title:Example(s)}
+{title:Example}
 
 {p 4 4 2}
 building the installation files for "mypackage" program
@@ -61,8 +61,16 @@ building the installation files for "mypackage" program
 {title:Author}
 
 {p 4 4 2}
-{browse "https://github.com/haghish":E. F. Haghish}     {break}
-University of Göttinge
+E. F. Haghish     {break}
+University of Göttingen     {break}
+{it:haghish@med.uni-goesttingen.de}    {break}
+{browse "https://github.com/haghish":https://github.com/haghish}
+
+
+{title:License}
+
+{p 4 4 2}
+MIT License
 
 {space 4}{hline}
 

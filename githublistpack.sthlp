@@ -2,10 +2,10 @@
 {it:v. 1.0.0}
 
 
-{title:Title}
+{title:githublistpack}
 
 {p 4 4 2}
-{bf:githublistpack} - mines the GitHub API for Stata repositories
+mines the GitHub API for Stata repositories
 
 
 {title:Syntax}

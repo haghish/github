@@ -1,10 +1,10 @@
 /***
 _v. 1.0.0_
 
-Title
-=====
+sscminer
+========
 
-__sscminer__ - mines and archives SSC packages based on their updates
+mines and archives SSC packages based on their updates
 
 Syntax
 ------

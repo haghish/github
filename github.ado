@@ -3,11 +3,11 @@
 /***
 _v. 2.0.0_
 
-Title
-=====
+github
+======
 
-__github__ - search, install, and uninstall Stata packages with a particular 
-version (release) as well as their dependencies from 
+__github__ is a program for searching, installing, and managing Stata packages 
+ as well as their dependencies from 
 [GitHub](http://www.github.com/haghish/github) website
 
 Syntax
@@ -27,7 +27,6 @@ where the subcommands can be:
 | search       | followed by _keywords_, it searches the GitHub API for relevant packages or repositories |
 | findfile     | followed by a _keyword_, it searches Stata packages for files that include the keyword |
 | list         | lists the packages installed from GitHub and checkes if they have an update |
-
 
 Description
 -----------
@@ -69,7 +68,6 @@ searching for a keyword. The table shows the options accordingly:
 | language(_str_)   | specifies the programming language of the repository. the default is __Stata__ |
 | in(_str_) | specifies the domain of the search which can be __name__, __description__, __readme__, or __all__ |
 | all | shows repositories that lack the __pkg__ and __stata.toc__ files in the search results |
-
 
 Installing package dependencies
 -------------------------------
