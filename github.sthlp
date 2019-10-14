@@ -106,12 +106,12 @@ install the latest development version of MarkDoc package
 {p 4 4 2}
 install the latest stable version of MarkDoc package
 
-        . github haghish/markdoc, stable
+        . github install haghish/markdoc, stable
 
 {p 4 4 2}
 install MarkDoc version 3.8.1 from GitHub (older version)
 
-        . github haghish/markdoc, version("3.8.1")
+        . github install haghish/markdoc, version("3.8.1")
 
 {p 4 4 2}
 Uninstall MarkDoc repository

@@ -21,12 +21,14 @@ where the subcommands can be:
 | _subcommand_ |  _Description_                                                           |
 |:-------------|:-------------------------------------------------------------------------|
 | install      | followed by the _username/repository_, installs the specified repository |
+| require      | followed by _username/repository_, examines the required version (see below) |
 | query        | followed by _username/repository_, returns all released versions of that package |
 | check        | followed by _username/repository_, evaluates whether the repository is installable |
 | uninstall    | followed by _package name_, uninstalls a package |
 | search       | followed by _keywords_, it searches the GitHub API for relevant packages or repositories |
 | findfile     | followed by a _keyword_, it searches Stata packages for files that include the keyword |
 | list         | lists the packages installed from GitHub and checkes if they have an update |
+| version      | return the version of installed package or set a minimum required version |
 
 Description
 -----------
@@ -59,7 +61,6 @@ searching for a keyword. The table shows the options accordingly:
 | package(_str_) | the package name. only needed if the repository name is not identical to the package name |
 | stable   | installs the latest stable release. otherwise the main branch is installed |
 | verson(_str_) | specifies a particular stable version (release tags) for the installation |
-
 
 ### __github search__ options:
 
@@ -98,11 +99,11 @@ install the latest development version of MarkDoc package
 
 install the latest stable version of MarkDoc package
 
-        . github haghish/markdoc, stable
+        . github install haghish/markdoc, stable
 
 install MarkDoc version 3.8.1 from GitHub (older version)
 
-        . github haghish/markdoc, version("3.8.1")
+        . github install haghish/markdoc, version("3.8.1")
 
 Uninstall MarkDoc repository
 
@@ -130,12 +131,21 @@ search for a script files with the name _dy_
 
         . github findfile dy
 
+### example of package management
+
+list the installed packages
+
+        . github list
+
+get the version of an installed packages, e.g. markdoc package
+
+        . github version markdoc
 
 ### examples of searching the popular packages
 
-build the complete list of Stata packages on GiutHub
+search for Stata packages on GiutHub and save the search results in a data set
 
-    . github list stata, language(all) in(all) all save(archive) append
+    . github search stata, language(Stata) save(archive) 
 
 Author
 ------
@@ -159,13 +169,13 @@ PLEASE NOTE
   intended to be used internally
 */
 
-*cap prog drop github
+cap prog drop github
 prog define github
 
 	version 13
 	
 	syntax anything, [stable Version(str) save(str) in(str) 				              ///
-	language(str) all NET package(str)                                            ///
+	language(str) all NET package(str) require(str)                               ///
 	/// the options below are not documented yet                                  ///
 	force created(str) pushed(str) debug reference(str)			                      ///
 	duration(numlist max=1) perpage(numlist max=1)                                ///
@@ -192,7 +202,45 @@ prog define github
 	// Version     //CHANGE THIS TO INFO?
 	// ---------
 	if "`1'" == "version" {
-		githubdb version, name(`anything')
+	  if missing("`require'") {
+		  githubdb version, name(`anything')
+		}
+		else {
+		  qui githubdb version, name(`anything')
+			local currentversion `r(version)'
+			if "`r(version)'" != "`require'" {
+			  tokenize "`r(version)'", parse(".")
+				local currentversion `1'	
+		    macro shift
+				while !missing("`1'") {
+					if "`1'" != "." local sub `sub'`1'
+					macro shift
+				}
+				local currentversion `currentversion'.`sub'
+				
+				tokenize "`require'", parse(".")
+				local requiredversion `1'	
+		    macro shift
+				while !missing("`1'") {
+					if "`1'" != "." local sub `sub'`1'
+					macro shift
+				}
+				local requiredversion `requiredversion'.`sub'
+				
+				// return error if rcall is old
+				if `requiredversion' > `currentversion' {
+					display as err "Version `requiredversion' or newer is "	///
+					"required"
+					err 198
+				}
+				else {
+				  di as txt "version `r(version)' meets version `require' requirement"
+				}
+			}
+			else {
+			  di as txt "version `require' is currently installed"
+			}
+		}
 		exit
 	}
 	

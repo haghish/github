@@ -80,7 +80,3 @@ markdoc "vignette.do", export(tex) toc replace master                        ///
 
 
 
-
-
-
-å
