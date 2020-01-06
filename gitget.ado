@@ -71,7 +71,7 @@ program gitget
 		quietly use "`r(fn)'", clear
 		quietly keep if packagename == "`anything'"
 		if _N == 0 {
-			display as err "`anything' package is unknown. try: {stata github search `anything'"
+			display as err "`anything' package is unknown. try: {stata github search `anything'}"
 		}
 		else if _N == 1 {
 			display as txt _n "{it:Installing `anything' ...}" 
