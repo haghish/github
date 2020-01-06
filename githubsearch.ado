@@ -102,6 +102,9 @@ program githubsearch
 		di as txt `"Line:`line'"' _n(3)
 	}
 	
+	// if a description includes an accent, it can crash the program; typical Stata issue with text processing
+	local line : subinstr local line "'" "", all
+	
 	// check the number of results
 	// --------------------------------
 	//display `"`macval(line)'"'
@@ -113,8 +116,9 @@ program githubsearch
 	// --------------------------------
 	if `1' > 100 {
 		local warning 1
-		di as txt "{p}(your search has yeilded {bf:`1'} results. Narrow your search "		///
-		"using {bf:language}, {bf:in}, {bf:created}, and {bf:pushed} options...)" _n
+		di as txt "{p}(your search has yielded {bf:`1'} results. " ///
+		"GitHub API returns the top 100 only. " ///
+		"Narrow your search using {bf:language}, {bf:in}, {bf:created}, and {bf:pushed} options...)" _n
 	}
 	
 	local line : subinstr local line "[" "", all
