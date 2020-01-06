@@ -1,7 +1,7 @@
 // documentation are written for MARKDOC package
 
 /***
-_v. 2.0.0_
+_v. 2.0.6_
 
 github
 ======
@@ -62,13 +62,16 @@ searching for a keyword. The table shows the options accordingly:
 | stable   | installs the latest stable release. otherwise the main branch is installed |
 | verson(_str_) | specifies a particular stable version (release tags) for the installation |
 
+
 ### __github search__ options:
 
-| _option_     |  _Description_                                                           |
-|:-------------|:-------------------------------------------------------------------------|
+| _option_      |  _Description_                                                           |
+|:--------------|:------------------------------------------------------------------------|
 | language(_str_)   | specifies the programming language of the repository. the default is __Stata__ |
 | in(_str_) | specifies the domain of the search which can be __name__, __description__, __readme__, or __all__ |
 | all | shows repositories that lack the __pkg__ and __stata.toc__ files in the search results |
+| save(filename) | stores the search results in a dataset |
+| replace | replaces the existing dataset |
 
 Installing package dependencies
 -------------------------------
@@ -169,7 +172,7 @@ PLEASE NOTE
   intended to be used internally
 */
 
-cap prog drop github
+*cap prog drop github
 prog define github
 
 	version 13
@@ -227,7 +230,7 @@ prog define github
 				}
 				local requiredversion `requiredversion'.`sub'
 				
-				// return error if rcall is old
+				// return error if version is old
 				if `requiredversion' > `currentversion' {
 					display as err "Version `requiredversion' or newer is "	///
 					"required"
@@ -337,7 +340,7 @@ prog define github
 	else if "`1'" == "search" {
 
 	  if !missing("`local'") | !missing("`net'") {
-	    findall `2', language(`language') in(`in') `local'  `net' `all' 
+	    githubfindall `2', language(`language') in(`in') `local'  `net' `all' 
 	  }
 	  else {
 		githubsearch `2', language(`language') in(`in') save(`save') `all' 		///
@@ -420,7 +423,6 @@ prog define github
 	local line : subinstr local line "}" "", all
 	
 	while r(eof) == 0 {
-
 		tokenize `"`macval(line)'"' , parse(",")
 		
 		while !missing(`"`macval(1)'"') | !missing(`"`macval(2)'"') | !missing(`"`macval(3)'"')  {
@@ -588,5 +590,5 @@ end
 
 /*
 capture prog drop github
-markdoc github.ado, export(sthlp) replace build
+markdoc github.ado, export(sthlp) replace 
 
