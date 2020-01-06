@@ -1,8 +1,8 @@
 /***
 version: 1.3
 
-findall
-=======
+githubfindall
+=============
 
 a program to search for Stata packages on GitHub, Stata Journal, 
 SSC, and the web. ths program is executed by __github search__ command, with 
@@ -11,12 +11,12 @@ the __net__ option and is not called on its own.
 Syntax
 ------
 
-> __findall__ _keyword_
+> __githubfindall__ _keyword_
 
 Description
 -----------
 
-__findall__ is a general command for searching for Stata packages on variety of 
+__githubfindall__ is a general command for searching for Stata packages on variety of 
 web hosts, including GitHub, Stata, SSC, etc. The command wraps the Stata's 
 {help search} command and adds the results of __github search__ command from the 
 [github package](https://github.com/haghish/github). 
@@ -30,7 +30,7 @@ Example
 
 search for markdoc package on SSC and GitHub and show the last update
 
-    . findall markdoc
+    . githubfindall markdoc
 
 Author
 ------
@@ -52,8 +52,8 @@ This help file was dynamically produced by
 
 
 
-*cap prog drop findall
-program findall
+*cap prog drop githubfindall
+program githubfindall
 	*syntax [anything] [,  *]
 	syntax [anything] [, language(str) in(str) net local all]
 	
@@ -166,4 +166,4 @@ program findall
 end
 
 
-*markdoc findall.ado , export(sthlp) replace build
+*markdoc githubfindall.ado , export(sthlp) replace build

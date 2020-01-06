@@ -2,7 +2,7 @@
 version: 1.3
 
 
-{title:findall}
+{title:githubfindall}
 
 {p 4 4 2}
 a program to search for Stata packages on GitHub, Stata Journal, 
@@ -12,13 +12,13 @@ the {bf:net} option and is not called on its own.
 
 {title:Syntax}
 
-{p 8 8 2} {bf:findall} {it:keyword}
+{p 8 8 2} {bf:githubfindall} {it:keyword}
 
 
 {title:Description}
 
 {p 4 4 2}
-{bf:findall} is a general command for searching for Stata packages on variety of 
+{bf:githubfindall} is a general command for searching for Stata packages on variety of 
 web hosts, including GitHub, Stata, SSC, etc. The command wraps the Stata{c 39}s 
 {help search} command and adds the results of {bf:github search} command from the 
 {browse "https://github.com/haghish/github":github package}. 
@@ -34,7 +34,7 @@ package.    {break}
 {p 4 4 2}
 search for markdoc package on SSC and GitHub and show the last update
 
-    . findall markdoc
+    . githubfindall markdoc
 
 
 {title:Author}

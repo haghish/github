@@ -7,8 +7,6 @@ d Distribution-Date:   20190531
 d License: MIT
 d 
 F abspath.ado
-F findall.ado
-F findall.sthlp
 F gitget.ado
 F gitget.dta
 F gitget.sthlp
@@ -21,6 +19,8 @@ F githubconfirm.ado
 F githubdb.ado
 F githubdependency.ado
 F githubfiles.dta
+F githubfindall.ado
+F githubfindall.sthlp
 F githubhot.ado
 F githublistpack.ado
 F githublistpack.sthlp
