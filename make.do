@@ -3,23 +3,21 @@
 // DO NOT FORGET to update the version of the package, if changed!
 // for more information visit http://github.com/haghish/github
 
-make github, replace toc pkg  version(2.0.0)                         ///
-     license("MIT")                                                  ///
-     author("E. F. Haghish")                                         ///
-     affiliation("University of Göttingen")                          ///
-     email("haghish@med.uni-goettingen.de")                          ///
-     url("https://github.com/haghish/github")                        ///
-     title("github package manager")                                 ///
-     description("search, install, and manage github packages")      ///
-     install("abspath.ado;findall.ado;findall.sthlp;gitget.ado;"     /// 
-		 "gitget.dta;gitget.sthlp;gitgetlist.ado;github.ado;"            ///
-		 "github.dlg;github.sthlp;githubcheck.ado;githubconfirm.ado;"    ///
-		 "githubdb.ado;githubdependency.ado;githubfiles.dta;"            ///
-		 "githubhot.ado;githublistpack.ado;githublistpack.sthlp;"        ///
-		 "githuboutput.ado;githubquery.ado;githubsearch.ado;"            ///
-		 "githubmake.ado;githubsearchsteps.ado;pkgzip.ado;"              ///
-		 "pkgzip.sthlp;make.ado;make.dlg;make.sthlp;makedlg.ado;"        ///
-		 "ssclastupdate.ado;sscminer.ado;sscminer.sthlp")               ///
+make github, replace toc pkg  version(2.0.5)                             ///
+     license("MIT")                                                      ///
+     author("E. F. Haghish")                                             ///
+     affiliation("University of Göttingen")                              ///
+     email("haghish@med.uni-goettingen.de")                              ///
+     url("https://github.com/haghish/github")                            ///
+     title("github package manager")                                     ///
+     description("search, install, and manage github packages")          ///
+     install("abspath.ado;githubfindall.ado;githubfindall.sthlp;"        /// 
+		 "gitget.ado;gitget.dta;gitget.sthlp;gitgetlist.ado;github.ado;"     ///
+		 "github.dlg;github.sthlp;githubcheck.ado;githubconfirm.ado;"        ///
+		 "githubdb.ado;githubdependency.ado;githubfiles.dta;"                ///
+		 "githubhot.ado;githublistpack.ado;githublistpack.sthlp;"            ///
+		 "githuboutput.ado;githubquery.ado;githubsearch.ado;"                ///
+		 "githubmake.ado;githubsearchsteps.ado;")                            ///
      ancillary("")                                                  
 
 
@@ -39,12 +37,9 @@ Generating Stata Help Files
 
 markdoc "github.ado", mini export(sthlp) replace
 markdoc "gitget.ado", mini export(sthlp) replace
-markdoc "make.ado", mini export(sthlp) replace
-markdoc "pkgzip.ado", mini export(sthlp) replace
 markdoc "githublistpack.ado", mini export(sthlp) replace
-markdoc "sscminer.ado", mini export(sthlp) replace
 markdoc "abspath.ado", mini export(sthlp) replace
-markdoc "findall.ado", mini export(sthlp) replace
+markdoc "githubfindall.ado", mini export(sthlp) replace
 
 /*
 Generating markdown files for GitHub Wiki
@@ -53,12 +48,9 @@ Generating markdown files for GitHub Wiki
 
 markdoc "github.ado", mini export(md) replace
 markdoc "gitget.ado", mini export(md) replace
-markdoc "make.ado", mini export(md) replace
-markdoc "pkgzip.ado", mini export(md) replace
 markdoc "githublistpack.ado", mini export(md) replace
-markdoc "sscminer.ado", mini export(md) replace
 markdoc "abspath.ado", mini export(md) replace
-markdoc "findall.ado", mini export(md) replace
+markdoc "githubfindall.ado", mini export(md) replace
 
 /*
 Generating the package vignette
@@ -67,15 +59,15 @@ Generating the package vignette
 
 markdoc "vignette.do", mini export(html) replace                             ///
         title("github v. 2.0.0 package vignette")                            ///
-				author("E. F. Haghish")                                              ///
-				affiliation("University of Goettingen")                              ///
-				address("haghish@med.uni-goettingen.de") 
+		author("E. F. Haghish")                                              ///
+		affiliation("University of Goettingen")                              ///
+		address("haghish@med.uni-goettingen.de") 
 
 markdoc "vignette.do", export(tex) toc replace master                        ///
         title("github v. 2.0.0 package vignette")                            ///
-				author("E. F. Haghish")                                              ///
-				affiliation("University of Goettingen")                              ///
-				address("haghish@med.uni-goettingen.de") 
+		author("E. F. Haghish")                                              ///
+		affiliation("University of Goettingen")                              ///
+		address("haghish@med.uni-goettingen.de") 
 
 
 

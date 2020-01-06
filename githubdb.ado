@@ -126,6 +126,37 @@ program githubdb, rclass
 		if "`anything'" == "list" {
 			preserve
 			use "`r(fn)'", clear
+			
+			// update the database if a package is removed without github uninstall
+			// --------------------------------------------------------------------
+			
+			// get the list of packages from stata.trk
+			qui findfile "stata.trk"
+			tempname hitch2 
+			file open `hitch2' using "`r(fn)'", read
+			file read `hitch2' line
+			local pkglist ""
+			while r(eof) == 0 {
+				if substr(`"`macval(line)'"', 1,2) == "N " {
+					local newline : di substr(`"`macval(line)'"', 2,.)
+					local newline : subinstr local newline ".pkg" "", all
+					tokenize `"`macval(newline)'"' , parse(" ")
+					if "`pkglist'" != "" local pkglist "`pkglist' `1'"
+					else local pkglist "`1'"
+				} 
+				file read `hitch2' line
+			}
+			file close `hitch2'
+			
+			// check that every package in github.dta is included in the list, otherwise remove it
+			local length = _N
+			forval num = 1/`length' {	
+				if strpos(`"`pkglist'"', name[`num']) < 1 {
+					qui drop in `num'
+					qui save "`c(sysdir_plus)'g/github.dta", replace
+				}
+			}
+
 			if !missing("`name'") {
 				qui keep if name == "`name'"
 			}
