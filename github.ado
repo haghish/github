@@ -325,7 +325,8 @@ prog define github
 				local address : di address[`j']
 				local pkgname : di packagename[`j']
 				local fname : di file[`j']
-				di "  `fname'" _col(28) "`pkgname'" _col(45) `"  {browse "https://github.com/`address'":`address'}"'
+				if "`address'" != "SSC" di "  `fname'" _col(28) "`pkgname'" _col(45) `"  {browse "https://github.com/`address'":`address'}"'
+				else di "  `fname'" _col(28) "`pkgname'" _col(45) `"  `address'"'
 			}
 			di in text " {hline 80}" _n
 		}
