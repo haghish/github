@@ -1,6 +1,6 @@
 use "https://github.com/haghish/github/blob/master/packagelist/archive.dta?raw=true", clear
 gen year = year(dofc(created))
-keep if year >= 2013 & year < 2019
+keep if year >= 2013 & year < 2020
 keep if language == "Stata" | installable == 1
 local reponame "Number of newly created repositories"
 local packname "Stata packages on Github by date of creation"
@@ -12,7 +12,7 @@ graph export "repositories.png", replace
 
 use "https://github.com/haghish/github/blob/master/packagelist/gitget.dta?raw=true", clear 
 gen year = year(dofc(created))
-keep if year >= 2013 & year < 2019
+keep if year >= 2013 & year < 2020
 local packname "Stata packages"
 graph bar (count) installable if installable == 1, over(year) ///
 ytitle("Public packages (installable repositories)") ytitle(, margin(bargraph))           ///
