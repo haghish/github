@@ -24,7 +24,7 @@ program gitgetlist
 
 	local last = _N 
 	forval i = 1/`last' {
-		local name = name[`i']
+		local name = path[`i']
 		local address = address[`i']
 		local hits = score[`i']
 		local updated : di %td dofc(updated[`i']) 

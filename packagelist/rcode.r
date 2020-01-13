@@ -1,8 +1,5 @@
-# let's measure the run time
-tictoc::tic()
-
 # change the working directory to the packagelist directory
-setwd("C:/Users/haghish.fardzadeh/Documents/GitHub/github/packagelist")
+setwd("\\winfs-uni.top.gwdg.de\ebadfardzade$\github\packagelist")
 
 library(haven)
 
@@ -32,5 +29,3 @@ toc$toc[toc$name == "stata.toc"] = 1
 toc$name = NULL
 colnames(toc) = c("tocpath","address","toc")
 write_dta(toc, "toc.dta")
-
-tictoc::toc()
