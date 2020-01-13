@@ -17,7 +17,7 @@ make github, replace toc pkg  version(2.0.5)                             ///
 		 "githubdb.ado;githubdependency.ado;githubfiles.dta;"                ///
 		 "githubhot.ado;githublistpack.ado;githublistpack.sthlp;"            ///
 		 "githuboutput.ado;githubquery.ado;githubsearch.ado;"                ///
-		 "githubmake.ado;githubsearchsteps.ado;")                            ///
+		 "githubmake.ado;githubsearchsteps.ado;githubcheckfilename.ado")     ///
      ancillary("")                                                  
 
 

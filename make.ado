@@ -210,6 +210,9 @@ prog make
 		forval m = 1/`start' {
 		  local n : di files[`m']
 		  file write `pkgfile' `"F `n'"' _n
+		  
+		  //check whether the file is unique
+		  githubcheckfilename "`anything'", filename("`n'")
 		}
 		restore
 	}
@@ -219,6 +222,9 @@ prog make
 		while !missing("`1'") {
 				if "`1'" != ";" {
 				file write `pkgfile' `"f `1'"' _n
+				
+				//check whether the file is unique
+		        githubcheckfilename "`anything'", filename("`n'")
 			}
 			macro shift
 		}
