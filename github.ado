@@ -310,6 +310,25 @@ prog define github
 	}
 	
 	else if "`1'" == "findfile" {
+    // check for updates
+    if "$githubfilesglobal" == "" {
+      di as text "checking for database updates..."
+      qui github version github
+      local gversion : di "`r(version)'"
+      qui github query haghish/github
+      local lversion : di "`r(latestversion)'"
+      if "`gversion'" != "`lversion'" {
+        di as txt "{p}WARNING: Would you like to update {bf:github} package to version {bf:`lversion'}?" ///
+        " currently, your database is outdated:" _n
+        
+        github list github
+        
+        di _n(2)
+      }
+      
+      global githubfilesglobal "checked"
+    }
+  
 		// searching githubfiles database
 		preserve
 		sysuse githubfiles.dta, clear
