@@ -520,7 +520,8 @@ prog define github
 		
 		quietly copy "`path'" "`packagename'-`version'.zip", replace
 		quietly unzipfile "`packagename'-`version'.zip", replace
-		local dir "`packagename'-`version'"
+		local ver2: subinstr local version "v" ""
+		local dir "`packagename'-`ver2'"
 		local wd : pwd
 		qui cd "`dir'" 
 		local pkg : pwd
