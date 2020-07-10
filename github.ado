@@ -581,7 +581,7 @@ prog define github
 		}
 		else {
 			net install `package', ///
-			from("https://raw.githubusercontent.com/`anything'/master/`path'")
+			from("https://raw.githubusercontent.com/`anything'/master/`path'") `replace'
 		}
 		
 		// check the version of the installing package
