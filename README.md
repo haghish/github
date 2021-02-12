@@ -1,3 +1,5 @@
+> __Cite__: Haghish, E. F. (2020). Developing, maintaining, and hosting Stata statistical software on GitHub. The Stata Journal, 20(4), 931-951.
+
 # GITHUB : a module for building, searching, installing, and managing Stata packages from GitHub
 
 <a href="http://github.com/haghish/github"><img src="https://github.com/haghish/markdoc/raw/master/Resources/images/github3.png" align="left" width="140" hspace="10" vspace="6"></a>
