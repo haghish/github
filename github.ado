@@ -1,7 +1,7 @@
 // documentation are written for MARKDOC package
 
 /***
-_v. 2.0.6_
+_v. 2.2.0_
 
 github
 ======

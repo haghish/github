@@ -3,7 +3,7 @@
 // DO NOT FORGET to update the version of the package, if changed!
 // for more information visit http://github.com/haghish/github
 
-make github, replace toc pkg  version(2.1.0)                             ///
+make github, replace toc pkg  version(2.2.0)                             ///
      license("MIT")                                                      ///
      author("E. F. Haghish")                                             ///
      affiliation("University of Göttingen")                              ///

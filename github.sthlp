@@ -1,5 +1,5 @@
 {smcl}
-{it:v. 2.0.6}
+{it:v. 2.2.0}
 
 
 {title:github}
