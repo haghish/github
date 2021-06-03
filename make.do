@@ -20,7 +20,7 @@ make github, replace toc pkg  version(2.1.0)                             ///
 		 "githuboutput.ado;githubquery.ado;githubsearch.ado;"                ///
      "make.ado;make.sthlp;make.dlg;makedlg.ado"                          ///
 		 "githubmake.ado;githubsearchsteps.ado;githubcheckfilename.ado")     ///
-     ancillary("")                                                  
+     ancillary("gitget.dta;githubfiles.dta")                                                  
 
 
 /*

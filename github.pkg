@@ -34,3 +34,5 @@ F make.ado
 F make.dlg
 F make.sthlp
 F makedlg.ado githubmake.ado
+f gitget.dta
+f githubfiles.dta
