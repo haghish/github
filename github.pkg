@@ -26,6 +26,7 @@ F githubfindall.sthlp
 F githubhot.ado
 F githublistpack.ado
 F githublistpack.sthlp
+F githubmake.ado
 F githuboutput.ado
 F githubquery.ado
 F githubsearch.ado
@@ -33,6 +34,6 @@ F githubsearchsteps.ado
 F make.ado
 F make.dlg
 F make.sthlp
-F makedlg.ado githubmake.ado
+F makedlg.ado
 f gitget.dta
 f githubfiles.dta
