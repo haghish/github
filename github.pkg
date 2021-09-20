@@ -8,6 +8,7 @@ d License: MIT
 d 
 F abspath.ado
 F abspath.sthlp
+F gitget.ado
 F gitget.dta
 F gitget.sthlp
 F gitgetlist.ado
@@ -34,6 +35,6 @@ F make.ado
 F make.dlg
 F make.sthlp
 F makedlg.ado
-F wdpermissions.ado gitget.ado
+F wdpermissions.ado
 f gitget.dta
 f githubfiles.dta
