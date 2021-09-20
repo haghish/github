@@ -3,7 +3,7 @@
 // DO NOT FORGET to update the version of the package, if changed!
 // for more information visit http://github.com/haghish/github
 
-make github, replace toc pkg  version(2.2.0)                             ///
+make github, replace toc pkg  version(2.3.0)                             ///
      license("MIT")                                                      ///
      author("E. F. Haghish")                                             ///
      affiliation("University of Göttingen")                              ///
@@ -12,7 +12,7 @@ make github, replace toc pkg  version(2.2.0)                             ///
      title("github package manager")                                     ///
      description("search, install, and manage github packages")          ///
      install("abspath.ado;abspath.sthlp;githubfindall.ado;"              ///
-     "githubfindall.sthlp;"                                              /// 
+     "githubfindall.sthlp;wdpermissions.ado"                             /// 
 		 "gitget.ado;gitget.dta;gitget.sthlp;gitgetlist.ado;github.ado;"     ///
 		 "github.dlg;github.sthlp;githubcheck.ado;githubconfirm.ado;"        ///
 		 "githubdb.ado;githubdependency.ado;githubfiles.dta;"                ///

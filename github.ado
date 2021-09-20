@@ -1,7 +1,7 @@
 // documentation are written for MARKDOC package
 
 /***
-_v. 2.2.0_
+_v. 2.3.0_
 
 github
 ======
@@ -504,6 +504,9 @@ prog define github
 	if missing("`version'") & !missing("`stable'") {
 		quietly github query `anything'
 		local version `r(latestversion)' 
+    
+    // check the writing permission of the currnt working directory
+    wdpermissions
 	}
 		
 	// Installing an archived version

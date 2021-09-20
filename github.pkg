@@ -1,14 +1,13 @@
-v 2.2.0
+v 2.3.0
 d 'GITHUB': github package manager
 d 
 d search, install, and manage github packages
 d 
-d Distribution-Date:   20210603
+d Distribution-Date:   20210920
 d License: MIT
 d 
 F abspath.ado
 F abspath.sthlp
-F gitget.ado
 F gitget.dta
 F gitget.sthlp
 F gitgetlist.ado
@@ -35,5 +34,6 @@ F make.ado
 F make.dlg
 F make.sthlp
 F makedlg.ado
+F wdpermissions.ado gitget.ado
 f gitget.dta
 f githubfiles.dta
