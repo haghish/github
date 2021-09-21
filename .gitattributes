@@ -1,0 +1,5 @@
+# settings for Linguist - which calcuates the repo language statistics on GitHub
+*.toc linguist-language=Stata
+*.pkg linguist-language=Stata
+*.log linguist-language=Stata
+*.smcl linguist-language=Stata
