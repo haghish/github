@@ -12,7 +12,7 @@ make github, replace toc pkg  version(2.3.0)                             ///
      title("github package manager")                                     ///
      description("search, install, and manage github packages")          ///
      install("abspath.ado;abspath.sthlp;githubfindall.ado;"              ///
-     "githubfindall.sthlp;wdpermissions.ado;"                             /// 
+     "githubfindall.sthlp;wdpermissions.ado;"                            /// 
 		 "gitget.ado;gitget.dta;gitget.sthlp;gitgetlist.ado;github.ado;"     ///
 		 "github.dlg;github.sthlp;githubcheck.ado;githubconfirm.ado;"        ///
 		 "githubdb.ado;githubdependency.ado;githubfiles.dta;"                ///
