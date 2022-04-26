@@ -137,6 +137,7 @@ program githubdb, rclass
 			file read `hitch2' line
 			local pkglist ""
 			while r(eof) == 0 {
+				local line : subinstr local line "`" "'", all // `
 				if substr(`"`macval(line)'"', 1,2) == "N " {
 					local newline : di substr(`"`macval(line)'"', 2,.)
 					local newline : subinstr local newline ".pkg" "", all
