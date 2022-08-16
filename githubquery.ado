@@ -1,6 +1,6 @@
 *cap prog drop githubquery
 program githubquery, rclass
-version 16
+version 14
 
 syntax anything
 
