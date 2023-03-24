@@ -182,7 +182,7 @@ prog define github
 	/// the options below are not documented yet                                  ///
 	force created(str) pushed(str) debug reference(str)			                      ///
 	duration(numlist max=1) perpage(numlist max=1)                                ///
-	append replace Number(numlist max=1) local path(str)] 
+	append replace Number(numlist max=1) local path(str) sysdir_codeword(string)] 
 	
 	
 	// correct the language
@@ -206,10 +206,10 @@ prog define github
 	// ---------
 	if "`1'" == "version" {
 	  if missing("`require'") {
-		  githubdb version, name(`anything')
+		  githubdb version, name(`anything') sysdir_codeword(`sysdir_codeword')
 		}
 		else {
-		  qui githubdb version, name(`anything')
+		  qui githubdb version, name(`anything') sysdir_codeword(`sysdir_codeword')
 			local currentversion `r(version)'
 			if "`r(version)'" != "`require'" {
 			  tokenize "`r(version)'", parse(".")
@@ -261,7 +261,7 @@ prog define github
 		if !missing("`3'") {
 			err 198
 		}
-		githubdb list, name("`2'")
+		githubdb list, name("`2'") sysdir_codeword(`sysdir_codeword')
 		exit
 	}
 	
@@ -276,21 +276,21 @@ prog define github
 		}
 		
 		// Make github command to update a package, if the username is also specified 
-		capture githubdb check, name("`anything'")
+		capture githubdb check, name("`anything'") sysdir_codeword(`sysdir_codeword')
 		if !missing("`r(address)'") {
 			github install `r(address)'
 		}
 		else {
 			tokenize "`anything'", parse("/")
 			if !missing("`3'") {
-				capture githubdb check, name("`anything'")
+				capture githubdb check, name("`anything'") sysdir_codeword(`sysdir_codeword')
 				if !missing("`r(address)'") {
 					github install `r(address)'
 				}
 			}
 			//otherwise display the original error
 			else {
-				githubdb check, name("`anything'")
+				githubdb check, name("`anything'") sysdir_codeword(`sysdir_codeword')
 			}
 		}
 		exit
@@ -304,7 +304,7 @@ prog define github
 		  di as err "package name is required"
 		  qui err 198
 		}
-		githubdb erase, name("`2'")
+		githubdb erase, name("`2'") sysdir_codeword(`sysdir_codeword')
 		ado uninstall `2'
 		exit
 	}
@@ -550,7 +550,7 @@ prog define github
 		// register the package in the database
 		githubdb add, address("`anything'") username("`username'") 			          	///
 		              reponame("`reponame'") name("`package'") force("`force'")     ///
-									version("`version'")
+									version("`version'") sysdir_codeword(`sysdir_codeword')
 									
 		di _n "{title:Checking package dependencies}" 
 		capture quietly findfile "dependency.do", path("`pkg'")
@@ -575,7 +575,7 @@ prog define github
 		}
 		
 		// make sure it is first uninstalled 
-		githubdb erase, name("`package'")
+		githubdb erase, name("`package'") sysdir_codeword(`sysdir_codeword')
 		capture quietly ado uninstall "`package'"
 		
 		if missing("`package'") {
@@ -595,7 +595,7 @@ prog define github
 		
 		githubdb add, address("`anything'") username("`username'") 			          	///
 		              reponame("`reponame'") name("`package'") force("`force'")     ///
-									version("`version'")
+									version("`version'") sysdir_codeword(`sysdir_codeword')
 		
 		di _n "{title:Checking package dependencies}" 
 		tempfile dep
