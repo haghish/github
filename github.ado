@@ -62,9 +62,6 @@ searching for a keyword. The table shows the options accordingly:
 | stable   | installs the latest stable release. otherwise the main branch is installed |
 | verson(_str_) | specifies a particular stable version (release tags) for the installation |
 
-By default the local package database is stored in the PLUS directory. This can be changed
-by setting the global GITHUB_DB_SYSDIR_CODEWORD to one of the sysdir codewords (see -help sysdir-).
-
 
 ### __github search__ options:
 
