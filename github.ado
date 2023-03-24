@@ -62,6 +62,9 @@ searching for a keyword. The table shows the options accordingly:
 | stable   | installs the latest stable release. otherwise the main branch is installed |
 | verson(_str_) | specifies a particular stable version (release tags) for the installation |
 
+By default the local package database is stored in the PLUS directory. This can be changed
+by setting the global GITHUB_DB_SYSDIR_CODEWORD to one of the sysdir codewords (see -help sysdir-).
+
 
 ### __github search__ options:
 
@@ -182,7 +185,7 @@ prog define github
 	/// the options below are not documented yet                                  ///
 	force created(str) pushed(str) debug reference(str)			                      ///
 	duration(numlist max=1) perpage(numlist max=1)                                ///
-	append replace Number(numlist max=1) local path(str) sysdir_codeword(string)] 
+	append replace Number(numlist max=1) local path(str)] 
 	
 	
 	// correct the language
@@ -206,10 +209,10 @@ prog define github
 	// ---------
 	if "`1'" == "version" {
 	  if missing("`require'") {
-		  githubdb version, name(`anything') sysdir_codeword(`sysdir_codeword')
+		  githubdb version, name(`anything')
 		}
 		else {
-		  qui githubdb version, name(`anything') sysdir_codeword(`sysdir_codeword')
+		  qui githubdb version, name(`anything')
 			local currentversion `r(version)'
 			if "`r(version)'" != "`require'" {
 			  tokenize "`r(version)'", parse(".")
@@ -261,7 +264,7 @@ prog define github
 		if !missing("`3'") {
 			err 198
 		}
-		githubdb list, name("`2'") sysdir_codeword(`sysdir_codeword')
+		githubdb list, name("`2'")
 		exit
 	}
 	
@@ -276,21 +279,21 @@ prog define github
 		}
 		
 		// Make github command to update a package, if the username is also specified 
-		capture githubdb check, name("`anything'") sysdir_codeword(`sysdir_codeword')
+		capture githubdb check, name("`anything'")
 		if !missing("`r(address)'") {
 			github install `r(address)'
 		}
 		else {
 			tokenize "`anything'", parse("/")
 			if !missing("`3'") {
-				capture githubdb check, name("`anything'") sysdir_codeword(`sysdir_codeword')
+				capture githubdb check, name("`anything'")
 				if !missing("`r(address)'") {
 					github install `r(address)'
 				}
 			}
 			//otherwise display the original error
 			else {
-				githubdb check, name("`anything'") sysdir_codeword(`sysdir_codeword')
+				githubdb check, name("`anything'")
 			}
 		}
 		exit
@@ -304,7 +307,7 @@ prog define github
 		  di as err "package name is required"
 		  qui err 198
 		}
-		githubdb erase, name("`2'") sysdir_codeword(`sysdir_codeword')
+		githubdb erase, name("`2'")
 		ado uninstall `2'
 		exit
 	}
@@ -550,7 +553,7 @@ prog define github
 		// register the package in the database
 		githubdb add, address("`anything'") username("`username'") 			          	///
 		              reponame("`reponame'") name("`package'") force("`force'")     ///
-									version("`version'") sysdir_codeword(`sysdir_codeword')
+									version("`version'")
 									
 		di _n "{title:Checking package dependencies}" 
 		capture quietly findfile "dependency.do", path("`pkg'")
@@ -575,7 +578,7 @@ prog define github
 		}
 		
 		// make sure it is first uninstalled 
-		githubdb erase, name("`package'") sysdir_codeword(`sysdir_codeword')
+		githubdb erase, name("`package'")
 		capture quietly ado uninstall "`package'"
 		
 		if missing("`package'") {
@@ -595,7 +598,7 @@ prog define github
 		
 		githubdb add, address("`anything'") username("`username'") 			          	///
 		              reponame("`reponame'") name("`package'") force("`force'")     ///
-									version("`version'") sysdir_codeword(`sysdir_codeword')
+									version("`version'")
 		
 		di _n "{title:Checking package dependencies}" 
 		tempfile dep

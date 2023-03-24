@@ -2,10 +2,10 @@
 
 *cap prog drop githubdb
 program githubdb, rclass
-	syntax anything, [address(str) username(str) reponame(str) name(str) force(str) version(str) sysdir_codeword(string)]
+	syntax anything, [address(str) username(str) reponame(str) name(str) force(str) version(str)]
 	
-	if "`sysdir_codeword'"=="" loc sysdir_codeword "PLUS"
-	loc sysdir_codeword = strlower("`sysdir_codeword'")
+	loc sysdir_codeword = strlower("${GITHUB_DB_SYSDIR_CODEWORD}")
+	if "`sysdir_codeword'"=="" loc sysdir_codeword "plus"
 	_assert inlist("`sysdir_codeword'","stata", "base", "site", "plus", "personal", "oldplace"), msg("githubdb: sysdir_codeword not valid, see -help sysdir-")
 	
 	// test the database, if it doesn't exist create it!
