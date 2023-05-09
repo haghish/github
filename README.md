@@ -236,7 +236,7 @@ These files also include the link to their repositories, if you click on them on
 
 # 5. Building package installation files automatically
 
-Imagine you have created an ado-file and Stata help files. How do you make your repository installable? You need to create a *stata.toc* aand a *packagename.pkg* files manually, specify the required information, files that should be installed, etc. The `
+Imagine you have created an ado-file and Stata help files. How do you make your repository installable? You need to create a *stata.toc* and a *packagename.pkg* files manually, specify the required information, files that should be installed, etc. The `
 github` package introduces the `make` GUI that generates the package installations for you, using a strict layout. You can just select the files that you wish to install, specify the required information, and have your *toc* and *pkg* files ready. Then, as soon as you copy these files to your repository, it would be installable!
 
 Change the working directory to the repository path and then run the GUI, typing:
