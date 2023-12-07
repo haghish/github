@@ -1,120 +1,95 @@
 *cap prog drop githubquery
 program githubquery, rclass
+version 14
+
+syntax anything
+
+qui {
 	
-	syntax anything
+	preserve
+	drop _all
 	
-	tempfile api tmp
-	tempname hitch knot
-	
-	capture qui copy "https://api.github.com/repos/`anything'/releases" `api', replace
+	cap scalar page = fileread("https://api.github.com/repos/`anything'/releases")
 	if _rc {
 		// Identify the errors with useful information
 		if _rc == 679 display as err "GitHub API rate limit exceeded... try again after some time"
-
 		error _rc
 	} 
 	
 	
-	file open `hitch' using "`api'", read
-	qui file open `knot' using "`tmp'", write replace
-	file read `hitch' line
+	// load data and transform to dataframe
+	mata {
+		lines = st_strscalar("page")
+		lines = ustrsplit(lines, ",")'
+		lines = strtrim(lines)
+		lines = stritrim(lines)
+		
+		lines =  subinstr(lines, `"":""', "->")
+		lines =  subinstr(lines, `"""', "")
+	}
+	getmata lines, replace
 	
-	//remove the beginning brackets
-	local line : subinstr local line "[{" ""
-	local line : subinstr local line "`" "", all  
+	split lines, parse ("->")
+	rename lines? (code url)
 	
-	di in text _n " {hline 40}" _n												                        ///
-	"  {bf:Version}" _col(16) "{bf:Release Date}" _col(34) "{bf:Install} " _n 	  ///
+	// get date
+	tempname ghpb 
+	frame copy `c(frame)'  `ghpb'
+	
+	frame `ghpb' {
+		keep if regexm(code, "published_at")
+		gen n = _n
+		rename url date
+	}
+	
+	// merge date and tags frames
+	keep if regexm(url, "releases/tag")
+	gen n = _n
+	gen tag  = regexs(2) if regexm(url, "(releases/tag/)(.*)")
+	
+	frlink 1:1 n, frame(`ghpb')
+	frget date, from(`ghpb')
+	
+	
+	// display
+	
+	noi di in text _n " {hline 40}" _n     ///
+	"  {bf:Version}" _col(16) "{bf:Release Date}" _col(34) "{bf:Install} " _n ///
 	" {hline 40}"
 	
-	while r(eof) == 0 {
-		tokenize `"`macval(line)'"' , parse(",")
-		
-		while !missing(`"`macval(1)'"') {
-			
-			if `"`macval(1)'"' == "," {
-				macro shift
-			}
-			else if `"`macval(1)'"' == "html_url" {
-				if strlen(`"`macval(2)'"') < strlen(`"https://github.com/`anything'/"') {
-					macro shift
-					macro shift
-				}
-				else {
-					file write `knot' `"`macval(1)'"' _n
-					macro shift
-					local 1 : di substr(`"`macval(1)'"', 2,.)
-					file write `knot' `"`macval(1)'"' _n
-					macro shift
-				}
-			}
-			else if `"`macval(1)'"' == "tag_name" {
-				file write `knot' `"`macval(1)'"' _n
-				macro shift
-				local a strlen(`"`macval(1)'"')
-				
-				local 1 : di substr(`"`macval(1)'"', 3,`a'-3)
-				file write `knot' `"`macval(1)'"' _n
-				macro shift
-			}
-			
-			else if `"`macval(1)'"' == "published_at" {
-				file write `knot' `"`macval(1)'"' _n
-				macro shift
-				local 1 : di substr(`"`macval(1)'"', 3,10)
-				file write `knot' `"`macval(1)'"' _n
-				macro shift
-			}
-			else {
-				macro shift
-			}	
-		}
-		file read `hitch' line
-	}
+	local N = _N
+	local bskip = 8 // basic skip
+	local vlnth = 5 // version length
 	
-	file close `hitch'		
-	file close `knot'
-	
-	file open `hitch' using "`tmp'", read
-	file read `hitch' line
-	local latestversion
-	
-	while r(eof) == 0 {
-		if `"`macval(line)'"' == "html_url" {
-			file read `hitch' line
-			local link `"`macval(line)'"'
-			file read `hitch' line
-			
-			if `"`macval(line)'"' == "tag_name" {
-				file read `hitch' line
-				local version `"`macval(line)'"'
-				file read `hitch' line
-			}
-			if `"`macval(line)'"' == "published_at" {
-				file read `hitch' line
-				local date `"`macval(line)'"'
-			}
-			
-			// get the latest version
-			// -----------------------------------------------------------------------
-			if missing("`latestversion'") local latestversion "`version'"
-			
-			if !missing(`"`link'"') & !missing("`version'") & !missing("`date'") {
-				
-				di `"  {browse `link':`version'}"' _skip(8)  "`date'" _skip(7) 	///
-				"{stata github install `anything', version(`version') : Install}" 
-				
-				local link
-				local version
-				local date
-			}
+	forvalues i = 1/`N' {
+		local link    = url[`i']
+		local version = tag[`i']
+		local date    = date[`i']
+		if regexm("`date'", "([0-9]+\-[0-9]+\-[0-9]+)(.*)") {
+			local date = regexs(1)
 		}
 		
-		file read `hitch' line
+		if (length("`version'") <= `vlnth') {
+			local skip = 8
+		}
+		else {
+			local skip = `vlnth'+`bskip' - length("`version'")
+		}
+		
+		noi di `"  {browse "`link'":`version'}"' _skip(`skip')  "`date'" _skip(7) 	///
+		"{stata github install `anything', version(`version') : Install}"
 	}
 	
-	di in text " {hline 40}" _n
-	return local latestversion `latestversion' 
 	
+	noi di in text " {hline 40}" _n
+	
+	local latestversion = tag[1]
+	
+} // end of qui
+
+return local latestversion `latestversion' 
+
 end
+
+exit 
 
