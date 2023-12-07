@@ -4,8 +4,12 @@
 program githubdb, rclass
 	syntax anything, [address(str) username(str) reponame(str) name(str) force(str) version(str)]
 	
+	//Determine where the db should be
+	qui findfile github.ado
+	loc sysdir_base = substr("`r(fn)'", 1, strlen("`r(fn)'")-12)
+	
 	// test the database, if it doesn't exist create it!
-	capture findfile github.dta, path("`c(sysdir_plus)'g/")
+	capture findfile github.dta, path("`sysdir_base'g/")
 	if _rc {
 		preserve
 		quietly clear
@@ -17,13 +21,13 @@ program githubdb, rclass
 		qui generate str name = ""
 		qui generate str version = ""
 		qui generate str force = ""
-		qui save "`c(sysdir_plus)'g/github.dta", replace
+		qui save "`sysdir_base'g/github.dta", replace
 		restore
 	}
 	
 	// for versions betwen 1.4.0 to 1.4.5 make sure the data set has these variables:
 	// -----------------------------------------------------------------------
-	capture findfile github.dta, path("`c(sysdir_plus)'g/")
+	capture findfile github.dta, path("`sysdir_base'g/")
 	if _rc == 0 {
 		preserve
 		use "`r(fn)'", clear
@@ -31,13 +35,13 @@ program githubdb, rclass
 		if _rc qui generate str version = ""
 		cap confirm variable force
 		if _rc qui generate str force   = ""
-		qui save "`c(sysdir_plus)'g/github.dta", replace
+		qui save "`sysdir_base'g/github.dta", replace
 		restore
 	}
 	
 	// processing the subcommands
 	// =========================================================================
-	capture findfile github.dta, path("`c(sysdir_plus)'g/")
+	capture findfile github.dta, path("`sysdir_base'g/")
 	if _rc == 0 {
 		
 		// check 
@@ -106,7 +110,7 @@ program githubdb, rclass
 			qui replace name = "`name'"         in `nextN'
 			qui replace version = "`version'"   in `nextN'
 			qui replace force = "`force'"       in `nextN'
-			qui save "`c(sysdir_plus)'g/github.dta", replace
+			qui save "`sysdir_base'g/github.dta", replace
 			restore
 		}
 		
@@ -117,7 +121,7 @@ program githubdb, rclass
 			use "`r(fn)'", clear
 			if missing("`name'") err 198
 			quietly drop if name == "`name'"  // clean the database
-			qui save "`c(sysdir_plus)'g/github.dta", replace
+			qui save "`sysdir_base'g/github.dta", replace
 			restore
 		}
 		
@@ -153,7 +157,7 @@ program githubdb, rclass
 			forval num = 1/`length' {	
 				if strpos(`"`pkglist'"', name[`num']) < 1 {
 					qui drop in `num'
-					qui save "`c(sysdir_plus)'g/github.dta", replace
+					qui save "`sysdir_base'g/github.dta", replace
 				}
 			}
 
